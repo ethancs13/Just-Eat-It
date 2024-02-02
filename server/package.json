@@ -1,5 +1,5 @@
 {
-  "name": "mern-server",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -17,11 +17,13 @@
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.1",
     "express": "^4.17.2",
+    "faker": "^6.6.6",
     "graphql": "^16.6.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.0.2"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.4.0",
     "nodemon": "^2.0.3"
   }
 }

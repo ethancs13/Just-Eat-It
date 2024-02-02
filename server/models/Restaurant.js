@@ -1,11 +1,36 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const { Schema, model } = require('mongoose');
 
-const restaurantSchema = new Schema({
-  name: { type: String, required: true },
-  cuisine: { type: Schema.Types.ObjectId, ref: 'Cuisine' }
-});
+const cuisineSchema = require('./Cuisine');
 
-const Restaurant = mongoose.model('Restaurant', restaurantSchema);
+const restaurantSchema = new Schema(
+  {
+  businessId: {
+    type: String,
+    required: true,
+  },
+  name: { 
+    type: String, 
+    required: true 
+  },
+  rating: {
+    type: Number,
+  },
+  image: {
+    type: String,
+  },
+  details: {
+    type: String,
+  },
+  url: {
+    type: String,
+  },
+  coordinates: {
+    type: String,
+  },
+  cuisine: [cuisineSchema]
+}
+);
+
+const Restaurant = model('Restaurant', restaurantSchema);
 
 module.exports = Restaurant;

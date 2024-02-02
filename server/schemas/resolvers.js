@@ -1,6 +1,4 @@
-const User = require('./userModel');
-const Restaurant = require('./restaurantModel');
-const Cuisine = require('./cuisineModel');
+const { User, Restaurant } = require('../models');
 
 const resolvers = {
   Query: {
@@ -30,13 +28,16 @@ const resolvers = {
       return { token: user.generateJWT(), user };
     },
     createRestaurant: async (parent, { name, cuisineId }) => {
+      // find cuisine from list
       const cuisine = await Cuisine.findById(cuisineId);
+
+      // make new restaurant with cuisine found
       const restaurant = new Restaurant({ name, cuisine });
       await restaurant.save();
       return restaurant;
     },
-    createCuisine: async (parent, { name, types }) => {
-      const cuisine = new Cuisine({ name, types });
+    createCuisine: async (parent, { name }) => {
+      const cuisine = new Cuisine({ name });
       await cuisine.save();
       return cuisine;
     }

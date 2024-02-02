@@ -1,32 +1,40 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-const cuisineSchema = require('./Cuisine')
+const cuisineSchema = require('./Cuisine');
 
-const userSchema = new Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true,
+const userSchema = new Schema(
+  {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    friends: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+      }
+    ],
+    favorites: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Restaurant'
+      }
+    ],
+    cuisine: [cuisineSchema],
   },
-  password: {
-    type: String,
-    required: true,
-  },
-  friends: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'User'
-    }
-  ],
-  favorites: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Restaurant'
-    }
-  ],
-  cuisine: [cuisine],
-});
+  {
+    toJSON: {
+      virtuals: true,
+    },
+  }
+);
 
 // hash user password
 userSchema.pre('save', async function (next) {
@@ -43,6 +51,14 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-const User = mongoose.model('User', userSchema);
+userSchema.virtual('friendCount').get(function () {
+  return this.friends.length;
+})
+
+userSchema.virtual('favoriteCount').get(function () {
+  return this.faviorites.length;
+})
+
+const User = model('User', userSchema);
 
 module.exports = User;
