@@ -1,0 +1,30 @@
+[
+  {
+    "username": "Ethan Sroka",
+    "password": "123",
+    "friends": [
+      {
+        "username":"Brian Gansukh",
+        "password":"1234"
+      },
+      {
+        "username":"Yolanda Smith",
+        "password":"12"
+      }
+    ],
+    "favorites": [
+      {
+        "name": "test1",
+        "cuisine": "asian"
+      }
+    ],
+    "cuisine": [
+      {
+        "name": "asian"
+      },
+      {
+        "name": "mexican"
+      }
+    ]
+  }
+]

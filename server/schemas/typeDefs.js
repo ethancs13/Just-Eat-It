@@ -4,7 +4,6 @@ const typeDefs = gql`
   type Cuisine {
     id: ID!
     name: String!
-    types: [String]!
   }
 
   type Restaurant {
@@ -46,7 +45,7 @@ const typeDefs = gql`
       image: String
       cuisineId: ID!
     ): Restaurant
-    createCuisine(name: String!, types: [String]!): Cuisine
+    createCuisine(name: String!): Cuisine
   }
 `;
 
