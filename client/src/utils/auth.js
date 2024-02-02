@@ -1,39 +1,39 @@
-// import decode from "jwt-decode";
+import decode from "jwt-decode";
 
-// class AuthService {
-//   getUser() {
-//     return decode(this.getToken());
-//   }
+class AuthService {
+  getUser() {
+    return decode(this.getToken());
+  }
 
-//   loggedIn() {
-//     const token = this.getToken();
-//     return !!token && !this.isTokenExpired(token);
-//   }
+  loggedIn() {
+    const token = this.getToken();
+    return !!token && !this.isTokenExpired(token);
+  }
 
-//   isTokenExpired(token) {
-//     try {
-//       const decoded = decode(token);
-//       if (decoded.exp < Date.now() / 1000) {
-//         return true;
-//       } else return false;
-//     } catch (err) {
-//       return false;
-//     }
-//   }
+  isTokenExpired(token) {
+    try {
+      const decoded = decode(token);
+      if (decoded.exp < Date.now() / 1000) {
+        return true;
+      } else return false;
+    } catch (err) {
+      return false;
+    }
+  }
 
-//   getToken() {
-//     return localStorage.getItem("id_token");
-//   }
+  getToken() {
+    return localStorage.getItem("id_token");
+  }
 
-//   login(idToken) {
-//     localStorage.setItem("id_token", idToken);
-//     window.location.assign("/user");
-//   }
+  login(idToken) {
+    localStorage.setItem("id_token", idToken);
+    window.location.assign("/user");
+  }
 
-//   logout() {
-//     localStorage.removeItem("id_token");
-//     window.location.assign("/");
-//   }
-// }
+  logout() {
+    localStorage.removeItem("id_token");
+    window.location.assign("/");
+  }
+}
 
-// export default new AuthService();
+export default new AuthService();
