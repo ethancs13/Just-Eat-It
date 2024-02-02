@@ -56,7 +56,7 @@ const typeDefs = gql`
       cuisines: [String]
     ): Restaurant
 
-    createCuisine(name: String!, types: [String]!): Cuisine
+    createCuisine(name: String!): Cuisine
   }
 `;
 
