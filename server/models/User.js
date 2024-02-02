@@ -55,7 +55,7 @@ userSchema.virtual('friendCount').get(function () {
   return this.friends.length;
 })
 
-userSchema.virtual('faoriteCount').get(function () {
+userSchema.virtual('favoriteCount').get(function () {
   return this.faviorites.length;
 })
 
