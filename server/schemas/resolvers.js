@@ -1,6 +1,4 @@
-const User = require('./userModel');
-const Restaurant = require('./restaurantModel');
-const Cuisine = require('./cuisineModel');
+const { User, Restaurant } = require('../models');
 
 const resolvers = {
   Query: {
