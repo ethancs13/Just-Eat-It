@@ -22,7 +22,12 @@ const startApolloServer = async () => {
 
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
-  
+
+  // Important for MERN Setup: Any client-side requests that begin with '/graphql' will be handled by our Apollo Server
+  app.use('/graphql', expressMiddleware(server, {
+    context: authMiddleware
+  }));
+
   // Important for MERN Setup: When our application runs from production, it functions slightly differently than in development
   // In development, we run two servers concurrently that work together
   // In production, our Node server runs and delivers our client-side bundle from the dist/ folder 
@@ -33,9 +38,6 @@ const startApolloServer = async () => {
       res.sendFile(path.join(__dirname, '../client/dist/index.html'));
     });
   }
-  
-  // Important for MERN Setup: Any client-side requests that begin with '/graphql' will be handled by our Apollo Server
-  app.use('/graphql', expressMiddleware(server));
 
   db.once('open', () => {
     app.listen(PORT, () => {
@@ -46,4 +48,4 @@ const startApolloServer = async () => {
 };
 
 // Call the async function to start the server
-  startApolloServer();
+startApolloServer();
