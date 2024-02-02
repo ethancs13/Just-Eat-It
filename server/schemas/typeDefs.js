@@ -23,7 +23,7 @@ const typeDefs = gql`
     password: String!
     friends: [User]!
     favorites: [Restaurant]!
-    cuisine: [Cuisine]
+    cuisines: [Cuisine]
   }
 
   type Auth {
