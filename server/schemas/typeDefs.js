@@ -1,27 +1,29 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+
   type Cuisine {
-    id: ID!
     name: String!
-    types: [String]!
   }
 
   type Restaurant {
-    id: ID!
+    businessId: String!
     name: String!
     rating: Float!
     image: String
-    cuisine: Cuisine!
+    details: String
+    url: String
+    coordinates: String
+    cuisine: [Cuisine]!
   }
 
   type User {
-    id: ID!
+    _id: ID!
     username: String!
     password: String!
     friends: [User]!
     favorites: [Restaurant]!
-    cuisine: Cuisine
+    cuisine: [Cuisine]
   }
 
   type Auth {
@@ -30,22 +32,30 @@ const typeDefs = gql`
   }
 
   type Query {
-    users: [User]!
+    allUsers: [User]!
     user(id: ID!): User
-    restaurants: [Restaurant]!
+
+    allRestaurants: [Restaurant]!
     restaurant(id: ID!): Restaurant
-    cuisines: [Cuisine]!
-    cuisine(id: ID!): Cuisine
+
+    allCuisines: [Cuisine]!
+    cuisine(name: String!): Cuisine
   }
 
   type Mutation {
     createUser(username: String!, password: String!): Auth
+
     createRestaurant(
-      name: String!
-      rating: Float!
-      image: String
-      cuisineId: ID!
+      businessId: String!,
+      name: String!,
+      rating: Float!,
+      image: String,
+      details: String,
+      url: String,
+      coordinates: String,
+      cuisines: [String]
     ): Restaurant
+
     createCuisine(name: String!, types: [String]!): Cuisine
   }
 `;
