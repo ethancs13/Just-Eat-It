@@ -1,30 +1,52 @@
 [
   {
     "username": "Ethan Sroka",
-    "password": "123",
-    "friends": [
-      {
-        "username":"Brian Gansukh",
-        "password":"1234"
-      },
-      {
-        "username":"Yolanda Smith",
-        "password":"12"
-      }
-    ],
+    "password": "secure123",
+    "friends": ["Brian Gansukh", "Yolanda Smith"],
     "favorites": [
       {
-        "name": "test1",
-        "cuisine": "asian"
+        "name": "Savor Delight",
+        "rating": 4.8,
+        "image": "https://example.com/savor-delight.jpg",
+        "details": "A cozy restaurant offering a variety of delicious dishes.",
+        "url": "https://example.com/savor-delight",
+        "cuisine": [
+          {
+            "name": "Italian"
+          },
+          {
+            "name": "Mediterranean"
+          }
+        ]
       }
     ],
     "cuisine": [
       {
-        "name": "asian"
+        "name": "Italian"
       },
       {
-        "name": "mexican"
+        "name": "Mexican"
       }
     ]
+  },
+  {
+    "username": "Brian Gansukh",
+    "password": "safe456",
+    "friends": [],
+    "favorites": [
+      {
+        "name": "Taco Paradise",
+        "rating": 4.2,
+        "image": "https://example.com/taco-paradise.jpg",
+        "details": "Satisfy your cravings with mouthwatering Mexican tacos.",
+        "url": "https://example.com/taco-paradise",
+        "cuisine": [
+          {
+            "name": "Mexican"
+          }
+        ]
+      }
+    ],
+    "cuisine": []
   }
 ]

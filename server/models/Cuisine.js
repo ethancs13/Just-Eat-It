@@ -1,12 +1,12 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-const cuisineSchema = new Schema(
-{
-  name: { 
-    type: String, 
-    required: true 
-  },
-}
-);
+const cuisineSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  }
+});
 
-module.exports = cuisineSchema;
+const Cuisine = model('Cuisine', cuisineSchema);
+
+module.exports = cuisineSchema, Cuisine;

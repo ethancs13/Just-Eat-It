@@ -1,8 +1,17 @@
 [
     {
-        "name": "asian"
+        "name": "Italian"
     },
     {
-        "name": "mexican"
+        "name": "Mexican"
+    },
+    {
+        "name": "Japanese"
+    },
+    {
+        "name": "Indian"
+    },
+    {
+        "name": "Mediterranean"
     }
 ]
