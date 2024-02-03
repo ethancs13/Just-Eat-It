@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-// eventually import validation for email/password
+// eventually import validation for username/password from utils?
 
 function SignUpForm() {
   const [username, setUsername] = useState('');
@@ -165,6 +166,11 @@ function SignUpForm() {
       <button type="submit" className="btn btn-primary">
         Submit
       </button>
+
+      <div>
+        <Link to="/login">Already have an account? Log in</Link>
+      </div>
+
       {submitted ? <p>Thanks for signing up!</p> : null}
     </form>
   );
