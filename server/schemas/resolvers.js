@@ -2,19 +2,19 @@ const { User, Restaurant } = require('../models');
 
 const resolvers = {
   Query: {
-    users: async () => {
+    allUsers: async () => {
       return await User.find({});
     },
     user: async (parent, { id }) => {
       return await User.findById(id);
     },
-    restaurants: async () => {
+    allRestaurants: async () => {
       return await Restaurant.find({});
     },
     restaurant: async (parent, { id }) => {
       return await Restaurant.findById(id);
     },
-    cuisines: async () => {
+    allCuisines: async () => {
       return await Cuisine.find({});
     },
     cuisine: async (parent, { id }) => {
