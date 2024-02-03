@@ -1,8 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-const cuisineSchema = require('./Cuisine');
-
 const userSchema = new Schema(
   {
     username: {
@@ -18,16 +16,23 @@ const userSchema = new Schema(
     friends: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'User'
-      }
+        ref: 'User',
+      },
     ],
     favorites: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Restaurant'
-      }
+        ref: 'Restaurant',
+      },
     ],
-    cuisine: [cuisineSchema],
+    cuisine: [
+      {
+        name: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
   },
   {
     toJSON: {
@@ -53,12 +58,11 @@ userSchema.methods.isCorrectPassword = async function (password) {
 
 userSchema.virtual('friendCount').get(function () {
   return this.friends.length;
-})
+});
 
 userSchema.virtual('favoriteCount').get(function () {
   return this.favorites.length;
 });
-
 
 const User = model('User', userSchema);
 

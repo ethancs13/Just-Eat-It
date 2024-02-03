@@ -13,7 +13,7 @@ db.once('open', async () => {
     // clean database
     await cleanDB('User', 'users');
     await cleanDB('Restaurant', 'restaurants');
-    // await cleanDB('Cuisine', 'cuisines');
+    await cleanDB('Cuisine', 'cuisines');
 
     // seed Users ...
     await User.create(userSeeds);

@@ -9,4 +9,4 @@ const cuisineSchema = new Schema({
 
 const Cuisine = model('Cuisine', cuisineSchema);
 
-module.exports = cuisineSchema, Cuisine;
+module.exports = Cuisine;

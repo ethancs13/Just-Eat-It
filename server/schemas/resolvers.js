@@ -1,4 +1,4 @@
-const { User, Restaurant } = require('../models');
+const { User, Restaurant, Cuisine } = require('../models');
 
 const resolvers = {
   Query: {

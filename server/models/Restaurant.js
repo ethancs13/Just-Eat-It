@@ -27,7 +27,14 @@ const restaurantSchema = new Schema(
   coordinates: {
     type: String,
   },
-  cuisine: [cuisineSchema]
+  cuisine: [
+    {
+      name: {
+        type: String,
+        required: true,
+      },
+    },
+  ]
 }
 );
 
