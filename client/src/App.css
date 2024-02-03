@@ -9,7 +9,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  font-family: "Arial", sans-serif;
+  font-family: 'Arial', sans-serif;
   font-size: 16px;
   background-color: var(--primary-color);
 }
@@ -93,6 +93,10 @@ h5 {
     background-color: var(--accent-color);
     border-radius: 8px;
   }
+}
+
+.form-check-label {
+  user-select: none;
 }
 
 @media (max-width: 425px) {
