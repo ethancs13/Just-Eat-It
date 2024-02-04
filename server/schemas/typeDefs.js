@@ -24,14 +24,18 @@ const typeDefs = gql`
     friends: [User]!
     favorites: [Restaurant]!
     cuisine: [Cuisine]
+    friendCount: Int
+    favoriteCount: Int
   }
 
   type Auth {
-    token: String!
-    user: User!
+    token: ID!
+    user: User
   }
 
   type Query {
+    me: User
+    
     allUsers: [User]!
     user(id: ID!): User
 
@@ -44,6 +48,8 @@ const typeDefs = gql`
 
   type Mutation {
     createUser(username: String!, password: String!): Auth
+
+    login(username: String!, password: String!): Auth
 
     createRestaurant(
       businessId: String!,
