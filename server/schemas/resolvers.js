@@ -60,7 +60,7 @@ const resolvers = {
 
       const token = signToken(user);
       // Added for debugging
-      console.log(token);
+      console.log(`Here's the token: ${token}`);
 
       return { token, user };
   },

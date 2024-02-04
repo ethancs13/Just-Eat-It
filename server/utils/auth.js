@@ -17,8 +17,8 @@ module.exports = {
 
     let token = req.body.token || req.query.token || req.headers.authorization;
 
-    // console.log(`Auth middleware running...`)
-    // console.log(req.body.token || req.query.token || req.headers.authorization);
+    console.log(`Auth middleware running...`)
+    console.log(req.body.token || req.query.token || req.headers.authorization);
 
 
     if (req.headers.authorization) {
