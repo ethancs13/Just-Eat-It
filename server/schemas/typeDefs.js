@@ -34,6 +34,8 @@ const typeDefs = gql`
   }
 
   type Query {
+    me: User
+    
     allUsers: [User]!
     user(id: ID!): User
 
@@ -46,6 +48,8 @@ const typeDefs = gql`
 
   type Mutation {
     createUser(username: String!, password: String!): Auth
+
+    login(username: String!, password: String!): Auth
 
     createRestaurant(
       businessId: String!,
