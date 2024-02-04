@@ -27,7 +27,12 @@ const restaurantSchema = new Schema(
   coordinates: {
     type: String,
   },
-  cuisine: [cuisineSchema]
+  cuisine: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Cuisine",
+    },
+  ],
 }
 );
 
