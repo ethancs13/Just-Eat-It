@@ -1,5 +1,8 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+// import axios
+import axios from 'axios';
 
 // eventually import validation for username/password from utils?
 
@@ -13,6 +16,43 @@ function SignUpForm() {
   const [option3, setOption3] = useState(false);
   const [option4, setOption4] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  // setup useNavigate
+  const navigate = useNavigate();
+
+  const handleSignup = (e) => {
+    e.preventDefault();
+
+    // create object for form data
+    let form = {
+      username, 
+      password, 
+      option1,
+      option2,
+      option3,
+      option4,
+    };
+
+    axios.post('http://localhost:3001/signup', form)
+        .then((data) => {
+            if (data.data.Status === 'Success') {
+                navigate('/login');
+            } else {
+                alert('Error');
+            }
+
+            // clear form inputs
+            setUsername('');
+            setPassword('');
+            setConfirmPassword('');
+            setOption1('');
+            setOption2('');
+            setOption3('');
+            setOption4('');
+            setSubmitted('');
+        })
+  
+  }
 
   const handleState = (event) => {
     const inputName = event.target.name;
@@ -163,7 +203,7 @@ function SignUpForm() {
           </label>
         </div>
       </div>
-      <button type="submit" className="btn btn-primary">
+      <button type="submit" onSubmit={handleSignup} className="btn btn-primary">
         Submit
       </button>
 

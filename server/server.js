@@ -1,6 +1,9 @@
 const express = require('express');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
+
+var bcrypt = require('bcryptjs'); // require bcrypt
+var salt = 10;
 const path = require('path');
 
 const { authMiddleware } = require('./utils/auth');
@@ -28,9 +31,44 @@ const startApolloServer = async () => {
     context: authMiddleware
   }));
 
-  // Important for MERN Setup: When our application runs from production, it functions slightly differently than in development
-  // In development, we run two servers concurrently that work together
-  // In production, our Node server runs and delivers our client-side bundle from the dist/ folder 
+
+
+
+
+
+  // signup routes
+  app.post('/signup', (req, res) => {
+
+    // store email and password
+    const username = req.body.username;
+    const password = req.body.password;
+
+    const option1 = req.body.option1;
+    const option2 = req.body.option2;
+    const option3 = req.body.option3;
+    const option4 = req.body.option4;
+
+    // hash password
+    bcrypt.hash(password, salt, (err, hash) => {
+      if (err) {
+        return res.json({ Error: "Error when hashing password" + err })
+      }
+      // query values
+      const values = [
+        username,
+        hash,
+        option1,
+        option2,
+        option3,
+        option4,
+      ];
+
+      console.log("values: ", values)
+
+      res.json({ Status: "Success" });
+    })
+  })
+
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/dist')));
 
