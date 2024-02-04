@@ -4,6 +4,7 @@ require('dotenv').config();
 
 // Check env config
 const secret = process.env.MY_SECRET;
+console.log(`The secret is: ${secret}`)
 const expiration = '2h';
 
 module.exports = {
