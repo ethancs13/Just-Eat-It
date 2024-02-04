@@ -24,6 +24,8 @@ const typeDefs = gql`
     friends: [User]!
     favorites: [Restaurant]!
     cuisine: [Cuisine]
+    friendCount: Int
+    favoriteCount: Int
   }
 
   type Auth {
