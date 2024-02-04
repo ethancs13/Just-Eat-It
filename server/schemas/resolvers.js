@@ -41,6 +41,30 @@ const resolvers = {
   },
 
   Mutation: {
+    login: async (parent, { username, password }) => {
+      console.log(`The user's username is: ${username}`)
+      const user = await User.findOne({ username });
+      console.log(`*************************************`);
+      console.log(user);
+      console.log(`*************************************`);
+
+      if(!user) {
+          throw AuthenticationError;
+      }
+
+      const correctPW = await user.isCorrectPassword(password);
+
+      if(!correctPW) {
+          throw AuthenticationError;
+      }
+
+      const token = signToken(user);
+      // Added for debugging
+      console.log(token);
+
+      return { token, user };
+  },
+
     createUser: async (parent, { username, password }) => {
       try{
       const user = await User.create({ username, password });
