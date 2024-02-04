@@ -9,7 +9,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   font-size: 16px;
   background-color: var(--primary-color);
 }
@@ -19,13 +19,13 @@ main {
 }
 
 #root {
-  --primary-color: #163f77;
-  --primaryMedium-color: #163f77;
-  --primaryLight-color: #d85908;
+  --primary-color: #1b2b45;
+  --primaryMedium-color: #11613c;
+  --primaryLight-color: #ff663d;
   --secondaryDark-color: #060c24;
   --secondaryLight-color: #a036ee;
-  --accent-color: #cf0b49;
-  --accentLight-color: #f3a444;
+  --accent-color: #f02b61;
+  --accentLight-color: #fe9553;
 }
 
 header {
@@ -89,7 +89,7 @@ h5 {
   transition: color 0.3s ease;
   &:hover,
   &.active {
-    color: var(--primaryMedium-color);
+    color: var(--primary-color);
     background-color: var(--accent-color);
     border-radius: 8px;
   }
