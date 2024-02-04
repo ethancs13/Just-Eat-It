@@ -24,9 +24,13 @@ const resolvers = {
   },
   Mutation: {
     createUser: async (parent, { username, password }) => {
-      const user = new User({ username, password });
-      await user.save();
-      return { token: user.generateJWT(), user };
+      try{
+      const user = await User.create({ username, password });
+      const token = signToken(user);
+      return { token, user };
+      } catch (error) {
+        return { error: error.message };
+      }
     },
     createRestaurant: async (parent, { name, cuisineId }) => {
       // find cuisine from list
