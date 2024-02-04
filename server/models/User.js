@@ -27,10 +27,8 @@ const userSchema = new Schema(
     ],
     cuisine: [
       {
-        name: {
-          type: String,
-          required: true,
-        },
+        type: Schema.Types.ObjectId,
+        ref: "Cuisine",
       },
     ],
   },

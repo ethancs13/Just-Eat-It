@@ -2,30 +2,18 @@
   {
     "username": "Ethan Sroka",
     "password": "secure123",
-    "friends": ["Brian Gansukh", "Yolanda Smith"],
+    "friends": [],
     "favorites": [
       {
-        "name": "Savor Delight",
-        "rating": 4.8,
-        "image": "https://example.com/savor-delight.jpg",
-        "details": "A cozy restaurant offering a variety of delicious dishes.",
-        "url": "https://example.com/savor-delight",
-        "cuisine": [
-          {
-            "name": "Italian"
-          },
-          {
-            "name": "Mediterranean"
-          }
-        ]
+        "_id": "65bef12d38d23982c0672bb2"
       }
     ],
     "cuisine": [
       {
-        "name": "Italian"
+        "_id": "65beec0a2ceaae105e10143d"
       },
       {
-        "name": "Mexican"
+        "_id": "65beec0a2ceaae105e10143e"
       }
     ]
   },
@@ -35,16 +23,7 @@
     "friends": [],
     "favorites": [
       {
-        "name": "Taco Paradise",
-        "rating": 4.2,
-        "image": "https://example.com/taco-paradise.jpg",
-        "details": "Satisfy your cravings with mouthwatering Mexican tacos.",
-        "url": "https://example.com/taco-paradise",
-        "cuisine": [
-          {
-            "name": "Mexican"
-          }
-        ]
+        "_id": "65bef12d38d23982c0672bb1"
       }
     ],
     "cuisine": []

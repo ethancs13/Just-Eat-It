@@ -1,5 +1,6 @@
 [
   {
+    "businessId": "Savor Delight",
     "name": "Savor Delight",
     "rating": 4.8,
     "image": "https://example.com/savor-delight.jpg",
@@ -7,14 +8,15 @@
     "url": "https://example.com/savor-delight",
     "cuisine": [
       {
-        "name": "Italian"
+        "_id": "65bee95999e1b64c4434c33e"
       },
       {
-        "name": "Mediterranean"
+        "_id": "65bee95999e1b64c4434c33d"
       }
     ]
   },
   {
+    "businessId": "Spice Haven",
     "name": "Spice Haven",
     "rating": 4.5,
     "image": "https://example.com/spice-haven.jpg",
@@ -22,11 +24,12 @@
     "url": "https://example.com/spice-haven",
     "cuisine": [
       {
-        "name": "Indian"
+        "_id": "65bee95999e1b64c4434c340"
       }
     ]
   },
   {
+    "businessId": "Taco Paradise",
     "name": "Taco Paradise",
     "rating": 4.2,
     "image": "https://example.com/taco-paradise.jpg",
@@ -34,7 +37,7 @@
     "url": "https://example.com/taco-paradise",
     "cuisine": [
       {
-        "name": "Mexican"
+        "_id": "65bee95999e1b64c4434c33f"
       }
     ]
   }

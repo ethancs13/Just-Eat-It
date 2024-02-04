@@ -15,17 +15,21 @@ db.once('open', async () => {
     await cleanDB('Restaurant', 'restaurants');
     await cleanDB('Cuisine', 'cuisines');
 
-    // seed Users ...
-    await User.create(userSeeds);
-    console.log('User Data Seeded.')
+    // seed Cuisines ...
+    await Cuisine.create(cuisineSeeds);
+    console.log("Cuisine Data Seeded.")
 
     // seed Restaurants ...
     await Restaurant.create(restaurantSeeds);
     console.log('Restaurant Data Seeded.')
 
-    // seed Cuisines ...
-    await Cuisine.create(cuisineSeeds);
-    console.log("Cuisine Data Seeded.")
+    // seed Users ...
+    await User.create(userSeeds);
+    console.log('User Data Seeded.')
+
+
+
+
 
 
 
