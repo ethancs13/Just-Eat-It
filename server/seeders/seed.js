@@ -10,31 +10,44 @@ const cleanDB = require('./cleanDB');
 db.once('open', async () => {
 
   try {
-    // clean database
-    await cleanDB('User', 'users');
-    await cleanDB('Restaurant', 'restaurants');
-    await cleanDB('Cuisine', 'cuisines');
+    // clean cuisine
+    await cleanDB('Cuisine', 'cuisines')
+      .then((err) => {
+        err ? console.log("Error: ", err) :
+          console.log(`---------------------\nCuisine data sanitized`,
+          )
+      })
+    // clean restaurant
+    await cleanDB('Restaurant', 'restaurants')
+      .then((err) => {
+        err ? console.log("Error: ", err) :
+          console.log("Restaurant data sanitized",
+          )
+      })
+    // clean user
+    await cleanDB('User', 'users')
+      .then((err) => {
+        err ? console.log("Error: ", err) :
+          console.log(`User data sanitized \n`,
+          )
+      })
 
-    // seed Cuisines ...
+
+
+    // seed Cuisines 
     await Cuisine.create(cuisineSeeds);
-    console.log("Cuisine Data Seeded.")
+    console.log(`---------------------\nCuisine Data Seeded.`)
 
-    // seed Restaurants ...
+    // seed Restaurants 
     await Restaurant.create(restaurantSeeds);
     console.log('Restaurant Data Seeded.')
 
-    // seed Users ...
+    // seed Users 
     await User.create(userSeeds);
     console.log('User Data Seeded.')
 
-
-
-
-
-
-
     // complete
-    console.log('all done!');
+    console.log(`\nall done!`);
     process.exit(0);
   } catch (err) {
     throw err;
