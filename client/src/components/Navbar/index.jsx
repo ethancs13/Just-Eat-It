@@ -29,9 +29,6 @@ export default function Nav() {
             <NavLink key={6} className="nav-link" to="/login">
               Login
             </NavLink>
-            <NavLink key={7} className="nav-link" to="/signUp">
-              Sign Up
-            </NavLink>
           </>
         ),
       ]}

@@ -7,9 +7,9 @@ export default function Nav({ links }) {
     <nav>
       <ul className="nav">
         {links.map((link, index) => (
-          <a className="nav-item" key={index}>
+          <li className="nav-item" key={index}>
             {link}
-          </a>
+          </li>
         ))}
       </ul>
     </nav>
