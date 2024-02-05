@@ -9,7 +9,7 @@ export default function Nav() {
         <NavLink key={1} className="nav-link" to="/">
           Home
         </NavLink>,
-        !Auth.loggedIn() ? (
+        Auth.loggedIn() ? (
           <>
             <NavLink key={2} className="nav-link" to="/user">
               Dashboard
