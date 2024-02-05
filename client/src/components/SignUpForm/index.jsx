@@ -171,8 +171,7 @@ function SignUpForm() {
         <p>
           Already have an account?
           <Link className="pageLink" to="/login">
-            {" "}
-            Log in
+            Login
           </Link>
         </p>
       </div>
