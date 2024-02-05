@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 // eventually import validation for username/password from utils?
+import { useMutation, gql } from "@apollo/client";
+import { CREATE_USER } from "../../utils/mutations"
 
 function SignUpForm() {
   const [username, setUsername] = useState("");
@@ -13,6 +15,8 @@ function SignUpForm() {
   const [option3, setOption3] = useState(false);
   const [option4, setOption4] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  const [createUser] = useMutation(CREATE_USER)
 
   const handleState = (event) => {
     const inputName = event.target.name;
@@ -47,9 +51,7 @@ function SignUpForm() {
     }
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
+  const validateForm = () => {
     let errorMessage = "";
 
     switch (true) {
@@ -66,12 +68,27 @@ function SignUpForm() {
         break;
     }
 
+    return errorMessage;
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const errorMessage = validateForm();
+
     if (errorMessage) {
       alert(errorMessage);
       return;
     }
 
-    setSubmitted(true);
+    try {
+      const { data } = await createUser({ username, password });
+      console.log("registered", data);
+      setSubmitted(true);
+    } catch (err) {
+      console.error(err);
+      alert("An error occurred while registering the user.");
+    }
   };
 
   return (
