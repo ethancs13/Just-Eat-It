@@ -79,12 +79,14 @@ h5 {
 }
 
 .nav-item {
+  text-decoration: none;
   margin-left: 0;
   color: var(--accent-color);
   list-style: none;
 }
 
 .nav-link {
+  display: inline-block;
   color: var(--accent-color);
   transition: color 0.3s ease;
   &:hover,
@@ -105,5 +107,15 @@ h5 {
   }
   .icon-container {
     gap: 0px;
+  }
+  .nav-link {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 320px) {
+  .nav-link {
+    padding: 7px;
+    font-size: smaller;
   }
 }
