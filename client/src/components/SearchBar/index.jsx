@@ -29,10 +29,10 @@ const SearchComponent = () => {
             placeholder="Select Food Preferences"
             flex={1}
             size="sm"
-            color="orange"
+            color="white"
+            borderColor="orange"
             ml={2}
             mr={2}
-            variant="filled"
             _focus={{ borderColor: 'orange.500' }}
             onChange={(e) => setTerm(e.target.value)}
           >
@@ -48,11 +48,10 @@ const SearchComponent = () => {
             size="lg"
             color="orange"
             borderColor="orange"
-            variant="filled"
             _focus={{ borderColor: 'orange.500' }}
             onChange={(e) => setLocation(e.target.value)}
           />
-          <Button colorScheme="purple" size="md" ml={2} onClick={search}>
+          <Button colorScheme="orange" size="md" ml={2} onClick={search}>
             Search
           </Button>
         </Flex>
