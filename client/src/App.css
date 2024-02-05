@@ -53,11 +53,17 @@ h1 {
   color: var(--accentLight-color);
 }
 
+h2 {
+  color: var(--secondaryLight-color);
+  padding-bottom: 2%;
+}
+
 h5 {
   color: var(--accent-color);
 }
 
 .container {
+  padding-top: 2%;
   min-height: 70vh;
 }
 
@@ -99,6 +105,26 @@ h5 {
 
 .form-check-label {
   user-select: none;
+}
+
+.pageLink {
+  padding-left: 2px;
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+.btn-primary {
+  margin-bottom: 1%;
+  color: var(--accentLight-color);
+  background-color: var(--primary-color);
+}
+
+.btn:hover {
+  background-color: var(--secondaryLight-color);
+}
+
+.error-message {
+  color: var(--primaryLight-color);
 }
 
 @media (max-width: 425px) {

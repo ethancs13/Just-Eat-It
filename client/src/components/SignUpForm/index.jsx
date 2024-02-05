@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 // eventually import validation for username/password from utils?
 
 function SignUpForm() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const [option1, setOption1] = useState(false);
   const [option2, setOption2] = useState(false);
@@ -17,30 +17,30 @@ function SignUpForm() {
   const handleState = (event) => {
     const inputName = event.target.name;
     const fieldValue =
-      event.target.type === 'checkbox'
+      event.target.type === "checkbox"
         ? event.target.checked
         : event.target.value;
 
     switch (inputName) {
-      case 'username':
+      case "username":
         setUsername(fieldValue);
         break;
-      case 'password':
+      case "password":
         setPassword(fieldValue);
         break;
-      case 'confirmPassword':
+      case "confirmPassword":
         setConfirmPassword(fieldValue);
         break;
-      case 'option1':
+      case "option1":
         setOption1(fieldValue);
         break;
-      case 'option2':
+      case "option2":
         setOption2(fieldValue);
         break;
-      case 'option3':
+      case "option3":
         setOption3(fieldValue);
         break;
-      case 'option4':
+      case "option4":
         setOption4(fieldValue);
       default:
         break;
@@ -50,17 +50,17 @@ function SignUpForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    let errorMessage = '';
+    let errorMessage = "";
 
     switch (true) {
       case !username:
-        errorMessage += 'Please enter a username.';
+        errorMessage += "Please enter a username.";
         break;
       case !password:
-        errorMessage += 'Please enter a password.';
+        errorMessage += "Please enter a password.";
         break;
       case password !== confirmPassword:
-        errorMessage += 'Passwords do not match.';
+        errorMessage += "Passwords do not match.";
         break;
       default:
         break;
@@ -168,7 +168,13 @@ function SignUpForm() {
       </button>
 
       <div>
-        <Link to="/login">Already have an account? Log in</Link>
+        <p>
+          Already have an account?
+          <Link className="pageLink" to="/login">
+            {" "}
+            Log in
+          </Link>
+        </p>
       </div>
 
       {submitted ? <p>Thanks for signing up!</p> : null}
