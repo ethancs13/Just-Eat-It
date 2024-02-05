@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Display&display=swap");
+
 html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
@@ -20,12 +22,14 @@ main {
 
 #root {
   --primary-color: #1b2b45;
+  --primaryHighlight-color: #5fb1f0;
   --primaryMedium-color: #11613c;
   --primaryLight-color: #ff663d;
   --secondaryDark-color: #060c24;
   --secondaryLight-color: #a036ee;
   --accent-color: #f02b61;
   --accentLight-color: #fe9553;
+  --background-opacity: 0.5;
 }
 
 header {
@@ -33,9 +37,10 @@ header {
   height: 20vh;
   background: linear-gradient(
     to right,
-    var(--primary-color),
+    var(--secondaryDark-color),
     var(--primaryLight-color),
-    var(--secondaryLight-color)
+    var(--secondaryLight-color),
+    var(--secondaryDark-color)
   );
   display: flex;
   align-items: center;
@@ -51,13 +56,30 @@ footer {
 
 h1 {
   color: var(--accentLight-color);
+  font-size: 3em;
+  font-family: "Noto Sans Display", sans-serif;
+  letter-spacing: 2px;
+}
+
+h2 {
+  color: var(--secondaryLight-color);
+  padding: 2%, 0%;
 }
 
 h5 {
-  color: var(--accent-color);
+  font-size: medium;
+  color: var(--primaryHighlight-color);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  font-family: "Noto Sans Display", sans-serif;
+}
+
+.glow-text {
+  color: var(--accentLight-color);
+  text-shadow: 0 0 5px var(--primaryLight-color);
 }
 
 .container {
+  padding-top: 2%;
   min-height: 70vh;
 }
 
@@ -76,27 +98,63 @@ h5 {
   display: flex;
   justify-content: flex-end;
   background-color: var(--secondaryDark-color);
+  font-family: "Noto Sans Display", sans-serif;
 }
 
 .nav-item {
+  text-decoration: none;
   margin-left: 0;
   color: var(--accent-color);
   list-style: none;
 }
 
 .nav-link {
+  display: inline-block;
   color: var(--accent-color);
   transition: color 0.3s ease;
   &:hover,
   &.active {
     color: var(--primary-color);
-    background-color: var(--accent-color);
+    background-color: var(--accent-color, 0.5);
     border-radius: 8px;
   }
 }
 
+.bg {
+  background-image: url("./assets/images/pexels-peng-liu-169647.jpg");
+  height: auto;
+  width: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.searchContainer {
+  margin-top: 15%;
+}
+
 .form-check-label {
   user-select: none;
+}
+
+.pageLink {
+  padding-left: 2px;
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+.btn-primary {
+  margin-bottom: 1%;
+  color: var(--accentLight-color);
+  background-color: var(--primary-color);
+}
+
+.btn:hover {
+  background-color: var(--secondaryLight-color);
+}
+
+.error-message {
+  color: var(--primaryLight-color);
 }
 
 @media (max-width: 425px) {
@@ -105,5 +163,15 @@ h5 {
   }
   .icon-container {
     gap: 0px;
+  }
+  .nav-link {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 320px) {
+  .nav-link {
+    padding: 7px;
+    font-size: smaller;
   }
 }
