@@ -76,6 +76,7 @@ function SignUpForm() {
 
   return (
     <form onSubmit={handleSubmit} className="form-container">
+      <h2>Sign Up</h2>
       <div className="mb-3">
         <label className="form-label">Username</label>
         <input

@@ -16,9 +16,10 @@ const SearchComponent = () => {
             placeholder="Select Food Preferences"
             flex={1}
             size="sm"
+            color="orange"
             ml={2}
             mr={2}
-            variant="filled"
+            // variant="filled"
             _focus={{ borderColor: "orange.500" }}
           >
             <option value="american">American</option>
@@ -33,10 +34,10 @@ const SearchComponent = () => {
             size="lg"
             color="orange"
             borderColor="orange"
-            variant="filled"
+            // variant="filled"
             _focus={{ borderColor: "orange.500" }}
           />
-          <Button colorScheme="purple" size="md" ml={2}>
+          <Button colorScheme="orange" size="md" ml={2}>
             Search
           </Button>
         </Flex>
