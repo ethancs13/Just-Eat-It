@@ -22,12 +22,14 @@ main {
 
 #root {
   --primary-color: #1b2b45;
+  --primaryHighlight-color: #5fb1f0;
   --primaryMedium-color: #11613c;
   --primaryLight-color: #ff663d;
   --secondaryDark-color: #060c24;
   --secondaryLight-color: #a036ee;
   --accent-color: #f02b61;
   --accentLight-color: #fe9553;
+  --background-opacity: 0.5;
 }
 
 header {
@@ -66,7 +68,8 @@ h2 {
 
 h5 {
   font-size: medium;
-  color: var(--accent-color);
+  color: var(--primaryHighlight-color);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
   font-family: "Noto Sans Display", sans-serif;
 }
 
@@ -112,7 +115,7 @@ h5 {
   &:hover,
   &.active {
     color: var(--primary-color);
-    background-color: var(--accent-color);
+    background-color: var(--accent-color, 0.5);
     border-radius: 8px;
   }
 }
@@ -124,6 +127,10 @@ h5 {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.searchContainer {
+  margin-top: 15%;
 }
 
 .form-check-label {
