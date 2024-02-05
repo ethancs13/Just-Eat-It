@@ -16,7 +16,8 @@ const SearchComponent = () => {
             placeholder="Select Food Preferences"
             flex={1}
             size="sm"
-            color="orange"
+            color="white"
+            borderColor="orange"
             ml={2}
             mr={2}
             _focus={{ borderColor: "orange.500" }}
