@@ -1,3 +1,7 @@
+import { useState } from 'react';
+import { handleSearch } from '../../utils/API';
+import SearchResults from '../SearchResults';
+
 import {
   Box,
   Input,
@@ -5,9 +9,18 @@ import {
   Button,
   ChakraProvider,
   Flex,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 const SearchComponent = () => {
+  const [term, setTerm] = useState('');
+  const [location, setLocation] = useState('');
+  const [results, setResults] = useState([]);
+
+  const search = async () => {
+    const data = await handleSearch(location, term);
+    setResults(data.businesses);
+  };
+
   return (
     <ChakraProvider>
       <Box className="searchContainer" p={4}>
@@ -20,7 +33,8 @@ const SearchComponent = () => {
             borderColor="orange"
             ml={2}
             mr={2}
-            _focus={{ borderColor: "orange.500" }}
+            _focus={{ borderColor: 'orange.500' }}
+            onChange={(e) => setTerm(e.target.value)}
           >
             <option value="american">American</option>
             <option value="mexican">Mexican</option>
@@ -34,12 +48,14 @@ const SearchComponent = () => {
             size="lg"
             color="orange"
             borderColor="orange"
-            _focus={{ borderColor: "orange.500" }}
+            _focus={{ borderColor: 'orange.500' }}
+            onChange={(e) => setLocation(e.target.value)}
           />
-          <Button colorScheme="orange" size="md" ml={2}>
+          <Button colorScheme="orange" size="md" ml={2} onClick={search}>
             Search
           </Button>
         </Flex>
+        <SearchResults results={results} />
       </Box>
     </ChakraProvider>
   );
