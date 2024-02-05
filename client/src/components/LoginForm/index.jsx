@@ -38,6 +38,7 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="form-container">
+      <h2>Login</h2>
       <div className="mb-3">
         <label className="form-label">Username</label>
         <input
