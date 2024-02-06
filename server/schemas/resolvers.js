@@ -69,6 +69,9 @@ const resolvers = {
       try {
         const user = await User.create({ username, password });
         const token = signToken(user);
+
+        console.log(`Signing up: ${user}`);
+        
         return { token, user };
       } catch (error) {
         return { error: error.message };
