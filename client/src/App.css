@@ -198,6 +198,36 @@ p {
   color: var(--primaryLight-color);
 }
 
+.card-container img {
+  margin: 20px 0px;
+  display: block;
+  max-height: 200px;
+  width: auto;
+  border-radius: 8px;
+  border: 2px solid var(--accentLight-color);
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  width: 25rem;
+  margin: 1%;
+  background-color: var(--secondaryLight-color);
+}
+
+.card-text {
+  text-align: center;
+  color: var(--primary-color);
+  font-size: 13px;
+}
+
+.card-title {
+  text-align: center;
+}
+
 @media (max-width: 425px) {
   h5 {
     font-size: smaller;
