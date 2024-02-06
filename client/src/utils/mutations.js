@@ -74,8 +74,8 @@ export const CREATE_RESTAURANT = gql`
 `;
 
 export const REMOVE_RESTAURANT = gql`
-  mutation RemoveRestaurant($businessId: String!) {
-    RemoveRestaurant(businessId: $businessId) {
+  mutation removeRestaurant($businessId: String!) {
+    removeRestaurant(businessId: $businessId) {
       _id
       username
       favorites {

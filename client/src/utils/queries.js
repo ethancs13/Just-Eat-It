@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const QUERY_ALL_USERS = gql`
   query allUsers {
@@ -23,7 +23,10 @@ export const QUERY_ME = gql`
     me {
       _id
       username
-      cuisine
+      cuisine {
+        id
+        name
+      }
       favorites {
         _id
         businessId
