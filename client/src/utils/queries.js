@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const QUERY_ALL_USERS = gql`
   query allUsers {
@@ -33,6 +33,14 @@ export const QUERY_ME = gql`
         url
         location
       }
+    }
+  }
+`;
+
+export const QUERY_ALL_CUISINES = gql`
+  query {
+    allCuisines {
+      name
     }
   }
 `;
