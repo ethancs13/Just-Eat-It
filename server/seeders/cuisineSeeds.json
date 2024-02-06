@@ -12,6 +12,39 @@
         "name": "Indian"
     },
     {
+        "name": "Thai"
+    },
+    {
+        "name": "Vietnamese"
+    },
+    {
+        "name": "Chinese"
+    },
+    {
+        "name": "Vegetarian"
+    },
+    {
+        "name": "Seafood"
+    },
+    {
+        "name": "Breakfast"
+    },
+    {
+        "name": "Mediterranean"
+    },
+    {
+        "name": "Fast Food"
+    },
+    {
+        "name": "Desserts"
+    },
+    {
+        "name": "Coffee Shops"
+    },
+    {
+        "name": "Steakhouse"
+    },
+    {
         "name": "Mediterranean"
     }
 ]
