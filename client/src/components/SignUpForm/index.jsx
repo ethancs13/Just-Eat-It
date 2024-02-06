@@ -1,94 +1,42 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Auth from "../../utils/auth";
 
 // eventually import validation for username/password from utils?
 import { useMutation, gql } from "@apollo/client";
 import { CREATE_USER } from "../../utils/mutations"
 
-function SignUpForm() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+const SignUpForm = () => {
+  const [ userFormData, setUserFormData ] = useState({ username: '', password: '' })
 
-  const [option1, setOption1] = useState(false);
-  const [option2, setOption2] = useState(false);
-  const [option3, setOption3] = useState(false);
-  const [option4, setOption4] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [createUser] = useMutation(CREATE_USER);
 
-  const [createUser] = useMutation(CREATE_USER)
-
-  const handleState = (event) => {
-    const inputName = event.target.name;
-    const fieldValue =
-      event.target.type === "checkbox"
-        ? event.target.checked
-        : event.target.value;
-
-    switch (inputName) {
-      case "username":
-        setUsername(fieldValue);
-        break;
-      case "password":
-        setPassword(fieldValue);
-        break;
-      case "confirmPassword":
-        setConfirmPassword(fieldValue);
-        break;
-      case "option1":
-        setOption1(fieldValue);
-        break;
-      case "option2":
-        setOption2(fieldValue);
-        break;
-      case "option3":
-        setOption3(fieldValue);
-        break;
-      case "option4":
-        setOption4(fieldValue);
-      default:
-        break;
-    }
-  };
-
-  const validateForm = () => {
-    let errorMessage = "";
-
-    switch (true) {
-      case !username:
-        errorMessage += "Please enter a username.";
-        break;
-      case !password:
-        errorMessage += "Please enter a password.";
-        break;
-      case password !== confirmPassword:
-        errorMessage += "Passwords do not match.";
-        break;
-      default:
-        break;
-    }
-
-    return errorMessage;
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserFormData({ ...userFormData, [name]: value });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const errorMessage = validateForm();
-
-    if (errorMessage) {
-      alert(errorMessage);
-      return;
-    }
-
     try {
-      const { data } = await createUser({ username, password });
+      const { data } = await createUser({
+        variables: { ...userFormData },
+    });
+
       console.log("registered", data);
-      setSubmitted(true);
+
+      Auth.login(data.createUser.token);
+
     } catch (err) {
       console.error(err);
       alert("An error occurred while registering the user.");
     }
+
+    setUserFormData({
+      username: '',
+      password: '',
+    });
   };
 
   return (
@@ -100,8 +48,9 @@ function SignUpForm() {
           type="text"
           className="form-control"
           name="username"
-          value={username}
-          onChange={handleState}
+          value={userFormData.username}
+          onChange={handleInputChange}
+          required
         />
       </div>
       <div className="mb-3">
@@ -110,77 +59,11 @@ function SignUpForm() {
           type="password"
           className="form-control"
           name="password"
-          value={password}
-          onChange={handleState}
+          value={userFormData.password}
+          onChange={handleInputChange}
         />
       </div>
-      <div className="mb-3">
-        <label className="form-label">Confirm Password</label>
-        <input
-          type="password"
-          className="form-control"
-          name="confirmPassword"
-          value={confirmPassword}
-          onChange={handleState}
-        ></input>
-      </div>
-      <div className="mb-3">
-        <label className="form-label">
-          Food Preferences (Check all that apply)
-        </label>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            id="option1"
-            name="option1"
-            checked={option1}
-            onChange={handleState}
-          />
-          <label className="form-check-label" htmlFor="option1">
-            American
-          </label>
-        </div>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            id="option2"
-            name="option2"
-            checked={option2}
-            onChange={handleState}
-          />
-          <label className="form-check-label" htmlFor="option2">
-            Mexican
-          </label>
-        </div>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            id="option3"
-            name="option3"
-            checked={option3}
-            onChange={handleState}
-          />
-          <label className="form-check-label" htmlFor="option3">
-            Italian
-          </label>
-        </div>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            id="option4"
-            name="option4"
-            checked={option4}
-            onChange={handleState}
-          />
-          <label className="form-check-label" htmlFor="option4">
-            Asian
-          </label>
-        </div>
-      </div>
+     
       <button type="submit" className="btn btn-primary">
         Sign Up
       </button>
@@ -194,7 +77,7 @@ function SignUpForm() {
         </p>
       </div>
 
-      {submitted ? <p>Thanks for signing up!</p> : null}
+      {/* {submitted ? <p>Thanks for signing up!</p> : null} */}
     </form>
   );
 }
