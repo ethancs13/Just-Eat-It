@@ -80,11 +80,31 @@ const resolvers = {
       return restaurant;
     },
 
-    createCuisine: async (parent, { name }) => {
-      const cuisine = new Cuisine({ name });
-      await cuisine.save();
-      return cuisine;
+    addCuisine: async (parent, { cuisineData }, context) => {
+      if(context.user) {
+        const updatedUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { cuisine: cuisineData }},
+          { new: true }
+        )
+        return updatedUser;
+      }
+      throw AuthenticationError;
     },
+
+    removeCuisine: async (parent, { cuisineData }, context) => {
+      if(context.user) {
+        const updatedUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $pull: { cuisine: cuisineData }},
+          { new: true }
+        )
+        return updatedUser;
+      }
+      throw AuthenticationError;
+    },
+
+    
   },
 
 };

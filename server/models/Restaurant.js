@@ -24,12 +24,6 @@ const restaurantSchema = new Schema(
   location: {
     type: String,
   },
-  cuisine: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Cuisine",
-    },
-  ],
 }
 );
 
