@@ -31,6 +31,7 @@ const SearchComponent = () => {
             size="sm"
             color="orange"
             borderColor="orange"
+            // background="grey"
             ml={2}
             mr={2}
             _focus={{ borderColor: "orange.500" }}
