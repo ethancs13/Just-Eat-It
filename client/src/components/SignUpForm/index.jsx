@@ -1,13 +1,21 @@
-import { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { CREATE_USER } from "../../utils/mutations";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import Auth from "../../utils/auth";
 
-// eventually import validation for username/password from utils?
-import { useMutation, gql } from "@apollo/client";
-import { CREATE_USER } from "../../utils/mutations"
-
 const SignUpForm = () => {
-  const [ userFormData, setUserFormData ] = useState({ username: '', password: '' })
+  const [userFormData, setUserFormData] = useState({
+    username: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const [errors, setErrors] = useState({
+    usernameError: "",
+    passwordError: "",
+    confirmPasswordError: "",
+  });
 
   const [createUser] = useMutation(CREATE_USER);
 
@@ -19,23 +27,65 @@ const SignUpForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    setErrors({
+      usernameError: "",
+      passwordError: "",
+      confirmPasswordError: "",
+    });
+
+    let hasErrors = false;
+
+    if (!userFormData.username.trim()) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        usernameError: "Invalid - Must have a username.",
+      }));
+      hasErrors = true;
+    }
+
+    if (!userFormData.password.trim()) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        passwordError: "Invalid - Must have a username.",
+      }));
+      hasErrors = true;
+    }
+
+    if (userFormData.password !== userFormData.confirmPassword) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        passwordError: "Passwords do not match",
+      }));
+      hasErrors = true;
+    }
+
+    if (hasErrors) {
+      return;
+    }
+
     try {
       const { data } = await createUser({
         variables: { ...userFormData },
-    });
+      });
 
       console.log("registered", data);
 
       Auth.login(data.createUser.token);
-
     } catch (err) {
       console.error(err);
       alert("An error occurred while registering the user.");
     }
 
     setUserFormData({
-      username: '',
-      password: '',
+      username: "",
+      password: "",
+      confirmPassword: "",
+    });
+
+    setErrors({
+      usernameError: "",
+      passwordError: "",
+      confirmPasswordError: "",
     });
   };
 
@@ -52,6 +102,9 @@ const SignUpForm = () => {
           onChange={handleInputChange}
           required
         />
+        {errors.usernameError && (
+          <div className="error-message">{errors.usernameError}</div>
+        )}
       </div>
       <div className="mb-3">
         <label className="form-label">Password</label>
@@ -61,9 +114,26 @@ const SignUpForm = () => {
           name="password"
           value={userFormData.password}
           onChange={handleInputChange}
+          required
         />
+        {errors.passwordError && (
+          <div className="error-message">{errors.passwordError}</div>
+        )}
       </div>
-     
+      <div className="mb-3">
+        <label className="form-label">Confirm Password</label>
+        <input
+          type="password"
+          className="form-control"
+          name="confirmPassword"
+          value={userFormData.confirmPassword}
+          onChange={handleInputChange}
+          required
+        />
+        {errors.confirmPasswordError && (
+          <div className="error-message">{errors.confirmPasswordError}</div>
+        )}
+      </div>
       <button type="submit" className="btn btn-primary">
         Sign Up
       </button>
@@ -76,10 +146,8 @@ const SignUpForm = () => {
           </Link>
         </p>
       </div>
-
-      {/* {submitted ? <p>Thanks for signing up!</p> : null} */}
     </form>
   );
-}
+};
 
 export default SignUpForm;
