@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const CREATE_USER = gql`
   mutation createUser($username: String!, $password: String!) {
@@ -62,6 +62,30 @@ export const CREATE_RESTAURANT = gql`
       image: $image
       url: $url
       location: $location
-    )
+    ) {
+      businessId
+      name
+      rating
+      image
+      url
+      location
+    }
+  }
+`;
+
+export const REMOVE_RESTAURANT = gql`
+  mutation RemoveRestaurant($businessId: String!) {
+    RemoveRestaurant(businessId: $businessId) {
+      _id
+      username
+      favorites {
+        businessId
+        name
+        rating
+        image
+        url
+        location
+      }
+    }
   }
 `;
