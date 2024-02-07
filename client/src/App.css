@@ -152,6 +152,15 @@ p {
   background-size: cover;
 }
 
+.bgUserPage {
+  background-image: url("./assets/images/pexels-bao-dang-3700369.jpg");
+  height: auto;
+  width: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .bgNoAccess {
   background-image: url("./assets/images/pexels-pixabay-315191.jpg");
   height: auto;
