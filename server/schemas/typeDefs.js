@@ -3,7 +3,7 @@ const { gql } = require("apollo-server-express");
 const typeDefs = gql`
   type Cuisine {
     name: String!
-    cuisineId: ID!
+    cuisineId: String!
   }
 
   type Restaurant {
@@ -47,7 +47,7 @@ const typeDefs = gql`
 
   input CuisineInput {
     name: String
-    cuisineId: ID!
+    cuisineId: String
   }
 
   type Mutation {
@@ -55,7 +55,7 @@ const typeDefs = gql`
 
     login(username: String!, password: String!): Auth
 
-    addCuisine(cuisineData: CuisineInput!): User
+    addCuisine(cuisineData: [CuisineInput!]): User
 
     removeCuisine(cuisineId: ID!): User
 
