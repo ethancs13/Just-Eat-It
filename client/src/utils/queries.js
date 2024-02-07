@@ -38,7 +38,6 @@ export const QUERY_ME = gql`
         cuisineId
       }
       favorites {
-        _id
         businessId
         name
         rating
