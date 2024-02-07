@@ -63,7 +63,7 @@ const resolvers = {
       try {
         const user = await User.create({ username, password });
         const token = signToken(user);
-        
+
         return { token, user };
       } catch (error) {
         return { error: error.message };
@@ -81,32 +81,29 @@ const resolvers = {
     },
 
     addCuisine: async (parent, { cuisineData }, context) => {
-      if(context.user) {
+      if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { cuisine: cuisineData }},
+          { $push: { savedCuisines: cuisineData } },
           { new: true }
-        )
+        );
         return updatedUser;
       }
       throw AuthenticationError;
     },
 
     removeCuisine: async (parent, { cuisineData }, context) => {
-      if(context.user) {
+      if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $pull: { cuisine: cuisineData }},
+          { $pull: { savedCuisines: { cuisineId } } },
           { new: true }
-        )
+        );
         return updatedUser;
       }
       throw AuthenticationError;
     },
-
-    
   },
-
 };
 
 module.exports = resolvers;
