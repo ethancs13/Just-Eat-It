@@ -18,21 +18,12 @@ const restaurantSchema = new Schema(
   image: {
     type: String,
   },
-  details: {
-    type: String,
-  },
   url: {
     type: String,
   },
-  coordinates: {
+  location: {
     type: String,
   },
-  cuisine: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Cuisine",
-    },
-  ],
 }
 );
 

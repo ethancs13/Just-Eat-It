@@ -4,7 +4,10 @@ export const QUERY_ALL_USERS = gql`
   query allUsers {
     _id
     username
-    cuisine
+    savedCuisines {
+      name
+      cuisineId
+    }
   }
 `;
 
@@ -13,7 +16,10 @@ export const QUERY_USER = gql`
     user(userId: $userId) {
       _id
       username
-      cuisine
+      savedCuisines {
+        name
+        cuisineId
+      }
     }
   }
 `;
@@ -23,7 +29,28 @@ export const QUERY_ME = gql`
     me {
       _id
       username
-      cuisine
+      savedCuisines {
+        name
+        cuisineId
+      }
+      favorites {
+        _id
+        businessId
+        name
+        rating
+        image
+        url
+        location
+      }
+    }
+  }
+`;
+
+export const QUERY_ALL_CUISINES = gql`
+  query {
+    allCuisines {
+      name
+      cuisineId
     }
   }
 `;

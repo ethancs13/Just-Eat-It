@@ -1,5 +1,7 @@
-const { Schema, model } = require('mongoose');
-const bcrypt = require('bcryptjs');
+const { Schema, model } = require("mongoose");
+const bcrypt = require("bcryptjs");
+
+const Cuisine = require("./Cuisine");
 
 const userSchema = new Schema(
   {
@@ -16,20 +18,20 @@ const userSchema = new Schema(
     friends: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'User',
+        ref: "User",
       },
     ],
     favorites: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Restaurant',
+        ref: "Restaurant",
       },
     ],
-    cuisine: [
+    savedCuisines: [
       {
-        type: Schema.Types.ObjectId,
-        ref: "Cuisine",
-      },
+      name: String,
+      cuisineId: String,
+      }
     ],
   },
   {
@@ -40,8 +42,8 @@ const userSchema = new Schema(
 );
 
 // hash user password
-userSchema.pre('save', async function (next) {
-  if (this.isNew || this.isModified('password')) {
+userSchema.pre("save", async function (next) {
+  if (this.isNew || this.isModified("password")) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
@@ -56,14 +58,14 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-userSchema.virtual('friendCount').get(function () {
+userSchema.virtual("friendCount").get(function () {
   return this.friends.length;
 });
 
-userSchema.virtual('favoriteCount').get(function () {
+userSchema.virtual("favoriteCount").get(function () {
   return this.favorites.length;
 });
 
-const User = model('User', userSchema);
+const User = model("User", userSchema);
 
 module.exports = User;
