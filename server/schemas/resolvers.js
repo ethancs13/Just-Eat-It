@@ -80,10 +80,9 @@ const resolvers = {
       return restaurant;
     },
 
-    // The arguments are just that and can be named what we want.  The order is what's important.
+    
     addCuisine: async (parent, { cuisineData }, context) => {
-      console.log(cuisineData);
-
+      
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
