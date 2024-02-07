@@ -9,6 +9,7 @@ export default function CuisineDropDown() {
   const { loading, error, data } = useQuery(QUERY_ALL_CUISINES);
   const [addCuisine] = useMutation(ADD_CUISINE);
   const [selectedCuisines, setSelectedCuisines] = useState([]);
+
   const handleCheckboxChange = (event) => {
     const { id, checked } = event.target;
     const cuisine = {
@@ -25,7 +26,7 @@ export default function CuisineDropDown() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.dir(selectedCuisines)
+
     try {
       const { data } = await addCuisine({
         variables: { cuisineData: selectedCuisines },
@@ -35,6 +36,8 @@ export default function CuisineDropDown() {
     } catch (error) {
       console.log(`Error saving food preferences: ${error.message}`);
     }
+
+    setSelectedCuisines([]);
   };
 
   if (loading) return <p>Loading...</p>;
