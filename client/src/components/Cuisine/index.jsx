@@ -1,9 +1,9 @@
-import CuisineDropDown from "./cuisineDropDown";
+import CuisineUpdateModal from "./cuisineUpdateModal";
 
 const Cuisine = () => {
   return (
     <div>
-      <CuisineDropDown />
+      <CuisineUpdateModal />
     </div>
   );
 };
