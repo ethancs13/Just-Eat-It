@@ -20,7 +20,7 @@ const typeDefs = gql`
     _id: ID!
     username: String!
     password: String!
-    friends: [User]!
+    friends: [User]
     favorites: [Restaurant]!
     savedCuisines: [Cuisine]
     friendCount: Int
