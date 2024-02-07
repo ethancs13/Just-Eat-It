@@ -84,13 +84,24 @@ const resolvers = {
     addCuisine: async (parent, { cuisineData }, context) => {
       
       if (context.user) {
+
+        const user = await User.findById(context.user._id);
+        const existingCusines = user.savedCuisines.map(cuisine => cuisine.cuisineId);
+
+        const updatedCuisines = cuisineData.filter(cuisine => !existingCusines.includes(cuisine.cuisineId));
+        console.log(updatedCuisines);
+
+        if (updatedCuisines.length > 0) {
         const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { savedCuisines: cuisineData } },
+          { $push: { savedCuisines: updatedCuisines } },
           { new: true }
         );
         return updatedUser;
+      } else {
+        return user
       }
+    }
       throw AuthenticationError;
     },
 
@@ -98,7 +109,7 @@ const resolvers = {
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedCuisines: { cuisineId } } },
+          { $addToSet: { savedCuisines: { cuisineId } } },
           { new: true }
         );
         return updatedUser;
