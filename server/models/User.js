@@ -27,7 +27,12 @@ const userSchema = new Schema(
         ref: "Restaurant",
       },
     ],
-    savedCuisines: [{ type: Schema.Types.ObjectId, ref: "Cuisine" }],
+    savedCuisines: [
+      {
+      name: String,
+      cuisineId: String,
+      }
+    ],
   },
   {
     toJSON: {
