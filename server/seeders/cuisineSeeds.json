@@ -1,17 +1,66 @@
 [
     {
+        "cuisineId": "617ca5e3e89691004a8e4b7a",
         "name": "Italian"
     },
     {
+        "cuisineId": "617ca5e3e89691004a8e4b7b",
         "name": "Mexican"
     },
     {
+        "cuisineId": "617ca5e3e89691004a8e4b7c",
         "name": "Japanese"
     },
     {
+        "cuisineId": "617ca5e3e89691004a8e4b7d",
         "name": "Indian"
     },
     {
+        "cuisineId": "617ca5e3e89691004a8e4b7e",
+        "name": "Thai"
+    },
+    {
+        "cuisineId": "617ca5e3e89691004a8e4b7f",
+        "name": "Vietnamese"
+    },
+    {
+        "cuisineId": "617ca5e3e89691004a8e4b80",
+        "name": "Chinese"
+    },
+    {
+        "cuisineId": "617ca5e3e89691004a8e4b81",
+        "name": "Vegetarian"
+    },
+    {
+        "cuisineId": "617ca5e3e89691004a8e4b82",
+        "name": "Seafood"
+    },
+    {
+        "cuisineId": "617ca5e3e89691004a8e4b83",
+        "name": "Breakfast"
+    },
+    {
+        "cuisineId": "617ca5e3e89691004a8e4b84",
+        "name": "Mediterranean"
+    },
+    {
+        "cuisineId": "617ca5e3e89691004a8e4b85",
+        "name": "Fast Food"
+    },
+    {
+        "cuisineId": "617ca5e3e89691004a8e4b86",
+        "name": "Desserts"
+    },
+    {
+        "cuisineId": "617ca5e3e89691004a8e4b87",
+        "name": "Coffee Shops"
+    },
+    {
+        "cuisineId": "617ca5e3e89691004a8e4b88",
+        "name": "Steakhouse"
+    },
+    {
+        "cuisineId": "617ca5e3e89691004a8e4b89",
         "name": "Mediterranean"
     }
 ]

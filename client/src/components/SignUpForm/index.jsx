@@ -1,127 +1,110 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useMutation } from "@apollo/client";
+import { CREATE_USER } from "../../utils/mutations";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import Auth from "../../utils/auth";
 
-// eventually import validation for username/password from utils?
+const SignUpForm = () => {
+  const [userFormData, setUserFormData] = useState({
+    username: "",
+    password: "",
+    confirmPassword: "",
+  });
 
-function SignUpForm() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errors, setErrors] = useState({
+    usernameError: "",
+    passwordError: "",
+    confirmPasswordError: "",
+  });
 
-  const [option1, setOption1] = useState(false);
-  const [option2, setOption2] = useState(false);
-  const [option3, setOption3] = useState(false);
-  const [option4, setOption4] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [createUser] = useMutation(CREATE_USER);
 
-  // setup useNavigate
-  const navigate = useNavigate();
-
-  const handleSignup = (e) => {
-    e.preventDefault();
-
-    // create object for form data
-    let form = {
-      username, 
-      password, 
-      option1,
-      option2,
-      option3,
-      option4,
-    };
-
-    axios.post('http://localhost:3001/signup', form)
-        .then((data) => {
-            if (data.data.Status === 'Success') {
-                navigate('/login');
-            } else {
-                alert('Error');
-            }
-
-            // clear form inputs
-            setUsername('');
-            setPassword('');
-            setConfirmPassword('');
-            setOption1('');
-            setOption2('');
-            setOption3('');
-            setOption4('');
-            setSubmitted('');
-        })
-  
-  }
-
-  const handleState = (event) => {
-    const inputName = event.target.name;
-    const fieldValue =
-      event.target.type === "checkbox"
-        ? event.target.checked
-        : event.target.value;
-
-    switch (inputName) {
-      case "username":
-        setUsername(fieldValue);
-        break;
-      case "password":
-        setPassword(fieldValue);
-        break;
-      case "confirmPassword":
-        setConfirmPassword(fieldValue);
-        break;
-      case "option1":
-        setOption1(fieldValue);
-        break;
-      case "option2":
-        setOption2(fieldValue);
-        break;
-      case "option3":
-        setOption3(fieldValue);
-        break;
-      case "option4":
-        setOption4(fieldValue);
-      default:
-        break;
-    }
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserFormData({ ...userFormData, [name]: value });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    let errorMessage = "";
+    setErrors({
+      usernameError: "",
+      passwordError: "",
+      confirmPasswordError: "",
+    });
 
-    switch (true) {
-      case !username:
-        errorMessage += "Please enter a username.";
-        break;
-      case !password:
-        errorMessage += "Please enter a password.";
-        break;
-      case password !== confirmPassword:
-        errorMessage += "Passwords do not match.";
-        break;
-      default:
-        break;
+    let hasErrors = false;
+
+    if (!userFormData.username.trim()) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        usernameError: "Invalid - Must have a username.",
+      }));
+      hasErrors = true;
     }
 
-    if (errorMessage) {
-      alert(errorMessage);
+    if (!userFormData.password.trim()) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        passwordError: "Invalid - Must have a username.",
+      }));
+      hasErrors = true;
+    }
+
+    if (userFormData.password !== userFormData.confirmPassword) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        passwordError: "Passwords do not match",
+      }));
+      hasErrors = true;
+    }
+
+    if (hasErrors) {
       return;
     }
 
-    setSubmitted(true);
+    try {
+      const { data } = await createUser({
+        variables: { ...userFormData },
+      });
+
+      console.log("registered", data);
+
+      Auth.login(data.createUser.token);
+    } catch (err) {
+      console.error(err);
+      alert("An error occurred while registering the user.");
+    }
+
+    setUserFormData({
+      username: "",
+      password: "",
+      confirmPassword: "",
+    });
+
+    setErrors({
+      usernameError: "",
+      passwordError: "",
+      confirmPasswordError: "",
+    });
   };
 
   return (
     <form onSubmit={handleSubmit} className="form-container">
+      <h2>Sign Up</h2>
       <div className="mb-3">
         <label className="form-label">Username</label>
         <input
           type="text"
           className="form-control"
           name="username"
-          value={username}
-          onChange={handleState}
+          value={userFormData.username}
+          onChange={handleInputChange}
+          required
         />
+        {errors.usernameError && (
+          <div className="error-message">{errors.usernameError}</div>
+        )}
       </div>
       <div className="mb-3">
         <label className="form-label">Password</label>
@@ -129,9 +112,13 @@ function SignUpForm() {
           type="password"
           className="form-control"
           name="password"
-          value={password}
-          onChange={handleState}
+          value={userFormData.password}
+          onChange={handleInputChange}
+          required
         />
+        {errors.passwordError && (
+          <div className="error-message">{errors.passwordError}</div>
+        )}
       </div>
       <div className="mb-3">
         <label className="form-label">Confirm Password</label>
@@ -139,69 +126,16 @@ function SignUpForm() {
           type="password"
           className="form-control"
           name="confirmPassword"
-          value={confirmPassword}
-          onChange={handleState}
-        ></input>
+          value={userFormData.confirmPassword}
+          onChange={handleInputChange}
+          required
+        />
+        {errors.confirmPasswordError && (
+          <div className="error-message">{errors.confirmPasswordError}</div>
+        )}
       </div>
-      <div className="mb-3">
-        <label className="form-label">
-          Food Preferences (Check all that apply)
-        </label>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            id="option1"
-            name="option1"
-            checked={option1}
-            onChange={handleState}
-          />
-          <label className="form-check-label" htmlFor="option1">
-            American
-          </label>
-        </div>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            id="option2"
-            name="option2"
-            checked={option2}
-            onChange={handleState}
-          />
-          <label className="form-check-label" htmlFor="option2">
-            Mexican
-          </label>
-        </div>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            id="option3"
-            name="option3"
-            checked={option3}
-            onChange={handleState}
-          />
-          <label className="form-check-label" htmlFor="option3">
-            Italian
-          </label>
-        </div>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            id="option4"
-            name="option4"
-            checked={option4}
-            onChange={handleState}
-          />
-          <label className="form-check-label" htmlFor="option4">
-            Asian
-          </label>
-        </div>
-      </div>
-      <button type="submit" onSubmit={handleSignup} className="btn btn-primary">
-        Submit
+      <button type="submit" className="btn btn-primary">
+        Sign Up
       </button>
 
       <div>
@@ -212,10 +146,8 @@ function SignUpForm() {
           </Link>
         </p>
       </div>
-
-      {submitted ? <p>Thanks for signing up!</p> : null}
     </form>
   );
-}
+};
 
 export default SignUpForm;
