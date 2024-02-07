@@ -25,7 +25,7 @@ export const LOGIN = gql`
 `;
 
 export const ADD_CUISINE = gql`
-  mutation addCuisine($cuisineData: CuisineInput!) {
+  mutation addCuisine($cuisineData: [CuisineInput!]) {
     addCuisine(cuisineData: $cuisineData) {
       _id
       username

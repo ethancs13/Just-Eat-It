@@ -80,8 +80,11 @@ const resolvers = {
       return restaurant;
     },
 
+    
     addCuisine: async (parent, { cuisineData }, context) => {
+      
       if (context.user) {
+<<<<<<< HEAD
         const user = await User.findById(context.user._id);
         const existingCusines = user.savedCuisines.map(
           (cuisine) => cuisine.cuisineId
@@ -102,7 +105,26 @@ const resolvers = {
         } else {
           return user;
         }
+=======
+
+        const user = await User.findById(context.user._id);
+        const existingCusines = user.savedCuisines.map(cuisine => cuisine.cuisineId);
+
+        const updatedCuisines = cuisineData.filter(cuisine => !existingCusines.includes(cuisine.cuisineId));
+        console.log(updatedCuisines);
+
+        if (updatedCuisines.length > 0) {
+        const updatedUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { savedCuisines: updatedCuisines } },
+          { new: true }
+        );
+        return updatedUser;
+      } else {
+        return user
+>>>>>>> 9f8cbb163f378cd52fac6f6ca1cff1e0a7f13cb7
       }
+    }
       throw AuthenticationError;
     },
 
