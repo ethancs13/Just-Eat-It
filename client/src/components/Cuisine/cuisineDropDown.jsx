@@ -11,15 +11,21 @@ export default function CuisineDropDown() {
 
     const selectedCuisines = Array.from(event.target.elements)
       .filter((el) => el.type === "checkbox" && el.checked)
-      .map((el) => el.value);
+      .map((el) => ({
+        name: el.value,
+        cuisineId: el.id,
+      }));
+
+    console.log("Mutation variables:", selectedCuisines);
 
     try {
-      await addCuisine({
-        variables: { cuisineData: { ...selectedCuisines } },
+      const { data } = await addCuisine({
+        variables: { cuisineData: selectedCuisines },
       });
+      console.log("Saved cuisines:", data.addCuisine);
       alert("Food preferences successfully saved!");
     } catch (error) {
-      alert(`Error saving food preferences: ${error.message}`);
+      console.log(`Error saving food preferences: ${error.message}`);
     }
   };
 
@@ -44,19 +50,6 @@ export default function CuisineDropDown() {
             <label htmlFor={cuisine.cuisineId}>{cuisine.name}</label>
           </div>
         ))}
-
-        {/* Need to add ID to Cuisine? */}
-
-        {/* {cuisines.map((cuisine, index) => (
-          <div key={`${cuisine.name}-${index}`}>
-            <input
-              type="checkbox"
-              id={`${cuisine.name}-${index}`}
-              value={cuisine.name}
-            />
-            <label htmlFor={`${cuisine.name}-${index}`}>{cuisine.name}</label>
-          </div>
-        ))} */}
         <button type="submit">Save</button>
       </form>
     </div>
