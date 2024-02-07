@@ -45,19 +45,19 @@ const typeDefs = gql`
     cuisine(name: String!): Cuisine
   }
 
-  # input CuisineInput {
-  #   name: String
-  #   cuisineId: String
-  # }
+  input CuisineInput {
+    name: String
+    cuisineId: String
+  }
 
   type Mutation {
     createUser(username: String!, password: String!): Auth
 
     login(username: String!, password: String!): Auth
 
-    # addCuisine(cuisineData: CuisineInput!): User
+    addCuisine(cuisineData: [CuisineInput!]): User
 
-    addCuisine(name: String!, cuisineId: String!): User
+    # addCuisine(name: String!, cuisineId: String!): User
 
     removeCuisine(cuisineId: ID!): User
 
