@@ -56,7 +56,7 @@ export default function CuisineUpdateModal() {
       {/* Modal for preferences form */}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Select your preferred cuisines:</Modal.Title>
+          <Modal.Title>Select your preferred foods:</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form onSubmit={handleSubmit}>

@@ -176,6 +176,27 @@ p {
   border-radius: 8px;
 }
 
+.pref-container {
+  background-color: #f02b6199;
+  width: 30vw;
+  height: fit-content;
+  border-radius: 8px;
+  margin-bottom: 2%;
+}
+
+.pref-container p {
+  margin-bottom: 0;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.pref-container li {
+  list-style: none;
+  color: var(--primary-color);
+  letter-spacing: 1px;
+  font-size: 18px;
+}
+
 .form-container {
   padding: 2%;
   background-color: #060c2499;
@@ -220,6 +241,7 @@ p {
   color: var(--accentLight-color);
   text-shadow: 0 0 2px var(--primaryLight-color);
   background-color: var(--secondaryDark-color);
+  letter-spacing: 1px;
 }
 
 .btn:hover {
@@ -260,6 +282,12 @@ p {
   text-align: center;
 }
 
+@media (max-width: 1024px) {
+  .pref-container {
+    width: 50vw;
+  }
+}
+
 @media (max-width: 425px) {
   h5 {
     font-size: smaller;
@@ -272,6 +300,9 @@ p {
   }
   .form-container {
     margin-top: 30px;
+  }
+  .pref-container {
+    width: 80vw;
   }
 }
 

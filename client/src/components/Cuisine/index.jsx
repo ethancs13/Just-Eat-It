@@ -22,15 +22,19 @@ const Cuisine = () => {
 
   return (
     <div>
-      <div>
-        <p>Current saved cuisines:</p>
-        <ul>
-          {userData.savedCuisines.map((cuisine) => (
-            <li key={cuisine.cuisineId}>{cuisine.name}</li>
-          ))}
-        </ul>
+      <div className="center">
+        <div className="pref-container">
+          <p>Food Preferences:</p>
+          <ul>
+            {userData.savedCuisines.map((cuisine) => (
+              <li key={cuisine.cuisineId}>{cuisine.name}</li>
+            ))}
+          </ul>
+        </div>
       </div>
-      <CuisineUpdateModal onUpdate={handleUpdateCuisines} />
+      <div className="center">
+        <CuisineUpdateModal onUpdate={handleUpdateCuisines} />
+      </div>
     </div>
   );
 };
