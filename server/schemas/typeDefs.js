@@ -57,8 +57,6 @@ const typeDefs = gql`
 
     addCuisine(cuisineData: [CuisineInput!]): User
 
-    # addCuisine(name: String!, cuisineId: String!): User
-
     removeCuisine(cuisineId: ID!): User
 
     createRestaurant(
