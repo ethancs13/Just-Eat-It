@@ -1,8 +1,11 @@
 const { Schema, model } = require("mongoose");
 
 const cuisineSchema = new Schema({
-  _id: { type: Schema.Types.ObjectId, auto: true },
   name: {
+    type: String,
+    required: true,
+  },
+  cuisineId: {
     type: String,
     required: true,
   },

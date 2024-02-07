@@ -34,16 +34,20 @@ export default function CuisineDropDown() {
     <div>
       <h3>Select your preferred cuisines:</h3>
       <form onSubmit={handleSubmit}>
-        {/* {cuisines.map((cuisine) => (
-          <div key={cuisine._id}>
-            <input type="checkbox" id={cuisine._id} value={cuisine.name} />
-            <label htmlFor={cuisine._id}>{cuisine.name}</label>
+        {cuisines.map((cuisine) => (
+          <div key={cuisine.cuisineId}>
+            <input
+              type="checkbox"
+              id={cuisine.cuisineId}
+              value={cuisine.name}
+            />
+            <label htmlFor={cuisine.cuisineId}>{cuisine.name}</label>
           </div>
-        ))} */}
+        ))}
 
         {/* Need to add ID to Cuisine? */}
 
-        {cuisines.map((cuisine, index) => (
+        {/* {cuisines.map((cuisine, index) => (
           <div key={`${cuisine.name}-${index}`}>
             <input
               type="checkbox"
@@ -52,7 +56,7 @@ export default function CuisineDropDown() {
             />
             <label htmlFor={`${cuisine.name}-${index}`}>{cuisine.name}</label>
           </div>
-        ))}
+        ))} */}
         <button type="submit">Save</button>
       </form>
     </div>

@@ -29,7 +29,8 @@ export const ADD_CUISINE = gql`
     addCuisine(cuisineData: $cuisineData) {
       _id
       username
-      cuisine {
+      savedCuisines {
+        cuisineId
         name
       }
     }
@@ -41,7 +42,8 @@ export const REMOVE_CUISINE = gql`
     removeCuisine(cuisineData: $cuisineData) {
       _id
       username
-      cuisine {
+      savedCuisines {
+        cuisineId
         name
       }
     }

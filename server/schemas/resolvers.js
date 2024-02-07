@@ -84,7 +84,7 @@ const resolvers = {
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { cuisine: cuisineData } },
+          { $push: { savedCuisines: cuisineData } },
           { new: true }
         );
         return updatedUser;
@@ -96,7 +96,7 @@ const resolvers = {
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $pull: { cuisine: cuisineData } },
+          { $pull: { savedCuisines: { cuisineId } } },
           { new: true }
         );
         return updatedUser;
