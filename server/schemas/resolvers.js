@@ -81,6 +81,8 @@ const resolvers = {
     },
 
     addCuisine: async (parent, { cuisineData }, context) => {
+      console.log(cuisineData);
+
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
@@ -92,7 +94,7 @@ const resolvers = {
       throw AuthenticationError;
     },
 
-    removeCuisine: async (parent, { cuisineData }, context) => {
+    removeCuisine: async (parent, { cuisineId }, context) => {
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
