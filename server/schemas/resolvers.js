@@ -20,8 +20,8 @@ const resolvers = {
       return await User.find({});
     },
 
-    user: async (parent, { id }) => {
-      return await User.findById(id);
+    user: async (parent, { username }) => {
+      return await User.findOne(username);
     },
 
     allRestaurants: async () => {
