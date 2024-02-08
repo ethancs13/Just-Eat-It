@@ -1,80 +1,85 @@
+// Friends MODAL!!!!!!
+
 import { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
-import { QUERY_ALL_CUISINES } from "../../utils/queries";
-import { ADD_CUISINE } from "../../utils/mutations";
+import { QUERY_USER, QUERY_ME } from "../../utils/queries";
 import { Modal, Button } from "react-bootstrap";
 
-export default function CuisineUpdateModal() {
-  const { loading, error, data } = useQuery(QUERY_ALL_CUISINES);
-  const [addCuisine] = useMutation(ADD_CUISINE);
-  const [selectedCuisines, setSelectedCuisines] = useState([]);
+export default function friendModal() {
+// This data variable was updated to differentiate it from get-me.
+  const { friendData } = useQuery(QUERY_USER);
+  console.log(`Friend Data: ${friendData}`);
+  
+  const { meData } = useQuery(QUERY_ME);
+  console.log(`Me Data: ${meData}`);
+  
+  const [selectedFriends, setSelectedFriends] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
   const handleCheckboxChange = (event) => {
-    const { id, checked } = event.target;
-    const cuisine = {
+    const { username, checked } = event.target;
+    const friendArray = {
       name: event.target.value,
-      cuisineId: id,
+      username: username,
     };
 
-    setSelectedCuisines((prevSelectedCuisines) =>
+    setSelectedFriends((prevSelectedFriends) =>
       checked
-        ? [...prevSelectedCuisines, cuisine]
-        : prevSelectedCuisines.filter((c) => c.cuisineId !== id)
+        ? [...prevSelectedFriends, friendArray ]
+        : prevSelectedFriends.filter((f) => f.username !== username)
     );
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    try {
-      const { data } = await addCuisine({
-        variables: { cuisineData: selectedCuisines },
-      });
-      console.log("Saved cuisines:", data);
-      setShowModal(false);
-    } catch (error) {
-      console.log(`Error saving food preferences: ${error.message}`);
-    }
+    // try {
+    //   const { data } = await addCuisine({
+    //     variables: { cuisineData: selectedCuisines },
+    //   });
+    //   console.log("Saved cuisines:", data);
+    //   setShowModal(false);
+    // } catch (error) {
+    //   console.log(`Error saving food preferences: ${error.message}`);
+    // }
 
-    setSelectedCuisines([]);
+    setSelectedFriends([]);
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-  const cuisines = data.allCuisines;
+ const allFriends = friendData.user;
+ console.log(`All Friends: ${allFriends}`);
 
   return (
     <div>
       {/* Button to open modal */}
       <Button variant="primary" onClick={() => setShowModal(true)}>
-        Update Preferences
+       Add Friends
       </Button>
 
       {/* Modal for preferences form */}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Select your preferred foods:</Modal.Title>
+          <Modal.Title>Select your Friends:</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ background: "#060c24" }}>
           <form onSubmit={handleSubmit}>
-            {cuisines.map((cuisine) => (
-              <div key={cuisine.cuisineId}>
+            {allFriends.map((friend) => (
+              <div key={friend.username}>
                 <input
                   type="checkbox"
-                  id={cuisine.cuisineId}
-                  value={cuisine.name}
+                  id={friend.username}
+                  value={friend.username}
                   onChange={handleCheckboxChange}
-                  checked={selectedCuisines.some(
-                    (c) => c.cuisineId === cuisine.cuisineId
+                  checked={selectedFriends.some(
+                    (f) => f.username === friend.username
                   )}
                   style={{ marginRight: "15px", marginBottom: "10px", height: "18px", width: "18px" }}
                 />
                 <label
                   style={{ fontSize: "24px", color: "#f02b61" }}
-                  htmlFor={cuisine.cuisineId}
+                  htmlFor={friend.username}
                 >
-                  {cuisine.name}
+                  {friend.username}
                 </label>
               </div>
             ))}

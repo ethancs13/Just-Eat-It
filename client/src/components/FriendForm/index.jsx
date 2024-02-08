@@ -1,5 +1,7 @@
+// FRIEND MODAL!!!!!
+
 import { useState } from "react";
-import CuisineUpdateModal from "./cuisineUpdateModal";
+import friendModal from "./friendAddModal";
 import { useQuery } from "@apollo/client";
 import { QUERY_ME } from "../../utils/queries";
 
@@ -33,7 +35,7 @@ const Cuisine = () => {
         </div>
       </div>
       <div className="center">
-        <CuisineUpdateModal onUpdate={handleUpdateCuisines} />
+        <friendModal onUpdate={handleUpdateCuisines} />
       </div>
     </div>
   );

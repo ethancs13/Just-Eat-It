@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import Auth from "../../utils/auth";
 
@@ -20,9 +20,9 @@ export default function Nav() {
             <NavLink key={4} className="nav-link" to="/favorites">
               Favorites
             </NavLink>
-            <NavLink key={5} onClick={Auth.logout} className="nav-link" to="/">
+            <Link key={5} onClick={Auth.logout} className="nav-link" to="/">
               Logout
-            </NavLink>
+            </Link>
           </>
         ) : (
           <>
