@@ -31,7 +31,6 @@ const RestaurantCard = ({ restaurant }) => {
   };
 
   const handleRemoveFavorite = async () => {
-    console.log("handleRemoveFavorite called");
     console.log("businessId:", restaurant.id);
     await removeFavorite({ variables: { businessId: restaurant.id } });
   };
