@@ -12,10 +12,19 @@ const FavoritesList = () => {
 
   const favoriteRestaurants = data?.me.favorites || [];
 
-  const handleAddFavorite = async (restaurantId) => {
-    await addFavorite({ variables: { restaurantId } });
-    await refetch();
-    setSelectedRestaurant(restaurantId);
+  console.log(favoriteRestaurants);
+
+  const handleAddFavorite = async (businessId) => {
+    const alreadyFavorited = favoriteRestaurants.some(
+      (restaurant) => restaurant.businessId === businessId
+    );
+
+    if (!alreadyFavorited) {
+      await addFavorite({ variables: { businessId } });
+      await refetch();
+    }
+
+    setSelectedRestaurant(businessId);
   };
 
   if (loading) return <p>Loading...</p>;
@@ -24,9 +33,9 @@ const FavoritesList = () => {
     <div className="row card-container">
       {favoriteRestaurants?.map((restaurant) => (
         <RestaurantCard
-          key={restaurant.id}
+          key={restaurant._id}
           restaurant={restaurant}
-          onAddFavorite={() => handleAddFavorite(restaurant.id)}
+          onAddFavorite={() => handleAddFavorite(restaurant.businessId)}
         />
       ))}
     </div>

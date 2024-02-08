@@ -109,26 +109,23 @@ const resolvers = {
 
     addFavorite: async (parent, { restaurantData }, context) => {
       console.log(restaurantData);
-      // if (context.user) {
-      //   const user = await User.findById(context.user._id);
-      //   const existingRestaurants = user.favorites.map(
-      //     (restaurant) => restaurant.businessId
-      //   );
-      //   const updatedFavorites = restaurantData.filter(
-      //     (restaurant) => !existingRestaurants.includes(restaurant.businessId)
-      //   );
-      //   console.log(updatedFavorites);
-      // if (updatedFavorites.length > 0) {
-      const updatedFavorites = await User.findByIdAndUpdate(
-        { _id: context.user._id },
-        { $push: { restaurantData: restaurantData } },
-        { new: true }
-      );
-      return updatedFavorites;
-      // } else {
-      //   return user;
-      // }
-      // }
+      if (context.user) {
+        const user = await User.findById(context.user._id);
+        const existingRestaurant = user.favorites.find(
+          (restaurant) => restaurant.businessId === restaurantData.businessId
+        );
+
+        if (!existingRestaurant) {
+          const updatedFavorites = await User.findByIdAndUpdate(
+            { _id: context.user._id },
+            { $push: { favorites: restaurantData } },
+            { new: true }
+          );
+          return updatedFavorites;
+        } else {
+          return user;
+        }
+      }
       throw AuthenticationError;
     },
 

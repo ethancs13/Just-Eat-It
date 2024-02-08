@@ -8,12 +8,14 @@ import auth from "../../utils/auth.js";
 const RestaurantCard = ({ restaurant }) => {
   const [addFavorite] = useMutation(ADD_FAVORITE);
 
+  const imageUrl = restaurant.image || restaurant.image_url;
+
   const handleAddFavorite = async () => {
     const restaurantData = {
       businessId: restaurant.id,
       name: restaurant.name,
       rating: restaurant.rating,
-      image: restaurant.image_url,
+      image: imageUrl,
       url: restaurant.url,
       location: restaurant.location.address1,
     };
@@ -22,13 +24,10 @@ const RestaurantCard = ({ restaurant }) => {
 
     await addFavorite({ variables: { restaurantData: restaurantData } });
   };
+
   return (
     <Card key={restaurant.id}>
-      <Card.Img
-        variant="top"
-        src={restaurant.image_url}
-        alt={restaurant.name}
-      />
+      <Card.Img variant="top" src={imageUrl} alt={restaurant.name} />
       <Card.Body>
         <Card.Title>{restaurant.name}</Card.Title>
         <Card.Text>{restaurant.rating} ⭐️</Card.Text>

@@ -46,7 +46,7 @@ const startApolloServer = async () => {
           },
           params: {
             location: location,
-            cuisine: cuisine,
+            term: cuisine,
             limit: 12,
           },
         }
