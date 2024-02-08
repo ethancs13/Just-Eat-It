@@ -37,35 +37,15 @@ export const ADD_CUISINE = gql`
   }
 `;
 
-export const REMOVE_CUISINE = gql`
-  mutation removeCuisine($cuisineData: CuisineInput!) {
-    removeCuisine(cuisineData: $cuisineData) {
+export const ADD_FRIEND = gql`
+  mutation addFriend($userData: userInput!) {
+    addFriend(friendData: $friendData) {
       _id
       username
-      savedCuisines {
-        cuisineId
-        name
+      friends {
+        _id
+        username
       }
     }
-  }
-`;
-
-export const CREATE_RESTAURANT = gql`
-  mutation createRestaurant(
-    $businessId: String!
-    $name: String!
-    $rating: Float!
-    $image: String
-    $url: String
-    $location: String
-  ) {
-    createRestaurant(
-      businessId: $businessId
-      name: $name
-      rating: $rating
-      image: $image
-      url: $url
-      location: $location
-    )
   }
 `;

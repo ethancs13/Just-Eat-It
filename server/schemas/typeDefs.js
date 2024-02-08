@@ -50,6 +50,11 @@ const typeDefs = gql`
     cuisineId: String
   }
 
+  input FriendInput {
+    _id: String
+    username: String
+  }
+
   type Mutation {
     createUser(username: String!, password: String!): Auth
 
@@ -59,6 +64,8 @@ const typeDefs = gql`
 
     removeCuisine(cuisineId: ID!): User
 
+    addFriend(friendData: FriendInput!): User
+
     createRestaurant(
       businessId: String!
       name: String!
@@ -67,6 +74,8 @@ const typeDefs = gql`
       url: String
       location: String
     ): Restaurant
+
+
   }
 `;
 
