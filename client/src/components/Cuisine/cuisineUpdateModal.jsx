@@ -56,7 +56,7 @@ export default function CuisineUpdateModal() {
         <Modal.Header closeButton>
           <Modal.Title>Select your preferred foods:</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body style={{ background: "#060c24" }}>
           <form onSubmit={handleSubmit}>
             {cuisines.map((cuisine) => (
               <div key={cuisine.cuisineId}>
@@ -68,11 +68,26 @@ export default function CuisineUpdateModal() {
                   checked={selectedCuisines.some(
                     (c) => c.cuisineId === cuisine.cuisineId
                   )}
+                  style={{ marginRight: "15px", marginBottom: "10px" }}
                 />
-                <label htmlFor={cuisine.cuisineId}>{cuisine.name}</label>
+                <label
+                  style={{ fontSize: "24px", color: "#f02b61" }}
+                  htmlFor={cuisine.cuisineId}
+                >
+                  {cuisine.name}
+                </label>
               </div>
             ))}
-            <Button variant="primary" type="submit">
+            <Button
+              variant="primary"
+              type="submit"
+              style={{
+                backgroundColor: "#fe9553",
+                color: "white",
+                display: "block",
+                margin: "0 auto",
+              }}
+            >
               Save
             </Button>
           </form>
