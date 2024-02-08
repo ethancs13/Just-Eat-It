@@ -70,14 +70,28 @@ const resolvers = {
       }
     },
 
-    createRestaurant: async (parent, { name, cuisineId }) => {
-      // find cuisine from list
-      const cuisine = await Cuisine.findById(cuisineId);
-
-      // make new restaurant with cuisine found
-      const restaurant = new Restaurant({ name, cuisine });
-      await restaurant.save();
-      return restaurant;
+    addFavorite: async (parent, { restaurantData }, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id);
+        const existingRestaurants = user.favorites.map(
+          (restaurant) => restaurant.businessId
+        );
+        const updatedFavorites = restaurantData.filter(
+          (restaurant) => !existingRestaurants.includes(restaurant.businessId)
+        );
+        console.log(updatedFavorites);
+        if (updatedFavorites.length > 0) {
+          const updatedFavorites = await User.findByIdAndUpdate(
+            { _id: context.user._id },
+            { $push: { restaurantData: updatedFavorites } },
+            { new: true }
+          );
+          return updatedFavorites;
+        } else {
+          return user;
+        }
+      }
+      throw AuthenticationError;
     },
 
     addCuisine: async (parent, { cuisineData }, context) => {
