@@ -84,7 +84,6 @@ const typeDefs = gql`
       location: String
     ): Restaurant
 
-
     removeFavorite(businessId: String!): User
   }
 `;

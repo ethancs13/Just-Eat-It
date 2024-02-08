@@ -13,15 +13,15 @@ import {
 } from "@chakra-ui/react";
 
 const SearchComponent = () => {
-  const [term, setTerm] = useState("");
   const [location, setLocation] = useState("");
+  const [cuisine, setCuisine] = useState("");
   const [results, setResults] = useState([]);
 
   // Fetch all cuisines
   const { data } = useQuery(QUERY_ALL_CUISINES);
 
   const search = async () => {
-    const data = await handleSearch(location, term);
+    const data = await handleSearch(location, cuisine);
     setResults(data.businesses);
   };
 
@@ -38,13 +38,13 @@ const SearchComponent = () => {
           <Select
             placeholder="Select Food Preferences"
             flex={1}
-            size="sm"
+            size="lg"
             color="orange"
             borderColor="orange"
             ml={2}
             mr={2}
             _focus={{ borderColor: "orange.500" }}
-            onChange={(e) => setTerm(e.target.value)}
+            onChange={(e) => setCuisine(e.target.value)}
           >
             {/* Map through cuisines if data is available */}
             {data?.allCuisines &&
@@ -57,7 +57,6 @@ const SearchComponent = () => {
           <Input
             placeholder="Search by area"
             flex={2}
-            mb={2}
             size="lg"
             color="orange"
             borderColor="orange"
@@ -65,7 +64,7 @@ const SearchComponent = () => {
             onChange={(e) => setLocation(e.target.value)}
             onKeyDown={handleKeyDown}
           />
-          <Button colorScheme="orange" size="md" ml={2} onClick={search}>
+          <Button colorScheme="orange" size="lg" ml={2} onClick={search}>
             Search
           </Button>
         </Flex>
