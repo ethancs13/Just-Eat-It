@@ -23,8 +23,12 @@ const userSchema = new Schema(
     ],
     favorites: [
       {
-        type: Schema.Types.ObjectId,
-        ref: "Restaurant",
+        businessId: String,
+        name: String,
+        rating: Number,
+        image: String,
+        url: String,
+        location: String,
       },
     ],
     savedCuisines: [

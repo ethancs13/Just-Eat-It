@@ -33,16 +33,14 @@ export const QUERY_ME = gql`
         name
         cuisineId
       }
-      # Causing Errors on User Page
-      # favorites {
-      #   _id
-      #   businessId
-      #   name
-      #   rating
-      #   image
-      #   url
-      #   location
-      # }
+      favorites {
+        businessId
+        name
+        rating
+        image
+        url
+        location
+      }
     }
   }
 `;
