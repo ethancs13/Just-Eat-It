@@ -49,3 +49,20 @@ export const ADD_FRIEND = gql`
     }
   }
 `;
+
+export const ADD_FAVORITE = gql`
+  mutation addFavorite($restaurantData: RestaurantInput!) {
+    addFavorite(restaurantData: $restaurantData) {
+      _id
+      username
+      favorites {
+        businessId
+        name
+        rating
+        image
+        url
+        location
+      }
+    }
+  }
+`;

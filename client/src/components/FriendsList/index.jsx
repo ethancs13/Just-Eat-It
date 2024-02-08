@@ -11,9 +11,9 @@ const FriendsList = () => {
 
   return (
     <div className="row card-container">
-      {currentFriends.map((friend) => (
+      {/* {currentFriends.map((friend) => (
         <FriendCard friend={friend} />
-      ))}
+      ))} */}
     </div>
   );
 };
