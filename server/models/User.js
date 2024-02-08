@@ -17,17 +17,25 @@ const userSchema = new Schema(
     },
     friends: [
       {
-        type: Schema.Types.ObjectId,
-        ref: "User",
+        username: String,
       },
     ],
     favorites: [
       {
-        type: Schema.Types.ObjectId,
-        ref: "Restaurant",
+        businessId: String,
+        name: String,
+        rating: Number,
+        image: String,
+        url: String,
+        location: String,
       },
     ],
-    savedCuisines: [{ type: Schema.Types.ObjectId, ref: "Cuisine" }],
+    savedCuisines: [
+      {
+        name: String,
+        cuisineId: String,
+      },
+    ],
   },
   {
     toJSON: {
@@ -48,8 +56,6 @@ userSchema.pre("save", async function (next) {
 
 // custom method to compare and validate password for logging in
 userSchema.methods.isCorrectPassword = async function (password) {
-  console.log(`Checking password...`);
-  console.log(`Password being compared is: ${password}`);
   return bcrypt.compare(password, this.password);
 };
 

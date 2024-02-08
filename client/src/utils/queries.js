@@ -12,8 +12,8 @@ export const QUERY_ALL_USERS = gql`
 `;
 
 export const QUERY_USER = gql`
-  query user($userId: ID!) {
-    user(userId: $userId) {
+  query user($username: String!) {
+    user(username: $username) {
       _id
       username
       savedCuisines {
@@ -29,12 +29,14 @@ export const QUERY_ME = gql`
     me {
       _id
       username
+      friends {
+        username
+      }
       savedCuisines {
         name
         cuisineId
       }
       favorites {
-        _id
         businessId
         name
         rating

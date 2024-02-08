@@ -1,8 +1,6 @@
 import PropTypes from "prop-types";
 
 export default function Nav({ links }) {
-  console.log(links);
-
   return (
     <nav>
       <ul className="nav">

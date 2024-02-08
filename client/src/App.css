@@ -29,7 +29,6 @@ main {
   --secondaryLight-color: #a036ee;
   --accent-color: #f02b61;
   --accentLight-color: #fe9553;
-  --background-opacity: 0.5;
 }
 
 header {
@@ -152,15 +151,73 @@ p {
   background-size: cover;
 }
 
+.bgUserPage {
+  background-image: url("./assets/images/pexels-nicole-avagliano-2368951.jpg");
+  height: auto;
+  width: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bgNoAccess {
+  background-image: url("./assets/images/pexels-pixabay-315191.jpg");
+  height: auto;
+  width: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .searchContainer {
   margin-top: 15%;
   background-color: #060c2499;
   border-radius: 8px;
 }
 
+.pref-container {
+  background-color: #f02b61cc;
+  width: 30vw;
+  height: fit-content;
+  border-radius: 8px;
+  margin-bottom: 2%;
+}
+
+.pref-container p {
+  margin-bottom: 0;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.pref-container li {
+  list-style: none;
+  color: var(--primary-color);
+  letter-spacing: 1px;
+  font-size: 18px;
+}
+
+.modal-content {
+  color: #a036ee;
+}
+
 .form-container {
   padding: 2%;
   background-color: #060c2499;
+  border-radius: 8px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.noAccess-container {
+  width: fit-content;
+  height: fit-content;
+  padding: 2%;
+  background-color: #060c24b4;
   border-radius: 8px;
 }
 
@@ -187,6 +244,7 @@ p {
   color: var(--accentLight-color);
   text-shadow: 0 0 2px var(--primaryLight-color);
   background-color: var(--secondaryDark-color);
+  letter-spacing: 1px;
 }
 
 .btn:hover {
@@ -227,6 +285,12 @@ p {
   text-align: center;
 }
 
+@media (max-width: 1024px) {
+  .pref-container {
+    width: 50vw;
+  }
+}
+
 @media (max-width: 425px) {
   h5 {
     font-size: smaller;
@@ -239,6 +303,9 @@ p {
   }
   .form-container {
     margin-top: 30px;
+  }
+  .pref-container {
+    width: 80vw;
   }
 }
 

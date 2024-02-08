@@ -25,7 +25,7 @@ export const LOGIN = gql`
 `;
 
 export const ADD_CUISINE = gql`
-  mutation addCuisine($cuisineData: CuisineInput!) {
+  mutation addCuisine($cuisineData: [CuisineInput!]) {
     addCuisine(cuisineData: $cuisineData) {
       _id
       username
@@ -37,35 +37,32 @@ export const ADD_CUISINE = gql`
   }
 `;
 
-export const REMOVE_CUISINE = gql`
-  mutation removeCuisine($cuisineData: CuisineInput!) {
-    removeCuisine(cuisineData: $cuisineData) {
+export const ADD_FRIEND = gql`
+  mutation addFriend($userData: userInput!) {
+    addFriend(friendData: $friendData) {
       _id
       username
-      savedCuisines {
-        cuisineId
-        name
+      friends {
+        _id
+        username
       }
     }
   }
 `;
 
-export const CREATE_RESTAURANT = gql`
-  mutation createRestaurant(
-    $businessId: String!
-    $name: String!
-    $rating: Float!
-    $image: String
-    $url: String
-    $location: String
-  ) {
-    createRestaurant(
-      businessId: $businessId
-      name: $name
-      rating: $rating
-      image: $image
-      url: $url
-      location: $location
-    )
+export const ADD_FAVORITE = gql`
+  mutation addFavorite($restaurantData: RestaurantInput!) {
+    addFavorite(restaurantData: $restaurantData) {
+      _id
+      username
+      favorites {
+        businessId
+        name
+        rating
+        image
+        url
+        location
+      }
+    }
   }
 `;
