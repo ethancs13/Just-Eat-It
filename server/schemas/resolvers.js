@@ -129,28 +129,15 @@ const resolvers = {
       throw AuthenticationError;
     },
 
-    addCuisine: async (parent, { cuisineData }, context) => {
+    removeFavorite: async (parent, { businessId }, context) => {
+      console.log(businessId);
       if (context.user) {
-        const user = await User.findById(context.user._id);
-        const existingCusines = user.savedCuisines.map(
-          (cuisine) => cuisine.cuisineId
+        const updatedUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $pull: { favorites: { businessId: businessId } } },
+          { new: true }
         );
-
-        const updatedCuisines = cuisineData.filter(
-          (cuisine) => !existingCusines.includes(cuisine.cuisineId)
-        );
-        console.log(updatedCuisines);
-
-        if (updatedCuisines.length > 0) {
-          const updatedUser = await User.findByIdAndUpdate(
-            { _id: context.user._id },
-            { $push: { savedCuisines: updatedCuisines } },
-            { new: true }
-          );
-          return updatedUser;
-        } else {
-          return user;
-        }
+        return updatedUser;
       }
       throw AuthenticationError;
     },
