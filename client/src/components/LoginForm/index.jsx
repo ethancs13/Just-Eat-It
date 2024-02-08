@@ -24,7 +24,6 @@ const LoginForm = () => {
         variables: { ...formData },
       });
       Auth.login(data.login.token);
-      console.log(`This is the data: ${data}`);
     } catch (error) {
       console.error(error, "Error occurred with user login.");
       setError("Oops 🤔, Please check your username or password.");
