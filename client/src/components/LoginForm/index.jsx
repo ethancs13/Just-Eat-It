@@ -36,6 +36,12 @@ const LoginForm = () => {
     });
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSubmit(event);
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit} className="form-container">
       <h2>Login</h2>
@@ -47,6 +53,7 @@ const LoginForm = () => {
           name="username"
           value={formData.username}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
           required
         />
       </div>
@@ -58,6 +65,7 @@ const LoginForm = () => {
           name="password"
           value={formData.password}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
           required
         />
         <div className="error-message">{error}</div>

@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { useQuery } from "@apollo/client";
+import { QUERY_ALL_CUISINES } from "../../utils/queries";
 import { handleSearch } from "../../utils/API";
 import SearchResults from "../SearchResults";
-
 import {
   Box,
   Input,
@@ -16,9 +17,18 @@ const SearchComponent = () => {
   const [location, setLocation] = useState("");
   const [results, setResults] = useState([]);
 
+  // Fetch all cuisines
+  const { data } = useQuery(QUERY_ALL_CUISINES);
+
   const search = async () => {
     const data = await handleSearch(location, term);
     setResults(data.businesses);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      search();
+    }
   };
 
   return (
@@ -31,16 +41,18 @@ const SearchComponent = () => {
             size="sm"
             color="orange"
             borderColor="orange"
-            // background="grey"
             ml={2}
             mr={2}
             _focus={{ borderColor: "orange.500" }}
             onChange={(e) => setTerm(e.target.value)}
           >
-            <option value="american">American</option>
-            <option value="mexican">Mexican</option>
-            <option value="italian">Italian</option>
-            <option value="Asian">Asian</option>
+            {/* Map through cuisines if data is available */}
+            {data?.allCuisines &&
+              data.allCuisines.map((cuisine) => (
+                <option key={cuisine.cuisineId} value={cuisine.name}>
+                  {cuisine.name}
+                </option>
+              ))}
           </Select>
           <Input
             placeholder="Search by area"
@@ -51,6 +63,7 @@ const SearchComponent = () => {
             borderColor="orange"
             _focus={{ borderColor: "orange.500" }}
             onChange={(e) => setLocation(e.target.value)}
+            onKeyDown={handleKeyDown}
           />
           <Button colorScheme="orange" size="md" ml={2} onClick={search}>
             Search
