@@ -68,7 +68,12 @@ export default function CuisineUpdateModal() {
                   checked={selectedCuisines.some(
                     (c) => c.cuisineId === cuisine.cuisineId
                   )}
-                  style={{ marginRight: "15px", marginBottom: "10px" }}
+                  style={{
+                    marginRight: "15px",
+                    marginBottom: "10px",
+                    width: "18px",
+                    height: "18px",
+                  }}
                 />
                 <label
                   style={{ fontSize: "24px", color: "#f02b61" }}
