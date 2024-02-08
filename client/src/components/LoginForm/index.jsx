@@ -24,7 +24,6 @@ const LoginForm = () => {
         variables: { ...formData },
       });
       Auth.login(data.login.token);
-      console.log(`This is the data: ${data}`);
     } catch (error) {
       console.error(error, "Error occurred with user login.");
       setError("Oops 🤔, Please check your username or password.");
@@ -34,6 +33,12 @@ const LoginForm = () => {
       username: "",
       password: "",
     });
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSubmit(event);
+    }
   };
 
   return (
@@ -47,6 +52,7 @@ const LoginForm = () => {
           name="username"
           value={formData.username}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
           required
         />
       </div>
@@ -58,6 +64,7 @@ const LoginForm = () => {
           name="password"
           value={formData.password}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
           required
         />
         <div className="error-message">{error}</div>

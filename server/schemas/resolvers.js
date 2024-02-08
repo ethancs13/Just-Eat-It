@@ -71,48 +71,36 @@ const resolvers = {
       }
     },
 
-    createRestaurant: async (parent, { name, cuisineId }) => {
-      // find cuisine from list
-      const cuisine = await Cuisine.findById(cuisineId);
-
-      // make new restaurant with cuisine found
-      const restaurant = new Restaurant({ name, cuisine });
-      await restaurant.save();
-      return restaurant;
-    },
-
-    
-    addCuisine: async (parent, { cuisineData }, context) => {
-      
+    addFavorite: async (parent, { restaurantData }, context) => {
       if (context.user) {
-
         const user = await User.findById(context.user._id);
-        const existingCusines = user.savedCuisines.map(cuisine => cuisine.cuisineId);
-
-        const updatedCuisines = cuisineData.filter(cuisine => !existingCusines.includes(cuisine.cuisineId));
-        console.log(updatedCuisines);
-
-        if (updatedCuisines.length > 0) {
-        const updatedUser = await User.findByIdAndUpdate(
-          { _id: context.user._id },
-          { $push: { savedCuisines: updatedCuisines } },
-          { new: true }
+        const existingRestaurants = user.favorites.map(
+          (restaurant) => restaurant.businessId
         );
-        return updatedUser;
-      } else {
-        return user
+        const updatedFavorites = restaurantData.filter(
+          (restaurant) => !existingRestaurants.includes(restaurant.businessId)
+        );
+        console.log(updatedFavorites);
+        if (updatedFavorites.length > 0) {
+          const updatedFavorites = await User.findByIdAndUpdate(
+            { _id: context.user._id },
+            { $push: { restaurantData: updatedFavorites } },
+            { new: true }
+          );
+          return updatedFavorites;
+        } else {
+          return user;
+        }
       }
-    }
       throw AuthenticationError;
     },
 
-    removeCuisine: async (parent, { cuisineId }, context) => {
+    addCuisine: async (parent, { cuisineData }, context) => {
       if (context.user) {
-        const updatedUser = await User.findByIdAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { savedCuisines: { cuisineId } } },
-          { new: true }
-        );
+        const user = await User.findById(context.user._id);
+        // Replace existing saved cuisines with the new ones
+        user.savedCuisines = cuisineData;
+        const updatedUser = await user.save();
         return updatedUser;
       }
       throw AuthenticationError;
