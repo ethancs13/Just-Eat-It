@@ -37,18 +37,14 @@ export const ADD_CUISINE = gql`
   }
 `;
 
-export const ADD_FAVORITE = gql`
-  mutation addFavorite($restaurantData: RestaurantInput!) {
-    addFavorite(restaurantData: $restaurantData) {
+export const ADD_FRIEND = gql`
+  mutation addFriend($userData: userInput!) {
+    addFriend(friendData: $friendData) {
       _id
       username
-      favorites {
-        businessId
-        name
-        rating
-        image
-        url
-        location
+      friends {
+        _id
+        username
       }
     }
   }

@@ -50,6 +50,11 @@ const typeDefs = gql`
     cuisineId: String
   }
 
+  input FriendInput {
+    _id: String
+    username: String
+  }
+
   input RestaurantInput {
     businessId: String!
     name: String!
@@ -67,6 +72,18 @@ const typeDefs = gql`
     addCuisine(cuisineData: [CuisineInput!]): User
 
     addFavorite(restaurantData: RestaurantInput!): User
+
+    addFriend(friendData: FriendInput!): User
+
+    createRestaurant(
+      businessId: String!
+      name: String!
+      rating: Float!
+      image: String
+      url: String
+      location: String
+    ): Restaurant
+
 
     removeFavorite(businessId: String!): User
   }
