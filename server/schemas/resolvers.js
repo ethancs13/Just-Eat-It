@@ -7,10 +7,9 @@ const resolvers = {
       console.dir(context.user);
 
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id })
-          .populate("friends", "_id username")
-          .populate("favorites", "businessId name rating image url location")
-          .select("-__v -password");
+        const userData = await User.findOne({ _id: context.user._id }).select(
+          "-__v -password"
+        );
         return userData;
       }
       throw AuthenticationError;
@@ -71,17 +70,15 @@ const resolvers = {
       }
     },
 
-    addFriend: async (parent, { friendData }, context) => {
+    addFriend: async (_, { friendData }, context) => {
       if (context.user) {
-        const user = await User.findById(_id);
-        const existingFriends = user.friends.map((friend) => {
-          friend._id;
-        });
+        const user = await User.findById(context.user._id);
+        const existingFriends = user.friends.map((friend) => friend._id);
 
+        console.log("friends: ", friendData);
         const updatedFriends = friendData.filter(
           (friend) => !existingFriends.includes(friend._id)
         );
-        console.log(updatedFriends);
 
         if (updatedFriends.length > 0) {
           const updatedUser = await User.findByIdAndUpdate(
@@ -91,7 +88,7 @@ const resolvers = {
           );
           return updatedUser;
         } else {
-          return user;
+          throw new Error("Friend already exists");
         }
       }
       throw AuthenticationError;
@@ -106,7 +103,7 @@ const resolvers = {
       await restaurant.save();
       return restaurant;
     },
-    
+
     addFavorite: async (parent, { restaurantData }, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id);

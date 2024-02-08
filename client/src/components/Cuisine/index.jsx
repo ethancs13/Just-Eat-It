@@ -28,7 +28,10 @@ const Cuisine = () => {
           <ul>
             {userData.savedCuisines?.map((cuisine) => (
               <li key={cuisine.cuisineId}>{cuisine.name}</li>
-            ))}
+            ))
+            :
+            <></>
+          }
           </ul>
         </div>
       </div>
