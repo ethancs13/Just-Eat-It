@@ -31,9 +31,7 @@ export default function CuisineUpdateModal() {
       const { data } = await addCuisine({
         variables: { cuisineData: selectedCuisines },
       });
-      console.log("Food preferences successfully saved!");
       console.log("Saved cuisines:", data);
-      alert("Food preferences successfully saved!");
       setShowModal(false);
     } catch (error) {
       console.log(`Error saving food preferences: ${error.message}`);

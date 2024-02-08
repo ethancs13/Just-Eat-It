@@ -29,9 +29,9 @@ const userSchema = new Schema(
     ],
     savedCuisines: [
       {
-      name: String,
-      cuisineId: String,
-      }
+        name: String,
+        cuisineId: String,
+      },
     ],
   },
   {
@@ -53,8 +53,6 @@ userSchema.pre("save", async function (next) {
 
 // custom method to compare and validate password for logging in
 userSchema.methods.isCorrectPassword = async function (password) {
-  console.log(`Checking password...`);
-  console.log(`Password being compared is: ${password}`);
   return bcrypt.compare(password, this.password);
 };
 

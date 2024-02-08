@@ -68,8 +68,6 @@ const SignUpForm = () => {
         variables: { ...userFormData },
       });
 
-      console.log("registered", data);
-
       Auth.login(data.createUser.token);
     } catch (err) {
       console.error(err);
@@ -89,6 +87,12 @@ const SignUpForm = () => {
     });
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSubmit(event);
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit} className="form-container">
       <h2>Sign Up</h2>
@@ -100,6 +104,7 @@ const SignUpForm = () => {
           name="username"
           value={userFormData.username}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
           required
         />
         {errors.usernameError && (
@@ -114,6 +119,7 @@ const SignUpForm = () => {
           name="password"
           value={userFormData.password}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
           required
         />
         {errors.passwordError && (
@@ -128,6 +134,7 @@ const SignUpForm = () => {
           name="confirmPassword"
           value={userFormData.confirmPassword}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
           required
         />
         {errors.confirmPasswordError && (
