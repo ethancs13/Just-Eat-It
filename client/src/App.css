@@ -29,7 +29,6 @@ main {
   --secondaryLight-color: #a036ee;
   --accent-color: #f02b61;
   --accentLight-color: #fe9553;
-  --background-opacity: 0.5;
 }
 
 header {
@@ -195,6 +194,10 @@ p {
   color: var(--primary-color);
   letter-spacing: 1px;
   font-size: 18px;
+}
+
+.modal-content {
+  color: #a036ee;
 }
 
 .form-container {
