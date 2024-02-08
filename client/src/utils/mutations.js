@@ -38,7 +38,7 @@ export const ADD_CUISINE = gql`
 `;
 
 export const ADD_FRIEND = gql`
-  mutation addFriend($userData: userInput!) {
+  mutation addFriend($friendData: FriendInput!) {
     addFriend(friendData: $friendData) {
       _id
       username

@@ -51,8 +51,8 @@ const typeDefs = gql`
   }
 
   input FriendInput {
-    _id: String
-    username: String
+    _id: ID!
+    username: String!
   }
 
   input RestaurantInput {

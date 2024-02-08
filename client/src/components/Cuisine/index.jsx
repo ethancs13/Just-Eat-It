@@ -26,11 +26,9 @@ const Cuisine = () => {
         <div className="pref-container">
           <p>Food Preferences:</p>
           <ul>
-            {userData.savedCuisines ? userData.savedCuisines.map((cuisine) => (
+            {userData.savedCuisines?.map((cuisine) => (
               <li key={cuisine.cuisineId}>{cuisine.name}</li>
             ))
-            :
-            <></>
           }
           </ul>
         </div>
