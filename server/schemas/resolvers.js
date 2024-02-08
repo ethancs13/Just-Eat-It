@@ -7,9 +7,10 @@ const resolvers = {
       console.dir(context.user);
 
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id }).select(
-          "-__v -password"
-        );
+        const userData = await User.findOne({ _id: context.user._id })
+          .populate("friends", "_id username")
+          .populate("favorites", "businessId name rating image url location")
+          .select("-__v -password");
         return userData;
       }
       throw AuthenticationError;
@@ -70,6 +71,42 @@ const resolvers = {
       }
     },
 
+    addFriend: async (parent, { friendData }, context) => {
+      if (context.user) {
+        const user = await User.findById(_id);
+        const existingFriends = user.friends.map((friend) => {
+          friend._id;
+        });
+
+        const updatedFriends = friendData.filter(
+          (friend) => !existingFriends.includes(friend._id)
+        );
+        console.log(updatedFriends);
+
+        if (updatedFriends.length > 0) {
+          const updatedUser = await User.findByIdAndUpdate(
+            { _id: context.user._id },
+            { $push: { friends: updatedFriends } },
+            { new: true }
+          );
+          return updatedUser;
+        } else {
+          return user;
+        }
+      }
+      throw AuthenticationError;
+    },
+
+    createRestaurant: async (parent, { name, cuisineId }) => {
+      // find cuisine from list
+      const cuisine = await Cuisine.findById(cuisineId);
+
+      // make new restaurant with cuisine found
+      const restaurant = new Restaurant({ name, cuisine });
+      await restaurant.save();
+      return restaurant;
+    },
+    
     addFavorite: async (parent, { restaurantData }, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id);
@@ -87,6 +124,32 @@ const resolvers = {
             { new: true }
           );
           return updatedFavorites;
+        } else {
+          return user;
+        }
+      }
+      throw AuthenticationError;
+    },
+
+    addCuisine: async (parent, { cuisineData }, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id);
+        const existingCusines = user.savedCuisines.map(
+          (cuisine) => cuisine.cuisineId
+        );
+
+        const updatedCuisines = cuisineData.filter(
+          (cuisine) => !existingCusines.includes(cuisine.cuisineId)
+        );
+        console.log(updatedCuisines);
+
+        if (updatedCuisines.length > 0) {
+          const updatedUser = await User.findByIdAndUpdate(
+            { _id: context.user._id },
+            { $push: { savedCuisines: updatedCuisines } },
+            { new: true }
+          );
+          return updatedUser;
         } else {
           return user;
         }
