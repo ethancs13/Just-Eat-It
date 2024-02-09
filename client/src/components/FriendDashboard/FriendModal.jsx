@@ -5,11 +5,11 @@ import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER, QUERY_ME } from "../../utils/queries";
 import { Modal, Button } from "react-bootstrap";
 
-export default function FriendModal() {
+export default function FriendModal({ friends }) {
 // This data variable was updated to differentiate it from get-me.
-  const { friendData } = useQuery(QUERY_USER);
-  console.log(`Friend Data: ${friendData}`);
-  
+console.log('Friend Prop:', friends);
+
+
   const { meData } = useQuery(QUERY_ME);
   console.log('Me data:', meData);
   
@@ -46,8 +46,6 @@ export default function FriendModal() {
     setSelectedFriends([]);
   };
 
- const allFriends = friendData.user;
- console.log(`All Friends: ${allFriends}`);
 
   return (
     <div>
@@ -56,48 +54,6 @@ export default function FriendModal() {
        Add Friends
       </Button>
 
-      {/* Modal for preferences form */}
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Select your Friends:</Modal.Title>
-        </Modal.Header>
-        <Modal.Body style={{ background: "#060c24" }}>
-          <form onSubmit={handleSubmit}>
-            {allFriends.map((friend) => (
-              <div key={friend.username}>
-                <input
-                  type="checkbox"
-                  id={friend.username}
-                  value={friend.username}
-                  onChange={handleCheckboxChange}
-                  checked={selectedFriends.some(
-                    (f) => f.username === friend.username
-                  )}
-                  style={{ marginRight: "15px", marginBottom: "10px", height: "18px", width: "18px" }}
-                />
-                <label
-                  style={{ fontSize: "24px", color: "#f02b61" }}
-                  htmlFor={friend.username}
-                >
-                  {friend.username}
-                </label>
-              </div>
-            ))}
-            <Button
-              variant="primary"
-              type="submit"
-              style={{
-                backgroundColor: "#fe9553",
-                color: "white",
-                display: "block",
-                margin: "0 auto",
-              }}
-            >
-              Save
-            </Button>
-          </form>
-        </Modal.Body>
-      </Modal>
     </div>
   );
 }

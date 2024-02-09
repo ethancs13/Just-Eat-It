@@ -10,7 +10,8 @@ import './FriendDashboard.css'
 const FriendDashboard = () => {
   const { loading, data, error } = useQuery(QUERY_ME);
 
-  // const userData = data?.me || {};
+  const userData = data?.me || {};
+  console.log('User Data:', userData);
 
   // const [savedCuisines, setSavedCuisines] = useState(
   //   userData.savedCuisines || []
@@ -37,7 +38,7 @@ const FriendDashboard = () => {
         </div>
       </div>
       <div className="center">
-        {/* <FriendModal /> */}
+        <FriendModal friends={[userData.friends]} />
       </div>
     </div>
   );
