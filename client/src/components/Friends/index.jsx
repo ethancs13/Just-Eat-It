@@ -24,7 +24,8 @@ const FriendsSection = () => {
         <FriendsSearchAdd />
       </div>
       <div>
-        <p>Friends</p>
+        {/* Added temporary styling */}
+        <p style={{ color: "blue" }}>Friends</p>
         <ul>
           {friends.map((friend) => (
             <li key={friend._id}>{friend.username}</li>
