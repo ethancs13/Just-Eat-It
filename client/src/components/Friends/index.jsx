@@ -37,32 +37,29 @@ const FriendsSection = () => {
 
   const styles = {
     removeIcon: {
-      height: "2.5em",
-      width: "2.5em",
+      height: "2em",
+      width: "2em",
       color: "#f02b61",
     },
-
     mainHeader: {
-      color: "#5fb1f0",
-    },
-    btn: {
-      marginTop: "10px",
-    },
-    resultsHeader: {
-      paddingTop: "20px",
+      fontSize: "24px",
+      letterSpacing: "1px",
       color: "#fe9553",
       textShadow: "0 0 5px #ff663d",
       textAlign: "left",
     },
-    results: {
-      color: "#f02b61",
-      listStyleType: "none",
-      fontSize: "18px",
+    card: {
+      marginTop: "20px",
+      background: "#1b2b4599",
     },
-    cardFooter: {
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
+    friend: {
+      margin: "5px",
+      padding: "2px",
+      color: "#1b2b45",
+      listStyleType: "none",
+      fontSize: "20px",
+      borderRadius: "8px",
+      background: "#FFFFFF",
     },
   };
 
@@ -72,12 +69,12 @@ const FriendsSection = () => {
         <FriendsSearchAdd />
       </div>
       <div>
-        <Card>
+        <Card style={styles.card}>
           <CardBody>
-            <Card.Title>Friends</Card.Title>
+            <Card.Title style={styles.mainHeader}>Friends</Card.Title>
             <ListGroup>
               {friends.map((friend) => (
-                <ListGroupItem key={friend._id}>
+                <ListGroupItem style={styles.friend} key={friend._id}>
                   {friend.username}
                   <BsX
                     style={styles.removeIcon}

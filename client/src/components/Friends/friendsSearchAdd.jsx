@@ -73,11 +73,13 @@ const FriendsSearchAdd = () => {
       color: "#5fb1f0",
     },
     card: {
+      marginTop: "25px",
       background: "#1b2b4580",
       alignItems: "none",
     },
     mainHeader: {
       color: "#5fb1f0",
+      fontSize: "24px",
     },
     message: {
       marginTop: "10px",
