@@ -78,6 +78,17 @@ p {
   color: white;
 }
 
+a,
+.yelpLink {
+  color: var(--accentLight-color);
+  text-align: center;
+  text-decoration: none;
+}
+
+a:hover {
+  color: white;
+}
+
 .glow-text {
   color: var(--accentLight-color);
   text-shadow: 0 0 5px var(--primaryLight-color);
@@ -310,6 +321,15 @@ p {
 
 .card-title {
   text-align: center;
+}
+
+.restCardTitle {
+  font-size: 25px;
+}
+
+.restCardDescription {
+  font-size: 20px;
+  margin-bottom: 0.5rem;
 }
 
 @media (max-width: 1024px) {

@@ -46,9 +46,11 @@ const RestaurantCard = ({ restaurant, favoritePage, onUpdate }) => {
     <Card>
       <Card.Img variant="top" src={imageUrl} alt={restaurant.name} />
       <Card.Body>
-        <Card.Title>{restaurant.name}</Card.Title>
-        <Card.Text>{restaurant.rating} ⭐️</Card.Text>
-        <Card.Text>{address}</Card.Text>
+        <Card.Title className="restCardTitle">{restaurant.name}</Card.Title>
+        <Card.Text className="restCardDescription">
+          {restaurant.rating} ⭐️
+        </Card.Text>
+        <Card.Text className="restCardDescription">{address}</Card.Text>
       </Card.Body>
       {auth.loggedIn() && (
         <>
@@ -64,7 +66,7 @@ const RestaurantCard = ({ restaurant, favoritePage, onUpdate }) => {
           )}
         </>
       )}
-      <Card.Body>
+      <Card.Body className="yelpLink">
         <a href={restaurant.url} target="_blank" rel="noopener noreferrer">
           View on Yelp for more details.
         </a>
