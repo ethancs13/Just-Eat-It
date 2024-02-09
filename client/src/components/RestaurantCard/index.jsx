@@ -6,7 +6,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import auth from "../../utils/auth.js";
 
-const RestaurantCard = ({ restaurant, favoritePage }) => {
+const RestaurantCard = ({ restaurant, favoritePage, onUpdate }) => {
   const [addFavorite] = useMutation(ADD_FAVORITE);
   const [removeFavorite] = useMutation(REMOVE_FAVORITE);
   const [isFavorited, setIsFavorited] = useState(false);
@@ -39,6 +39,7 @@ const RestaurantCard = ({ restaurant, favoritePage }) => {
   const handleRemoveFavorite = async () => {
     await removeFavorite({ variables: { businessId: bothId } });
     setIsFavorited(false);
+    onUpdate();
   };
 
   return (
