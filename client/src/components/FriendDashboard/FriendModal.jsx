@@ -5,13 +5,13 @@ import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER, QUERY_ME } from "../../utils/queries";
 import { Modal, Button } from "react-bootstrap";
 
-export default function friendModal() {
+export default function FriendModal() {
 // This data variable was updated to differentiate it from get-me.
   const { friendData } = useQuery(QUERY_USER);
   console.log(`Friend Data: ${friendData}`);
   
   const { meData } = useQuery(QUERY_ME);
-  console.log(`Me Data: ${meData}`);
+  console.log('Me data:', meData);
   
   const [selectedFriends, setSelectedFriends] = useState([]);
   const [showModal, setShowModal] = useState(false);

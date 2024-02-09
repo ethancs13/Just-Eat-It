@@ -4,12 +4,9 @@ const { signToken, AuthenticationError } = require("../utils/auth");
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
-      console.dir(context.user);
-
+      
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
-          .populate("friends", "_id username")
-          .populate("favorites", "businessId name rating image url location")
           .select("-__v -password");
         return userData;
       }
