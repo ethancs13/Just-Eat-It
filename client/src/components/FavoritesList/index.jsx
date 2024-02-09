@@ -8,6 +8,8 @@ const FavoritesList = () => {
 
   const favoriteRestaurants = data?.me.favorites || [];
 
+  // ADD refetch so the database refreshes similar to cuisine index
+
   console.log(favoriteRestaurants);
 
   if (loading) return <p>Loading...</p>;

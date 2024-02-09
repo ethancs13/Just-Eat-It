@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client";
 import { QUERY_ALL_CUISINES } from "../../utils/queries";
 import { handleSearch } from "../../utils/API";
 import SearchResults from "../SearchResults";
+import IntroText from "./IntroText";
 import {
   Box,
   Input,
@@ -33,12 +34,18 @@ const SearchComponent = () => {
 
   return (
     <ChakraProvider>
-      <Box className="searchContainer" p={4}>
+      <IntroText />
+      <Box
+        className="searchContainer"
+        p={4}
+        mt={results.length > 0 ? "0" : "10%"}
+      >
         <Flex align="center" justify="center">
           <Select
             placeholder="Select Food Preferences"
             flex={1}
             size="lg"
+            fontSize="md"
             color="orange"
             borderColor="orange"
             ml={2}
@@ -55,7 +62,7 @@ const SearchComponent = () => {
               ))}
           </Select>
           <Input
-            placeholder="Search by area"
+            placeholder="Search by city"
             flex={2}
             size="lg"
             color="orange"
