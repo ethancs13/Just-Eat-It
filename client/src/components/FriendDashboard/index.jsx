@@ -31,9 +31,9 @@ const FriendDashboard = () => {
         <div className="pref-container">
           <p>Select Friends...It's time to Eat!</p>
           <ul>
-            {/* {userData.savedCuisines?.map((cuisine) => (
-              <li key={cuisine.cuisineId}>{cuisine.name}</li>
-            ))} */}
+            {userData.friends?.map((friend) => (
+              <li key={friend.username}>{friend.username}</li>
+            ))}
           </ul>
         </div>
       </div>
