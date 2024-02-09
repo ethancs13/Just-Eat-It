@@ -6,13 +6,16 @@ import { ADD_FRIEND } from "../../utils/mutations";
 const FriendsSearchAdd = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState(null);
+  const [searchError, setSearchError] = useState("");
   const [searchUser] = useLazyQuery(QUERY_USER_BY_USERNAME, {
     onCompleted: (result) => setData(result),
+    onError: (error) => setSearchError("Username not found."),
   });
   const [addFriend] = useMutation(ADD_FRIEND);
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
+    setSearchError("");
   };
 
   const handleSubmit = (e) => {
@@ -52,6 +55,8 @@ const FriendsSearchAdd = () => {
         />
         <button type="submit">Search</button>
       </form>
+      {/* Added temporary styling */}
+      {searchError && <p style={{ color: "blue" }}> {searchError}</p>}
       {data && data.user && (
         <div>
           <h2>Search Results:</h2>
