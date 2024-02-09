@@ -1,11 +1,11 @@
-import axios from 'axios';
+import axios from "axios";
 
-export const handleSearch = async (location, term) => {
+export const handleSearch = async (location, cuisine) => {
   try {
-    const response = await axios.get('http://localhost:3001', {
+    const response = await axios.get("http://localhost:3001", {
       params: {
         location: location,
-        term: term,
+        cuisine: cuisine,
       },
     });
     console.log(response.data);
