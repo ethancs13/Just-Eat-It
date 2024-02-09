@@ -3,6 +3,8 @@ import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ME } from "../../utils/queries";
 import { REMOVE_FRIEND } from "../../utils/mutations";
 import FriendsSearchAdd from "./FriendsSearchAdd";
+import { Card, CardBody, ListGroup, ListGroupItem } from "react-bootstrap";
+import { BsX } from "react-icons/bs";
 
 const FriendsSection = () => {
   const { loading, error, data, refetch } = useQuery(QUERY_ME);
@@ -33,24 +35,56 @@ const FriendsSection = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
+  const styles = {
+    removeIcon: {
+      height: "2em",
+      width: "2em",
+      color: "#f02b61",
+    },
+    mainHeader: {
+      fontSize: "24px",
+      letterSpacing: "1px",
+      color: "#fe9553",
+      textShadow: "0 0 5px #ff663d",
+      textAlign: "left",
+    },
+    card: {
+      marginTop: "20px",
+      background: "#1b2b4599",
+    },
+    friend: {
+      margin: "5px",
+      padding: "2px",
+      color: "#1b2b45",
+      listStyleType: "none",
+      fontSize: "20px",
+      borderRadius: "8px",
+      background: "#FFFFFF",
+    },
+  };
+
   return (
     <div>
-      <h3>Friends Section</h3>
       <div>
         <FriendsSearchAdd />
       </div>
       <div>
-        <p style={{ color: "blue" }}>Friends</p>
-        <ul>
-          {friends.map((friend) => (
-            <li key={friend._id}>
-              {friend.username}
-              <button onClick={() => handleRemoveFriend(friend._id)}>
-                Remove
-              </button>
-            </li>
-          ))}
-        </ul>
+        <Card style={styles.card}>
+          <CardBody>
+            <Card.Title style={styles.mainHeader}>Friends</Card.Title>
+            <ListGroup>
+              {friends.map((friend) => (
+                <ListGroupItem style={styles.friend} key={friend._id}>
+                  {friend.username}
+                  <BsX
+                    style={styles.removeIcon}
+                    onClick={() => handleRemoveFriend(friend._id)}
+                  />
+                </ListGroupItem>
+              ))}
+            </ListGroup>
+          </CardBody>
+        </Card>
       </div>
     </div>
   );
