@@ -5,11 +5,10 @@ import { ADD_FRIEND } from "../../utils/mutations";
 
 const FriendsSearchAdd = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchUser, { loading, error, data }] = useLazyQuery(
-    QUERY_USER_BY_USERNAME
-  );
-
-  console.log("Search Friend Data", data);
+  const [data, setData] = useState(null);
+  const [searchUser] = useLazyQuery(QUERY_USER_BY_USERNAME, {
+    onCompleted: (result) => setData(result),
+  });
   const [addFriend] = useMutation(ADD_FRIEND);
 
   const handleChange = (e) => {
@@ -25,16 +24,21 @@ const FriendsSearchAdd = () => {
     }
   };
 
-  const handleAddFriend = (friendData) => {
-    addFriend({
-      variables: {
-        friendData: {
-          _id: friendData._id,
-          username: friendData.username,
+  const handleAddFriend = async (friendData) => {
+    try {
+      await addFriend({
+        variables: {
+          friendData: {
+            _id: friendData._id,
+            username: friendData.username,
+          },
         },
-      },
-    });
-    console.log("FriendData", friendData);
+      });
+      setSearchTerm("");
+      setData(null);
+    } catch (error) {
+      console.error("Error adding friend:", error);
+    }
   };
 
   return (
@@ -48,8 +52,6 @@ const FriendsSearchAdd = () => {
         />
         <button type="submit">Search</button>
       </form>
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error.message}</p>}
       {data && data.user && (
         <div>
           <h2>Search Results:</h2>
