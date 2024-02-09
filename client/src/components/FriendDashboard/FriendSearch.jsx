@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@apollo/client";
-import { QUERY_USER } from "../../utils/queries";
+import { QUERY_USER_BY_USERNAME } from "../../utils/queries";
 
 import {
     Box,
