@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_FAVORITE, REMOVE_FAVORITE } from "../../utils/mutations";
 
@@ -5,9 +6,10 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import auth from "../../utils/auth.js";
 
-const RestaurantCard = ({ restaurant, favoritePage }) => {
+const RestaurantCard = ({ restaurant, favoritePage, onUpdate }) => {
   const [addFavorite] = useMutation(ADD_FAVORITE);
   const [removeFavorite] = useMutation(REMOVE_FAVORITE);
+  const [isFavorited, setIsFavorited] = useState(false);
 
   const imageUrl = restaurant.image || restaurant.image_url;
   const address =
@@ -31,10 +33,13 @@ const RestaurantCard = ({ restaurant, favoritePage }) => {
     console.log(restaurant);
 
     await addFavorite({ variables: { restaurantData: restaurantData } });
+    setIsFavorited(true);
   };
 
   const handleRemoveFavorite = async () => {
     await removeFavorite({ variables: { businessId: bothId } });
+    setIsFavorited(false);
+    onUpdate();
   };
 
   return (
@@ -48,10 +53,14 @@ const RestaurantCard = ({ restaurant, favoritePage }) => {
       {auth.loggedIn() && (
         <>
           {!favoritePage && (
-            <Button onClick={handleAddFavorite}>Favorite</Button>
+            <Button className="favoriteBtn" onClick={handleAddFavorite}>
+              {isFavorited ? "Added to Favorites!" : "Favorite"}
+            </Button>
           )}
           {favoritePage && (
-            <Button onClick={handleRemoveFavorite}>Remove Favorite</Button>
+            <Button className="favoriteBtn" onClick={handleRemoveFavorite}>
+              Remove Favorite
+            </Button>
           )}
         </>
       )}

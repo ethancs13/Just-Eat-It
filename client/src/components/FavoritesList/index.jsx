@@ -4,9 +4,13 @@ import { QUERY_ME } from "../../utils/queries";
 import RestaurantCard from "../RestaurantCard";
 
 const FavoritesList = () => {
-  const { loading, data } = useQuery(QUERY_ME);
+  const { loading, data, refetch } = useQuery(QUERY_ME);
 
   const favoriteRestaurants = data?.me.favorites || [];
+
+  const handleUpdateFavorites = async () => {
+    await refetch();
+  };
 
   console.log(favoriteRestaurants);
 
@@ -19,6 +23,7 @@ const FavoritesList = () => {
           key={restaurant.businessId}
           restaurant={restaurant}
           favoritePage={true}
+          onUpdate={handleUpdateFavorites}
         />
       ))}
     </div>
