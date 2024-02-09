@@ -4,9 +4,10 @@ const { signToken, AuthenticationError } = require("../utils/auth");
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
-      
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
+          .populate("friends", "_id username")
+          .populate("favorites", "businessId name rating image url location")
           .select("-__v -password");
         return userData;
       }
@@ -23,7 +24,11 @@ const resolvers = {
     },
 
     user: async (parent, { username }) => {
-      return await User.findOne({ username });
+      const user = await User.findOne({ username });
+      if (!user) {
+        throw new Error("User not found");
+      }
+      return user;
     },
 
     allRestaurants: async () => {
@@ -83,11 +88,18 @@ const resolvers = {
           );
 
           if (!existingFriend) {
-            const updatedUser = await User.findByIdAndUpdate(
-              context.user._id,
-              { $push: { friends: friendData._id } },
-              { new: true }
-            );
+            // Push the friend's _id to the friends array
+            user.friends.push(friendData._id);
+            await user.save();
+
+            // Populate the user object with the friends data
+            const updatedUser = await User.findById(context.user._id)
+              .populate("friends", "_id username") // Populate the friends field
+              .populate(
+                "favorites",
+                "businessId name rating image url location"
+              )
+              .select("-__v -password");
             return updatedUser;
           } else {
             return user;
