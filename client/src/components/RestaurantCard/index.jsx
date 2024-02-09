@@ -5,7 +5,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import auth from "../../utils/auth.js";
 
-const RestaurantCard = ({ restaurant }) => {
+const RestaurantCard = ({ restaurant, favoritePage }) => {
   const [addFavorite] = useMutation(ADD_FAVORITE);
   const [removeFavorite] = useMutation(REMOVE_FAVORITE);
 
@@ -15,9 +15,11 @@ const RestaurantCard = ({ restaurant }) => {
       ? restaurant.location.address1
       : restaurant.location;
 
+  const bothId = restaurant.id || restaurant.businessId;
+
   const handleAddFavorite = async () => {
     const restaurantData = {
-      businessId: restaurant.id,
+      businessId: bothId,
       name: restaurant.name,
       rating: restaurant.rating,
       image: imageUrl,
@@ -26,17 +28,17 @@ const RestaurantCard = ({ restaurant }) => {
     };
 
     console.log(restaurantData);
+    console.log(restaurant);
 
     await addFavorite({ variables: { restaurantData: restaurantData } });
   };
 
   const handleRemoveFavorite = async () => {
-    console.log("businessId:", restaurant.id);
-    await removeFavorite({ variables: { businessId: restaurant.id } });
+    await removeFavorite({ variables: { businessId: bothId } });
   };
 
   return (
-    <Card key={restaurant.id}>
+    <Card>
       <Card.Img variant="top" src={imageUrl} alt={restaurant.name} />
       <Card.Body>
         <Card.Title>{restaurant.name}</Card.Title>
@@ -45,8 +47,12 @@ const RestaurantCard = ({ restaurant }) => {
       </Card.Body>
       {auth.loggedIn() && (
         <>
-          <Button onClick={handleAddFavorite}>Favorite</Button>
-          <Button onClick={handleRemoveFavorite}>Remove Favorite</Button>
+          {!favoritePage && (
+            <Button onClick={handleAddFavorite}>Favorite</Button>
+          )}
+          {favoritePage && (
+            <Button onClick={handleRemoveFavorite}>Remove Favorite</Button>
+          )}
         </>
       )}
       <Card.Body>

@@ -15,7 +15,11 @@ const FavoritesList = () => {
   return (
     <div className="row card-container">
       {favoriteRestaurants?.map((restaurant) => (
-        <RestaurantCard key={restaurant._id} restaurant={restaurant} />
+        <RestaurantCard
+          key={restaurant.businessId}
+          restaurant={restaurant}
+          favoritePage={true}
+        />
       ))}
     </div>
   );
