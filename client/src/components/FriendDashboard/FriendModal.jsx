@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
-import { QUERY_ME } from "../../utils/queries";
+import { QUERY_USER_BY_USERNAME, QUERY_ME } from "../../utils/queries";
 import { Modal, Button } from "react-bootstrap";
 import FriendPreferences from "./FriendPreferences";
 
