@@ -1,0 +1,14 @@
+.select-friend-dashboard {
+    margin-top: 20px;
+
+    & .pref-container {
+        min-height: 75px;
+        padding: 10px;
+        box-shadow: 10px 10px 10px;
+    }
+}
+
+.modal-body {
+    background-color: white;
+}
+

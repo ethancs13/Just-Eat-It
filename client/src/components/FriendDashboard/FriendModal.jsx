@@ -4,16 +4,15 @@ import { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER, QUERY_ME } from "../../utils/queries";
 import { Modal, Button } from "react-bootstrap";
+import FriendPreferences from "./FriendPreferences";
 
-export default function friendModal() {
-// This data variable was updated to differentiate it from get-me.
-  const { friendData } = useQuery(QUERY_USER);
-  console.log(`Friend Data: ${friendData}`);
-  
-  const { meData } = useQuery(QUERY_ME);
-  console.log(`Me Data: ${meData}`);
-  
-  const [selectedFriends, setSelectedFriends] = useState([]);
+export default function FriendModal() {
+
+  // console.log('Friend Prop:', friends);
+  // const [selectedFriends, setSelectedFriends] = useState(friends);
+  // console.log('Selected Friends:', selectedFriends);
+  // const mappedFriends = friends.map(friend => friend.username);
+  // console.log('Mapped Friends:', mappedFriends);
   const [showModal, setShowModal] = useState(false);
 
   const handleCheckboxChange = (event) => {
@@ -46,8 +45,6 @@ export default function friendModal() {
     setSelectedFriends([]);
   };
 
- const allFriends = friendData.user;
- console.log(`All Friends: ${allFriends}`);
 
   return (
     <div>
@@ -55,15 +52,14 @@ export default function friendModal() {
       <Button variant="primary" onClick={() => setShowModal(true)}>
        Add Friends
       </Button>
-
-      {/* Modal for preferences form */}
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
+  {/* Modal for preferences form
+  <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Select your Friends:</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ background: "#060c24" }}>
           <form onSubmit={handleSubmit}>
-            {allFriends.map((friend) => (
+            {selectedFriends.map((friend) => (
               <div key={friend.username}>
                 <input
                   type="checkbox"
@@ -79,7 +75,7 @@ export default function friendModal() {
                   style={{ fontSize: "24px", color: "#f02b61" }}
                   htmlFor={friend.username}
                 >
-                  {friend.username}
+                  {friend[0].username}
                 </label>
               </div>
             ))}
@@ -97,7 +93,9 @@ export default function friendModal() {
             </Button>
           </form>
         </Modal.Body>
-      </Modal>
+      </Modal> */}
+    
+
     </div>
   );
 }
