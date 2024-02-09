@@ -7,8 +7,10 @@ import { QUERY_ME } from "../../utils/queries";
 
 import './FriendDashboard.css'
 import FriendPreferences from "./FriendPreferences";
+import FriendSearch from "./FriendSearch";
 
 const FriendDashboard = () => {
+
   const { loading, data, error } = useQuery(QUERY_ME);
 
   const userData = data?.me || {};
@@ -25,6 +27,8 @@ const FriendDashboard = () => {
       <div className="center">
         <div className="pref-container">
           <p>Select Friends...It's time to Eat!</p>
+          <FriendSearch />
+
           <ul>
             {userData.friends?.map((friend) => (
               <li key={friend.username}>{friend.username}</li>
@@ -37,6 +41,8 @@ const FriendDashboard = () => {
       <div className="center">
         <FriendModal friends={friendsArr} />
       </div>
+
+      
     </div>
   );
 };
