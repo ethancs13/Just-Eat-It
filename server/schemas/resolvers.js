@@ -79,7 +79,6 @@ const resolvers = {
     },
 
     addFriend: async (parent, { friendData }, context) => {
-      console.log(friendData);
       if (context.user) {
         try {
           const user = await User.findById(context.user._id);
@@ -88,19 +87,21 @@ const resolvers = {
           );
 
           if (!existingFriend) {
-            // Push the friend's _id to the friends array
-            user.friends.push(friendData._id);
-            await user.save();
+            const friendExists = user.friends.some(
+              (friend) => friend.toString() === friendData._id
+            );
 
-            // Populate the user object with the friends data
-            const updatedUser = await User.findById(context.user._id)
-              .populate("friends", "_id username") // Populate the friends field
-              .populate(
-                "favorites",
-                "businessId name rating image url location"
-              )
-              .select("-__v -password");
-            return updatedUser;
+            if (!friendExists) {
+              user.friends.push(friendData._id);
+              await user.save();
+
+              const updatedUser = await User.findById(
+                context.user._id
+              ).populate("friends", "_id username");
+              return updatedUser;
+            } else {
+              throw new Error("User is already a friend.");
+            }
           } else {
             return user;
           }
@@ -108,7 +109,7 @@ const resolvers = {
           throw new Error(`Failed to add friend: ${error.message}`);
         }
       } else {
-        throw AuthenticationError;
+        throw new AuthenticationError("You must be logged in to add a friend.");
       }
     },
 
