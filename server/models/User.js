@@ -17,7 +17,8 @@ const userSchema = new Schema(
     },
     friends: [
       {
-        username: String,
+        type: Schema.Types.ObjectId,
+        ref: "User",
       },
     ],
     favorites: [

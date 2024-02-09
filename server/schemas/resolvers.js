@@ -17,11 +17,16 @@ const resolvers = {
     },
 
     allUsers: async () => {
-      return await User.find({});
+      try {
+        return await User.find({});
+      } catch (error) {
+        console.error("Error fetching all users:", error);
+        throw error;
+      }
     },
 
     user: async (parent, { username }) => {
-      return await User.findOne(username);
+      return await User.findOne({ username });
     },
 
     allRestaurants: async () => {
@@ -73,28 +78,61 @@ const resolvers = {
 
     addFriend: async (parent, { friendData }, context) => {
       if (context.user) {
-        const user = await User.findById(_id);
-        const existingFriends = user.friends.map((friend) => {
-          friend._id;
-        });
-
-        const updatedFriends = friendData.filter(
-          (friend) => !existingFriends.includes(friend._id)
-        );
-        console.log(updatedFriends);
-
-        if (updatedFriends.length > 0) {
-          const updatedUser = await User.findByIdAndUpdate(
-            { _id: context.user._id },
-            { $push: { friends: updatedFriends } },
-            { new: true }
+        try {
+          const user = await User.findById(context.user._id);
+          const existingFriends = user.friends.map((friend) =>
+            friend.toString()
           );
-          return updatedUser;
-        } else {
+
+          const updatedFriends = friendData.filter(
+            (friendId) => !existingFriends.includes(friendId)
+          );
+
+          if (updatedFriends.length > 0) {
+            user.friends.push(...updatedFriends);
+            await user.save();
+          }
+
           return user;
+        } catch (error) {
+          throw new Error(`Failed to add friend: ${error.message}`);
         }
       }
       throw AuthenticationError;
+    },
+
+    removeFriend: async (_, { username }, context) => {
+      if (!context.user) {
+        throw AuthenticationError;
+      }
+
+      try {
+        // Find the current user
+        const currentUser = await User.findById(context.user._id);
+        if (!currentUser) {
+          throw new Error("User not found.");
+        }
+
+        // Find the user to be removed as a friend
+        const friendUser = await User.findOne({ username });
+        if (!friendUser) {
+          throw new Error("Friend not found.");
+        }
+
+        // Check if the friend is already in the current user's friends list
+        const friendIndex = currentUser.friends.indexOf(friendUser._id);
+        if (friendIndex === -1) {
+          throw new Error("User is not a friend.");
+        }
+
+        // Remove the friend from the current user's friends list
+        currentUser.friends.splice(friendIndex, 1);
+        await currentUser.save();
+
+        return currentUser;
+      } catch (error) {
+        throw new Error(`Failed to remove friend: ${error.message}`);
+      }
     },
 
     createRestaurant: async (parent, { name, cuisineId }) => {
