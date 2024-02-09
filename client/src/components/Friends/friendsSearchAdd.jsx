@@ -3,6 +3,7 @@ import { useLazyQuery, useMutation } from "@apollo/client";
 import { QUERY_USER_BY_USERNAME } from "../../utils/queries";
 import { ADD_FRIEND } from "../../utils/mutations";
 import { Card, Form, Button } from "react-bootstrap";
+import { BsPlus } from "react-icons/bs";
 
 const useMessageTimeout = (message, setMessage) => {
   useEffect(() => {
@@ -93,7 +94,7 @@ const FriendsSearchAdd = () => {
             <ul>
               <li>
                 <strong>Username:</strong> {data.user.username}
-                <Button onClick={() => handleAddFriend(data.user)}>Add</Button>
+                <BsPlus onClick={() => handleAddFriend(data.user)} />
               </li>
             </ul>
           </div>

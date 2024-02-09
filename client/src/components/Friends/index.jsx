@@ -10,6 +10,7 @@ import {
   ListGroup,
   ListGroupItem,
 } from "react-bootstrap";
+import { BsX } from "react-icons/bs";
 
 const FriendsSection = () => {
   const { loading, error, data, refetch } = useQuery(QUERY_ME);
@@ -53,9 +54,7 @@ const FriendsSection = () => {
               {friends.map((friend) => (
                 <ListGroupItem key={friend._id}>
                   {friend.username}
-                  <Button onClick={() => handleRemoveFriend(friend._id)}>
-                    Remove
-                  </Button>
+                  <BsX onClick={() => handleRemoveFriend(friend._id)} />
                 </ListGroupItem>
               ))}
             </ListGroup>
