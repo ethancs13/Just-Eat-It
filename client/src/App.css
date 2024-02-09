@@ -160,6 +160,15 @@ p {
   background-size: cover;
 }
 
+.bgFriendsPage {
+  background-image: url("./assets/images/pexels-roman-ska-6989900.jpg");
+  height: auto;
+  width: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .bgNoAccess {
   background-image: url("./assets/images/pexels-pixabay-315191.jpg");
   height: auto;

@@ -1,12 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { QUERY_USER_BY_USERNAME } from "../../utils/queries";
 import { ADD_FRIEND } from "../../utils/mutations";
+import { Card, Form, Button } from "react-bootstrap";
+
+const useMessageTimeout = (message, setMessage) => {
+  useEffect(() => {
+    if (message) {
+      const timeout = setTimeout(() => {
+        setMessage("");
+      }, 3000);
+      return () => clearTimeout(timeout);
+    }
+  }, [message, setMessage]);
+};
 
 const FriendsSearchAdd = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState(null);
-
   const [searchError, setSearchError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [duplicateMessage, setDuplicateMessage] = useState("");
@@ -17,17 +28,16 @@ const FriendsSearchAdd = () => {
   });
   const [addFriend] = useMutation(ADD_FRIEND);
 
+  useMessageTimeout(searchError, setSearchError);
+  useMessageTimeout(successMessage, setSuccessMessage);
+  useMessageTimeout(duplicateMessage, setDuplicateMessage);
+
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
-    setSearchError("");
-    setDuplicateMessage("");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSearchError("");
-    setSuccessMessage("");
-    setDuplicateMessage("");
     if (searchTerm.trim() !== "") {
       searchUser({
         variables: { username: searchTerm.trim() },
@@ -51,38 +61,45 @@ const FriendsSearchAdd = () => {
     } catch (error) {
       console.error("Error adding friend:", error);
       setDuplicateMessage("You already have this user as a friend!");
+      setData(null);
     }
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Search by username"
-          value={searchTerm}
-          onChange={handleChange}
-        />
-        <button type="submit">Search</button>
-      </form>
-      {/* Temporary color styling */}
-      {searchError && <p style={{ color: "blue" }}> {searchError}</p>}
-      {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
-      {duplicateMessage && <p style={{ color: "red" }}>{duplicateMessage}</p>}
-      {data && data.user && (
-        <div>
-          <h2>Search Results:</h2>
-          <ul>
-            <li>
-              <strong>Username:</strong> {data.user.username}
-            </li>
-            <li>
-              <button onClick={() => handleAddFriend(data.user)}>Add</button>
-            </li>
-          </ul>
-        </div>
-      )}
-    </div>
+    <Card>
+      <Card.Body>
+        <Form onSubmit={handleSubmit}>
+          <Card.Title>Add New Friends</Card.Title>
+          <Form.Group controlId="searchForm">
+            <Form.Control
+              type="text"
+              placeholder="Search by username"
+              value={searchTerm}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          {searchError && <p className="text-danger">{searchError}</p>}
+          {successMessage && <p className="text-success">{successMessage}</p>}
+          {duplicateMessage && (
+            <p className="text-danger">{duplicateMessage}</p>
+          )}
+          <Button variant="primary" type="submit">
+            Search
+          </Button>
+        </Form>
+        {data && data.user && (
+          <div>
+            <h2>Search Results:</h2>
+            <ul>
+              <li>
+                <strong>Username:</strong> {data.user.username}
+                <Button onClick={() => handleAddFriend(data.user)}>Add</Button>
+              </li>
+            </ul>
+          </div>
+        )}
+      </Card.Body>
+    </Card>
   );
 };
 

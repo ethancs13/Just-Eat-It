@@ -3,6 +3,13 @@ import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ME } from "../../utils/queries";
 import { REMOVE_FRIEND } from "../../utils/mutations";
 import FriendsSearchAdd from "./FriendsSearchAdd";
+import {
+  Card,
+  Button,
+  CardBody,
+  ListGroup,
+  ListGroupItem,
+} from "react-bootstrap";
 
 const FriendsSection = () => {
   const { loading, error, data, refetch } = useQuery(QUERY_ME);
@@ -35,22 +42,25 @@ const FriendsSection = () => {
 
   return (
     <div>
-      <h3>Friends Section</h3>
-      <div>
+      <div className="center">
         <FriendsSearchAdd />
       </div>
       <div>
-        <p style={{ color: "blue" }}>Friends</p>
-        <ul>
-          {friends.map((friend) => (
-            <li key={friend._id}>
-              {friend.username}
-              <button onClick={() => handleRemoveFriend(friend._id)}>
-                Remove
-              </button>
-            </li>
-          ))}
-        </ul>
+        <Card>
+          <CardBody>
+            <Card.Title>Friends</Card.Title>
+            <ListGroup>
+              {friends.map((friend) => (
+                <ListGroupItem key={friend._id}>
+                  {friend.username}
+                  <Button onClick={() => handleRemoveFriend(friend._id)}>
+                    Remove
+                  </Button>
+                </ListGroupItem>
+              ))}
+            </ListGroup>
+          </CardBody>
+        </Card>
       </div>
     </div>
   );

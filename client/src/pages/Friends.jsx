@@ -23,9 +23,10 @@ export default function Friends() {
     return <NoAccess />;
   }
   return (
-    <div className="container">
-      <h2>Friend Page</h2>
-      <FriendsSection />
+    <div className="bgFriendsPage">
+      <div className="container center">
+        <FriendsSection />
+      </div>
     </div>
   );
 }
