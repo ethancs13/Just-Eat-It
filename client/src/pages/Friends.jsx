@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import FriendsList from "../components/FriendsList";
+import FriendsSection from "../components/Friends";
 import Auth from "../utils/auth";
 import NoAccess from "../components/NoAccess";
 
@@ -25,7 +25,7 @@ export default function Friends() {
   return (
     <div className="container">
       <h2>Friend Page</h2>
-      <FriendsList />
+      <FriendsSection />
     </div>
   );
 }

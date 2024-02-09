@@ -38,13 +38,50 @@ export const ADD_CUISINE = gql`
 `;
 
 export const ADD_FRIEND = gql`
-  mutation addFriend($userData: userInput!) {
+  mutation addFriend($friendData: FriendInput!) {
     addFriend(friendData: $friendData) {
       _id
       username
       friends {
         _id
         username
+      }
+      favorites {
+        businessId
+        name
+        rating
+        image
+        url
+        location
+      }
+      savedCuisines {
+        name
+        cuisineId
+      }
+    }
+  }
+`;
+
+export const REMOVE_FRIEND = gql`
+  mutation removeFriend($username: String!) {
+    removeFriend(username: $username) {
+      _id
+      username
+      friends {
+        _id
+        username
+      }
+      favorites {
+        businessId
+        name
+        rating
+        image
+        url
+        location
+      }
+      savedCuisines {
+        name
+        cuisineId
       }
     }
   }
