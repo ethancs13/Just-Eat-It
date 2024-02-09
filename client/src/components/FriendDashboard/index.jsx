@@ -13,17 +13,11 @@ const FriendDashboard = () => {
   const userData = data?.me || {};
   console.log('User Data:', userData);
 
-  // const [savedCuisines, setSavedCuisines] = useState(
-  //   userData.savedCuisines || []
-  // );
+  const [ friendsArr, setFriendsArr ] = useState(
+    userData.friends || []
+    );
 
-  // if (loading) return <p>Loading...</p>;
-
-  // const handleUpdateCuisines = async () => {
-  //   // Refetch user data to update savedCuisines
-  //   await refetch();
-  //   setSavedCuisines(userData.savedCuisines || []);
-  // };
+  console.log('Friends Arr:', friendsArr);
 
   return (
     <div className="select-friend-dashboard">
@@ -38,7 +32,7 @@ const FriendDashboard = () => {
         </div>
       </div>
       <div className="center">
-        <FriendModal friends={[userData.friends]} />
+        <FriendModal friends={friendsArr} />
       </div>
     </div>
   );
