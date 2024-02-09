@@ -3,13 +3,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ME } from "../../utils/queries";
 import { REMOVE_FRIEND } from "../../utils/mutations";
 import FriendsSearchAdd from "./FriendsSearchAdd";
-import {
-  Card,
-  Button,
-  CardBody,
-  ListGroup,
-  ListGroupItem,
-} from "react-bootstrap";
+import { Card, CardBody, ListGroup, ListGroupItem } from "react-bootstrap";
 import { BsX } from "react-icons/bs";
 
 const FriendsSection = () => {
@@ -41,9 +35,40 @@ const FriendsSection = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
+  const styles = {
+    removeIcon: {
+      height: "2.5em",
+      width: "2.5em",
+      color: "#f02b61",
+    },
+
+    mainHeader: {
+      color: "#5fb1f0",
+    },
+    btn: {
+      marginTop: "10px",
+    },
+    resultsHeader: {
+      paddingTop: "20px",
+      color: "#fe9553",
+      textShadow: "0 0 5px #ff663d",
+      textAlign: "left",
+    },
+    results: {
+      color: "#f02b61",
+      listStyleType: "none",
+      fontSize: "18px",
+    },
+    cardFooter: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+  };
+
   return (
     <div>
-      <div className="center">
+      <div>
         <FriendsSearchAdd />
       </div>
       <div>
@@ -54,7 +79,10 @@ const FriendsSection = () => {
               {friends.map((friend) => (
                 <ListGroupItem key={friend._id}>
                   {friend.username}
-                  <BsX onClick={() => handleRemoveFriend(friend._id)} />
+                  <BsX
+                    style={styles.removeIcon}
+                    onClick={() => handleRemoveFriend(friend._id)}
+                  />
                 </ListGroupItem>
               ))}
             </ListGroup>

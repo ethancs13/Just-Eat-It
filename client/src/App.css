@@ -334,6 +334,9 @@ p {
   .pref-container {
     width: 80vw;
   }
+  .card {
+    width: fit-content;
+  }
 }
 
 @media (max-width: 320px) {

@@ -66,11 +66,45 @@ const FriendsSearchAdd = () => {
     }
   };
 
+  const styles = {
+    addIcon: {
+      height: "2.5em",
+      width: "2.5em",
+      color: "#5fb1f0",
+    },
+    card: {
+      background: "#1b2b4580",
+      alignItems: "none",
+    },
+    mainHeader: {
+      color: "#5fb1f0",
+    },
+    message: {
+      marginTop: "10px",
+      fontStyle: "italic",
+      letterSpacing: "1px",
+    },
+    btn: {
+      marginTop: "10px",
+    },
+    resultsHeader: {
+      paddingTop: "20px",
+      color: "#fe9553",
+      textShadow: "0 0 5px #ff663d",
+      textAlign: "left",
+    },
+    results: {
+      color: "#f02b61",
+      listStyleType: "none",
+      fontSize: "18px",
+    },
+  };
+
   return (
-    <Card>
+    <Card style={styles.card}>
       <Card.Body>
         <Form onSubmit={handleSubmit}>
-          <Card.Title>Add New Friends</Card.Title>
+          <Card.Title style={styles.mainHeader}>Add New Friends</Card.Title>
           <Form.Group controlId="searchForm">
             <Form.Control
               type="text"
@@ -79,22 +113,25 @@ const FriendsSearchAdd = () => {
               onChange={handleChange}
             />
           </Form.Group>
-          {searchError && <p className="text-danger">{searchError}</p>}
-          {successMessage && <p className="text-success">{successMessage}</p>}
-          {duplicateMessage && (
-            <p className="text-danger">{duplicateMessage}</p>
-          )}
-          <Button variant="primary" type="submit">
+          <div style={styles.message}>
+            {searchError && <p>{searchError}</p>}
+            {successMessage && <p>{successMessage}</p>}
+            {duplicateMessage && <p>{duplicateMessage}</p>}
+          </div>
+          <Button style={styles.btn} variant="primary" type="submit">
             Search
           </Button>
         </Form>
         {data && data.user && (
           <div>
-            <h2>Search Results:</h2>
-            <ul>
+            <h4 style={styles.resultsHeader}>Search Results:</h4>
+            <ul style={styles.results}>
               <li>
-                <strong>Username:</strong> {data.user.username}
-                <BsPlus onClick={() => handleAddFriend(data.user)} />
+                <strong>Add</strong> {data.user.username}
+                <BsPlus
+                  style={styles.addIcon}
+                  onClick={() => handleAddFriend(data.user)}
+                />
               </li>
             </ul>
           </div>

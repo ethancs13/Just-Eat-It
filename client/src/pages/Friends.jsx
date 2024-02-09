@@ -22,9 +22,17 @@ export default function Friends() {
   if (!loggedIn) {
     return <NoAccess />;
   }
+
+  const styles = {
+    card: {
+      display: "flex",
+      justifyContent: "center",
+      textAlign: "center",
+    },
+  };
   return (
     <div className="bgFriendsPage">
-      <div className="container center">
+      <div className="container" style={styles.card}>
         <FriendsSection />
       </div>
     </div>
