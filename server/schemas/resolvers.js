@@ -113,37 +113,23 @@ const resolvers = {
       }
     },
 
-    removeFriend: async (_, { username }, context) => {
-      if (!context.user) {
-        throw AuthenticationError;
-      }
+    removeFriend: async (parent, { friendId }, context) => {
+      if (context.user) {
+        try {
+          const updatedUser = await User.findByIdAndUpdate(
+            context.user._id,
+            { $pull: { friends: friendId } },
+            { new: true }
+          ).populate("friends");
 
-      try {
-        // Find the current user
-        const currentUser = await User.findById(context.user._id);
-        if (!currentUser) {
-          throw new Error("User not found.");
+          return updatedUser;
+        } catch (error) {
+          throw new Error(`Failed to remove friend: ${error.message}`);
         }
-
-        // Find the user to be removed as a friend
-        const friendUser = await User.findOne({ username });
-        if (!friendUser) {
-          throw new Error("Friend not found.");
-        }
-
-        // Check if the friend is already in the current user's friends list
-        const friendIndex = currentUser.friends.indexOf(friendUser._id);
-        if (friendIndex === -1) {
-          throw new Error("User is not a friend.");
-        }
-
-        // Remove the friend from the current user's friends list
-        currentUser.friends.splice(friendIndex, 1);
-        await currentUser.save();
-
-        return currentUser;
-      } catch (error) {
-        throw new Error(`Failed to remove friend: ${error.message}`);
+      } else {
+        throw new AuthenticationError(
+          "You must be logged in to remove a friend"
+        );
       }
     },
 

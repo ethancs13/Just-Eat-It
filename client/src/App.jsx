@@ -38,11 +38,11 @@ const client = new ApolloClient({
               // Custom merge function for the favorite places
               return [...existing, ...incoming];
             },
-            friends: {
-              merge(existing = [], incoming) {
-                // Custom merge function for the friends
-                return [...existing, ...incoming];
-              },
+          },
+          friends: {
+            merge(existing = [], incoming) {
+              // Custom merge function for the friends
+              return [...existing, ...incoming];
             },
           },
         },
