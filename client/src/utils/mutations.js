@@ -66,3 +66,20 @@ export const ADD_FAVORITE = gql`
     }
   }
 `;
+
+export const REMOVE_FAVORITE = gql`
+  mutation removeFavorite($businessId: String!) {
+    removeFavorite(businessId: $businessId) {
+      _id
+      username
+      favorites {
+        businessId
+        name
+        rating
+        image
+        url
+        location
+      }
+    }
+  }
+`;

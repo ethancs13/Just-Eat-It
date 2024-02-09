@@ -71,8 +71,8 @@ export default function CuisineUpdateModal() {
                   style={{
                     marginRight: "15px",
                     marginBottom: "10px",
-                    width: "18px",
                     height: "18px",
+                    width: "18px",
                   }}
                 />
                 <label

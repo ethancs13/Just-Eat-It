@@ -36,7 +36,7 @@ const typeDefs = gql`
     me: User
 
     allUsers: [User]!
-    user(id: ID!): User
+    user(username: String!): User
 
     allRestaurants: [Restaurant]!
     restaurant(id: ID!): Restaurant
@@ -83,7 +83,6 @@ const typeDefs = gql`
       url: String
       location: String
     ): Restaurant
-
 
     removeFavorite(businessId: String!): User
   }
