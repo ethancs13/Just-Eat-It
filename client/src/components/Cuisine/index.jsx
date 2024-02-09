@@ -12,6 +12,8 @@ const Cuisine = () => {
     userData.savedCuisines || []
   );
 
+  console.log("Data", userData);
+
   if (loading) return <p>Loading...</p>;
 
   const handleUpdateCuisines = async () => {
