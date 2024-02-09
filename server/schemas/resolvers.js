@@ -77,28 +77,30 @@ const resolvers = {
     },
 
     addFriend: async (parent, { friendData }, context) => {
+      console.log(friendData);
       if (context.user) {
         try {
           const user = await User.findById(context.user._id);
-          const existingFriends = user.friends.map((friend) =>
-            friend.toString()
+          const existingFriend = user.friends.find(
+            (friend) => friend._id === friendData._id
           );
 
-          const updatedFriends = friendData.filter(
-            (friendId) => !existingFriends.includes(friendId)
-          );
-
-          if (updatedFriends.length > 0) {
-            user.friends.push(...updatedFriends);
-            await user.save();
+          if (!existingFriend) {
+            const updatedUser = await User.findByIdAndUpdate(
+              context.user._id,
+              { $push: { friends: friendData._id } },
+              { new: true }
+            );
+            return updatedUser;
+          } else {
+            return user;
           }
-
-          return user;
         } catch (error) {
           throw new Error(`Failed to add friend: ${error.message}`);
         }
+      } else {
+        throw AuthenticationError;
       }
-      throw AuthenticationError;
     },
 
     removeFriend: async (_, { username }, context) => {

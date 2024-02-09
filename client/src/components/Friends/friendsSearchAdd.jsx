@@ -1,12 +1,16 @@
 import { useState } from "react";
-import { useLazyQuery } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import { QUERY_USER_BY_USERNAME } from "../../utils/queries";
+import { ADD_FRIEND } from "../../utils/mutations";
 
 const FriendsSearchAdd = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchUser, { loading, error, data }] = useLazyQuery(
     QUERY_USER_BY_USERNAME
   );
+
+  console.log("Search Friend Data", data);
+  const [addFriend] = useMutation(ADD_FRIEND);
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
@@ -19,6 +23,18 @@ const FriendsSearchAdd = () => {
         variables: { username: searchTerm.trim() },
       });
     }
+  };
+
+  const handleAddFriend = (friendData) => {
+    addFriend({
+      variables: {
+        friendData: {
+          _id: friendData._id,
+          username: friendData.username,
+        },
+      },
+    });
+    console.log("FriendData", friendData);
   };
 
   return (
@@ -42,7 +58,7 @@ const FriendsSearchAdd = () => {
               <strong>Username:</strong> {data.user.username}
             </li>
             <li>
-              <button>Add Friend</button>
+              <button onClick={() => handleAddFriend(data.user)}>Add</button>
             </li>
           </ul>
         </div>
