@@ -79,7 +79,7 @@ const typeDefs = gql`
     ): Restaurant
     removeFavorite(businessId: String!): User
     addFriend(friendData: FriendInput!): User!
-    removeFriend(username: String!): User
+    removeFriend(friendId: ID!): User!
   }
 `;
 
