@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER, QUERY_ME } from "../../utils/queries";
 import { Modal, Button } from "react-bootstrap";
+import FriendPreferences from "./FriendPreferences";
 
 export default function FriendModal() {
 
@@ -93,7 +94,7 @@ export default function FriendModal() {
           </form>
         </Modal.Body>
       </Modal> */}
-     
+    
 
     </div>
   );

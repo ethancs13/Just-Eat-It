@@ -14,6 +14,7 @@ const resolvers = {
     },
 
     allUsers: async () => {
+      console.log('Finding all users...')
       return await User.find({});
     },
 

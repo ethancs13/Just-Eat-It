@@ -2,14 +2,17 @@ import { gql } from "@apollo/client";
 
 export const QUERY_ALL_USERS = gql`
   query allUsers {
-    _id
-    username
-    savedCuisines {
-      name
-      cuisineId
+    allUsers {
+      _id
+      username
+      savedCuisines {
+        name
+        cuisineId
+      }
     }
   }
 `;
+
 
 export const QUERY_USER = gql`
   query user($username: String!) {

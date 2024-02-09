@@ -6,6 +6,7 @@ import { useQuery } from "@apollo/client";
 import { QUERY_ME } from "../../utils/queries";
 
 import './FriendDashboard.css'
+import FriendPreferences from "./FriendPreferences";
 
 const FriendDashboard = () => {
   const { loading, data, error } = useQuery(QUERY_ME);
@@ -17,7 +18,7 @@ const FriendDashboard = () => {
     userData.friends || []
     );
 
-  console.log('Friends Arr:', friendsArr);
+  // console.log('Friends Arr:', friendsArr);
 
   return (
     <div className="select-friend-dashboard">
@@ -29,7 +30,9 @@ const FriendDashboard = () => {
               <li key={friend.username}>{friend.username}</li>
             ))}
           </ul>
+          <FriendPreferences friends={friendsArr}/>
         </div>
+     
       </div>
       <div className="center">
         <FriendModal friends={friendsArr} />
