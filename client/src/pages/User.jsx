@@ -1,8 +1,8 @@
 import Auth from "../utils/auth";
 import { useState, useEffect } from "react";
 import NoAccess from "../components/NoAccess";
-
 import Cuisine from "../components/Cuisine";
+
 export default function User() {
   const token = Auth.getToken();
   const [loggedIn, setLoggedIn] = useState(Auth.loggedIn());
