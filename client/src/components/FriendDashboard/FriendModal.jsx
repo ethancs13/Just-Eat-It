@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER_BY_USERNAME, QUERY_ME } from "../../utils/queries";
 import { Modal, Button } from "react-bootstrap";
-import FriendPreferences from "./FriendPreferences";
+// import FriendPreferences from "./FriendPreferences";
 
 export default function FriendModal() {
 
@@ -52,33 +52,15 @@ export default function FriendModal() {
       <Button variant="primary" onClick={() => setShowModal(true)}>
        Let's Find a Restaurant!
       </Button>
-  {/* Modal for preferences form
+
+  {/* Modal for preferences form */}
+
   <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Select your Friends:</Modal.Title>
+          <Modal.Title>Let's Find a Place to Eat</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ background: "#060c24" }}>
-          <form onSubmit={handleSubmit}>
-            {selectedFriends.map((friend) => (
-              <div key={friend.username}>
-                <input
-                  type="checkbox"
-                  id={friend.username}
-                  value={friend.username}
-                  onChange={handleCheckboxChange}
-                  checked={selectedFriends.some(
-                    (f) => f.username === friend.username
-                  )}
-                  style={{ marginRight: "15px", marginBottom: "10px", height: "18px", width: "18px" }}
-                />
-                <label
-                  style={{ fontSize: "24px", color: "#f02b61" }}
-                  htmlFor={friend.username}
-                >
-                  {friend[0].username}
-                </label>
-              </div>
-            ))}
+
             <Button
               variant="primary"
               type="submit"
@@ -89,11 +71,11 @@ export default function FriendModal() {
                 margin: "0 auto",
               }}
             >
-              Save
+              Find me something to Eat
             </Button>
-          </form>
+          
         </Modal.Body>
-      </Modal> */}
+      </Modal>
     
 
     </div>

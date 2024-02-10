@@ -6,7 +6,7 @@ import { useQuery } from "@apollo/client";
 import { QUERY_ME } from "../../utils/queries";
 
 import './FriendDashboard.css'
-import FriendPreferences from "./FriendPreferences";
+// import FriendPreferences from "./FriendPreferences";
 import FriendSearch from "./FriendSearch";
 
 const FriendDashboard = () => {
