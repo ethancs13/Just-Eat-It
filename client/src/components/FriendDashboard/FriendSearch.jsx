@@ -37,7 +37,7 @@ const FriendSearch = () => {
             <Box className="searchContainer friend-dashboard" p={4}>
                 <Flex align="center" justify="center">
                     <form onSubmit={(handleSubmit)}>
-               
+                    <Flex align="center" justify="center">
                             <Input
                                 placeholder="Search for a friend"
                                 flex={2}
@@ -54,6 +54,7 @@ const FriendSearch = () => {
                         <Button type="submit" colorScheme="orange" size="lg" ml={2} >
                             Find Friend
                         </Button>
+                        </Flex>
                     </form>
                 </Flex>
             </Box>
