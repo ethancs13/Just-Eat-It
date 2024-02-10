@@ -20,3 +20,6 @@ p {
     margin-top: 10px;
 }
 
+.friend-dashboard form {
+    width: 95%;
+}
