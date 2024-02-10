@@ -36,9 +36,7 @@ const FriendSearch = () => {
         <ChakraProvider>
             <Box className="searchContainer friend-dashboard" p={4}>
                 <Flex align="center" justify="center">
-                    <form onSubmit={(handleSubmit)
-                            
-                        }>
+                    <form onSubmit={(handleSubmit)}>
                
                             <Input
                                 placeholder="Search for a friend"
