@@ -50,7 +50,7 @@ export default function FriendModal() {
     <div>
       {/* Button to open modal */}
       <Button variant="primary" onClick={() => setShowModal(true)}>
-       Add Friends
+       Let's Find a Restaurant!
       </Button>
   {/* Modal for preferences form
   <Modal show={showModal} onHide={() => setShowModal(false)}>
