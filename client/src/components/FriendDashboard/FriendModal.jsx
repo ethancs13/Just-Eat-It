@@ -57,7 +57,7 @@ export default function FriendModal() {
 
   <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Let's Find a Place to Eat</Modal.Title>
+          <Modal.Title className="modal-title">Let's Find a Place to Eat</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ background: "#060c24" }}>
 

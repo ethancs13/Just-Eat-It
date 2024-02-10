@@ -23,3 +23,7 @@ p {
 .friend-dashboard form {
     width: 95%;
 }
+
+.modal-title {
+    margin: 0 auto;
+}
