@@ -7,7 +7,6 @@ import { Modal, Button } from "react-bootstrap";
 import FriendPreferences from "./FriendPreferences";
 
 export default function FriendModal() {
-
   // console.log('Friend Prop:', friends);
   // const [selectedFriends, setSelectedFriends] = useState(friends);
   // console.log('Selected Friends:', selectedFriends);
@@ -24,7 +23,7 @@ export default function FriendModal() {
 
     setSelectedFriends((prevSelectedFriends) =>
       checked
-        ? [...prevSelectedFriends, friendArray ]
+        ? [...prevSelectedFriends, friendArray]
         : prevSelectedFriends.filter((f) => f.username !== username)
     );
   };
@@ -45,14 +44,13 @@ export default function FriendModal() {
     setSelectedFriends([]);
   };
 
-
   return (
     <div>
       {/* Button to open modal */}
       <Button variant="primary" onClick={() => setShowModal(true)}>
-       Let's Find a Restaurant!
+        Let's Find a Restaurant!
       </Button>
-  {/* Modal for preferences form
+      {/* Modal for preferences form
   <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Select your Friends:</Modal.Title>
@@ -94,8 +92,6 @@ export default function FriendModal() {
           </form>
         </Modal.Body>
       </Modal> */}
-    
-
     </div>
   );
 }
