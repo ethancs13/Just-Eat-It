@@ -16,9 +16,9 @@ const FriendDashboard = () => {
   const userData = data?.me || {};
   console.log('User Data:', userData);
 
-  const [ friendsArr, setFriendsArr ] = useState(
+  const [friendsArr, setFriendsArr] = useState(
     userData.friends || []
-    );
+  );
 
   // console.log('Friends Arr:', friendsArr);
 
@@ -34,14 +34,15 @@ const FriendDashboard = () => {
             ))}
           </ul> */}
           {/* <FriendPreferences friends={friendsArr}/> */}
+
+          <div className="center">
+            <FriendModal friends={friendsArr} />
+          </div>
+
         </div>
-     
-      </div>
-      <div className="center">
-        <FriendModal friends={friendsArr} />
+
       </div>
 
-      
     </div>
   );
 };
