@@ -49,13 +49,17 @@ const FriendSearch = () => {
                     <Button colorScheme="orange" size="lg" ml={2} onClick={() =>
                         getUser({ variables: { username: searchFriend.friendName }})
                         }>
-                        Search
+                        Find Friend
                     </Button>
                 </Flex>
             </Box>
 
             <div>
                 <p>My friends like to eat:</p>
+                <ul>
+                    {data?.user.savedCuisines.map(cusisine => (
+                       <li>{cusisine.name}</li> ))}
+                </ul>
             </div>
         </ChakraProvider>
 
