@@ -31,15 +31,18 @@ const FriendSearch = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            setFriendFavorites([]);
             await getUser({ variables: { username: searchFriend.friendName } });
             setFriendFavorites(data.user.savedCuisines);
-            console.log('Friend Favorites:', friendFavorites);
+            const friendFoods = data.user.savedCuisines;
             setSearchFriend({ friendName: "" });
+            console.log('Friend Foods:', friendFoods);
+            return friendFoods;
 
         } catch (err) {
+
             console.error('Error querying user data:', error);
         }
-        // const friendFoods = data.user.savedCuisines;
 
     };
 
@@ -87,6 +90,7 @@ const FriendSearch = () => {
                 {friendFavorites && friendFavorites.length > 0 && (
                     <FriendModal friendFoods={friendFavorites} />
                 )}
+             
             </div>
 
         </ChakraProvider>

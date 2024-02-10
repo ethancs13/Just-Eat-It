@@ -10,15 +10,21 @@ export default function FriendModal({ friendFoods }) {
 
   console.log('Imported Favorites', friendFoods);
 
-  // console.log('Friend Prop:', friends);
-  // const [selectedFriends, setSelectedFriends] = useState(friends);
-  // console.log('Selected Friends:', selectedFriends);
-  // const mappedFriends = friends.map(friend => friend.username);
-  // console.log('Mapped Friends:', mappedFriends);
+  const {loading, error, data} = useQuery(QUERY_ME);
   const [showModal, setShowModal] = useState(false);
 
-  const {loading, error, data} = useQuery(QUERY_ME);
-  console.log('Me Data:', data);
+  const myFavorites = data.me.savedCuisines.map(food => food.name);
+  console.log('My Favorites:', myFavorites);
+  
+  const friendFavorites = friendFoods.map(food => food.name);
+  console.log('Friend Favorites:', friendFavorites);
+
+  const ourFavorites = myFavorites.filter(food => friendFavorites.includes(food));
+  console.log('Our Favorites:', ourFavorites);
+
+
+
+  
 
   const handleCheckboxChange = (event) => {
     const { username, checked } = event.target;
