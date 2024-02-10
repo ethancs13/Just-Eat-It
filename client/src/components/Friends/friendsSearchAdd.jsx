@@ -20,17 +20,16 @@ const FriendsSearchAdd = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState(null);
   const [searchError, setSearchError] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
   const [duplicateMessage, setDuplicateMessage] = useState("");
 
   const [searchUser] = useLazyQuery(QUERY_USER_BY_USERNAME, {
     onCompleted: (result) => setData(result),
     onError: (error) => setSearchError("Username not found."),
   });
+
   const [addFriend] = useMutation(ADD_FRIEND);
 
   useMessageTimeout(searchError, setSearchError);
-  useMessageTimeout(successMessage, setSuccessMessage);
   useMessageTimeout(duplicateMessage, setDuplicateMessage);
 
   const handleChange = (e) => {
@@ -58,7 +57,7 @@ const FriendsSearchAdd = () => {
       });
       setSearchTerm("");
       setData(null);
-      setSuccessMessage("Friend added successfully!");
+      window.location.reload();
     } catch (error) {
       console.error("Error adding friend:", error);
       setDuplicateMessage("You already have this user as a friend!");
@@ -98,7 +97,7 @@ const FriendsSearchAdd = () => {
     results: {
       color: "#f02b61",
       listStyleType: "none",
-      fontSize: "18px",
+      fontSize: "16px",
     },
   };
 
@@ -117,7 +116,7 @@ const FriendsSearchAdd = () => {
           </Form.Group>
           <div style={styles.message}>
             {searchError && <p>{searchError}</p>}
-            {successMessage && <p>{successMessage}</p>}
+
             {duplicateMessage && <p>{duplicateMessage}</p>}
           </div>
           <Button style={styles.btn} variant="primary" type="submit">
