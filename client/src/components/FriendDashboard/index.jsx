@@ -28,12 +28,11 @@ const FriendDashboard = () => {
         <div className="pref-container">
           <p>Select Friends...It's time to Eat!</p>
           <FriendSearch />
-
-          <ul>
+          {/* <ul>
             {userData.friends?.map((friend) => (
               <li key={friend.username}>{friend.username}</li>
             ))}
-          </ul>
+          </ul> */}
           <FriendPreferences friends={friendsArr}/>
         </div>
      

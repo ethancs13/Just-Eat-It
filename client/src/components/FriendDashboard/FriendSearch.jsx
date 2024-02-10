@@ -26,13 +26,14 @@ const FriendSearch = () => {
     }
 
       const search = async () => {
-        const data = await handleSearch(location, cuisine);
-        setResults(data.businesses);
+        // const data = await handleSearch(location, cuisine);
+        // setResults(data.businesses);
+        setSearchFriend({friendName: ""})
       };
 
     return (
         <ChakraProvider>
-            <Box className="searchContainer" p={4}>
+            <Box className="searchContainer friend-dashboard" p={4}>
                 <Flex align="center" justify="center">
                     <Input
                         placeholder="Search for a friend"
