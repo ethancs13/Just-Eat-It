@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLazyQuery } from "@apollo/client";
 import { QUERY_USER_BY_USERNAME } from "../../utils/queries";
+import FriendModal from "./FriendModal";
 
 import {
     Box,
@@ -14,6 +15,7 @@ import {
 const FriendSearch = () => {
 
     const [searchFriend, setSearchFriend] = useState({ friendName: "" });
+    const [friendFavorites, setFriendFavorites] = useState([]);
     const [getUser, { loading, error, data }] = useLazyQuery(QUERY_USER_BY_USERNAME);
 
     const handleChange = (e) => {
@@ -28,9 +30,21 @@ const FriendSearch = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        getUser({ variables: { username: searchFriend.friendName } })
-        setSearchFriend({ friendName: "" })
+        try {
+            await getUser({ variables: { username: searchFriend.friendName } });
+            setFriendFavorites(data.user.savedCuisines);
+            console.log('Friend Favorites:', friendFavorites);
+            setSearchFriend({ friendName: "" });
+
+        } catch (err) {
+            console.error('Error querying user data:', error);
+        }
+        // const friendFoods = data.user.savedCuisines;
+
     };
+
+
+
 
     return (
         <ChakraProvider>
@@ -68,7 +82,15 @@ const FriendSearch = () => {
                 </ul>
 
             </div>
+
+            <div className="center">
+                {friendFavorites && friendFavorites.length > 0 && (
+                    <FriendModal friendFoods={friendFavorites} />
+                )}
+            </div>
+
         </ChakraProvider>
+
 
     )
 }

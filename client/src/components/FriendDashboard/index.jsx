@@ -35,10 +35,6 @@ const FriendDashboard = () => {
           </ul> */}
           {/* <FriendPreferences friends={friendsArr}/> */}
 
-          <div className="center">
-            <FriendModal friends={friendsArr} />
-          </div>
-
         </div>
 
       </div>
