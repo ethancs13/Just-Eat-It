@@ -97,7 +97,7 @@ const FriendsSearchAdd = () => {
     results: {
       color: "#f02b61",
       listStyleType: "none",
-      fontSize: "18px",
+      fontSize: "16px",
     },
   };
 

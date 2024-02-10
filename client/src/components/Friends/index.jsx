@@ -42,7 +42,7 @@ const FriendsSection = () => {
       color: "#f02b61",
     },
     mainHeader: {
-      fontSize: "24px",
+      fontSize: "26px",
       letterSpacing: "1px",
       color: "#fe9553",
       textShadow: "0 0 5px #ff663d",
@@ -57,7 +57,7 @@ const FriendsSection = () => {
       padding: "2px",
       color: "#1b2b45",
       listStyleType: "none",
-      fontSize: "20px",
+      fontSize: "19px",
       borderRadius: "8px",
       background: "#FFFFFF",
     },
