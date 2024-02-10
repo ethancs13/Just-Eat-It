@@ -16,9 +16,9 @@ const FriendDashboard = () => {
   const userData = data?.me || {};
   console.log('User Data:', userData);
 
-  const [ friendsArr, setFriendsArr ] = useState(
+  const [friendsArr, setFriendsArr] = useState(
     userData.friends || []
-    );
+  );
 
   // console.log('Friends Arr:', friendsArr);
 
@@ -28,21 +28,21 @@ const FriendDashboard = () => {
         <div className="pref-container">
           <p>Select Friends...It's time to Eat!</p>
           <FriendSearch />
-
-          <ul>
+          {/* <ul>
             {userData.friends?.map((friend) => (
               <li key={friend.username}>{friend.username}</li>
             ))}
-          </ul>
-          <FriendPreferences friends={friendsArr}/>
+          </ul> */}
+          {/* <FriendPreferences friends={friendsArr}/> */}
+
+          <div className="center">
+            <FriendModal friends={friendsArr} />
+          </div>
+
         </div>
-     
-      </div>
-      <div className="center">
-        <FriendModal friends={friendsArr} />
+
       </div>
 
-      
     </div>
   );
 };

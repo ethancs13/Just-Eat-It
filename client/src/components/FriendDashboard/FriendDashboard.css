@@ -1,3 +1,7 @@
+p {
+    font-weight: bold;
+}
+
 .select-friend-dashboard {
     margin-top: 20px;
 
@@ -12,3 +16,10 @@
     background-color: white;
 }
 
+.searchContainer {
+    margin-top: 10px;
+}
+
+.friend-dashboard form {
+    width: 95%;
+}
