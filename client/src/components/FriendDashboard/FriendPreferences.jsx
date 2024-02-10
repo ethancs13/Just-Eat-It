@@ -11,7 +11,7 @@ console.log('Friends Array:', friendsArr);
 
     return (
         <div>
-            <h3>My friends like to eat:</h3>
+            <p>My friends like to eat:</p>
         </div>
     )
 }

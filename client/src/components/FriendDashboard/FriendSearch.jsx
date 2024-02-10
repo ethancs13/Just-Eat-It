@@ -25,9 +25,8 @@ const FriendSearch = () => {
         })
     }
 
-      const search = async () => {
+      const handleSearch = async () => {
         // const data = await handleSearch(location, cuisine);
-        // setResults(data.businesses);
         setSearchFriend({friendName: ""})
       };
 
@@ -46,7 +45,7 @@ const FriendSearch = () => {
                         name="friendName"
                         value={searchFriend.friendName}
                     />
-                    <Button colorScheme="orange" size="lg" ml={2} onClick={search}>
+                    <Button colorScheme="orange" size="lg" ml={2} onClick={handleSearch}>
                         Search
                     </Button>
                 </Flex>
