@@ -13,12 +13,23 @@ import {
 
 const FriendSearch = () => {
 
-    const [ searchedFriend, setSearchedFriend ] = useState({username: ""})
-    const handleKeyDown = (event) => {
-        if (event.key === "Enter") {
-          search();
-        }
-      };
+    const [ searchData, setSearchData ] = useState({friendName: ""});
+
+    const handleChange = (e) => {
+        const newValue = e.target.value;
+        console.log('New Value:', newValue);
+
+        setSearchData(currData => {
+            currData.friendName = newValue;
+            return {...currData};
+        })
+    }
+    // const [ searchedFriend, setSearchedFriend ] = useState({username: ""})
+    // const handleKeyDown = (event) => {
+    //     if (event.key === "Enter") {
+    //       search();
+    //     }
+    //   };
 
       const search = async () => {
         const data = await handleSearch(location, cuisine);
@@ -36,8 +47,9 @@ const FriendSearch = () => {
                         color="orange"
                         borderColor="orange"
                         _focus={{ borderColor: "orange.500" }}
-                        // onChange={(e) => setLocation(e.target.value)}
-                        onKeyDown={handleKeyDown}
+                        onChange={handleChange}
+                        name='friendName'
+                        value={searchData.friendName}
                     />
                     <Button colorScheme="orange" size="lg" ml={2} onClick={search}>
                         Search
