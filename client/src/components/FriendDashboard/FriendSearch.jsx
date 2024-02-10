@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import { QUERY_USER_BY_USERNAME } from "../../utils/queries";
 
 import {
@@ -13,7 +13,8 @@ import {
 
 const FriendSearch = () => {
 
-    const [ searchFriend, setSearchFriend ] = useState({friendName: ""});
+    const [searchFriend, setSearchFriend] = useState({ friendName: "" });
+    const [getUser, {loading, error , data}] = useLazyQuery(QUERY_USER_BY_USERNAME);
 
     const handleChange = (e) => {
         const newValue = e.target.value;
@@ -21,14 +22,14 @@ const FriendSearch = () => {
 
         setSearchFriend(currData => {
             currData.friendName = newValue;
-            return {...currData};
+            return { ...currData };
         })
     }
 
-      const handleSearch = async () => {
-        // const data = await handleSearch(location, cuisine);
-        setSearchFriend({friendName: ""})
-      };
+    // const handleSearch = async () => {
+
+    //     setSearchFriend({ friendName: "" })
+    // };
 
     return (
         <ChakraProvider>
@@ -45,11 +46,17 @@ const FriendSearch = () => {
                         name="friendName"
                         value={searchFriend.friendName}
                     />
-                    <Button colorScheme="orange" size="lg" ml={2} onClick={handleSearch}>
+                    <Button colorScheme="orange" size="lg" ml={2} onClick={() =>
+                        getUser({ variables: { username: searchFriend.friendName }})
+                        }>
                         Search
                     </Button>
                 </Flex>
             </Box>
+
+            <div>
+                <p>My friends like to eat:</p>
+            </div>
         </ChakraProvider>
 
     )

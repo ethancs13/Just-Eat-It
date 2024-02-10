@@ -33,7 +33,7 @@ const FriendDashboard = () => {
               <li key={friend.username}>{friend.username}</li>
             ))}
           </ul> */}
-          <FriendPreferences friends={friendsArr}/>
+          {/* <FriendPreferences friends={friendsArr}/> */}
         </div>
      
       </div>
