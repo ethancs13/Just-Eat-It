@@ -22,7 +22,8 @@
     "faker": "^6.6.6",
     "graphql": "^16.6.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^7.0.2"
+    "mongoose": "^7.0.2",
+    "ws": "^8.16.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.0",
