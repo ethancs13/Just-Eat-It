@@ -9,15 +9,15 @@ import auth from "../../utils/auth.js";
 const RestaurantCard = ({ restaurant, favoritePage, onUpdate }) => {
   const [addFavorite] = useMutation(ADD_FAVORITE);
   const [removeFavorite] = useMutation(REMOVE_FAVORITE);
+
   const [isFavorited, setIsFavorited] = useState(false);
 
+  const bothId = restaurant.id || restaurant.businessId;
   const imageUrl = restaurant.image || restaurant.image_url;
   const address =
     typeof restaurant.location === "object"
       ? restaurant.location.address1
       : restaurant.location;
-
-  const bothId = restaurant.id || restaurant.businessId;
 
   const handleAddFavorite = async () => {
     const restaurantData = {
