@@ -55,21 +55,21 @@ const Chat = () => {
     document.getElementById("messages").appendChild(container);
   }
 
+  const styles = {
+    name: {
+        padding: "10px",
+    },
+    message: {
+
+    }
+  }
+
   return (
     <div>
       <h1>Chati</h1>
 
-      {/* <div className="textBox">
-        <p>test</p>
-        <img
-          src="https://www.freeiconspng.com/uploads/text-box-png-27.png"
-          width="100"
-          alt="Clipart PNG Text Box"
-        />
-      </div> */}
-
       <section className="wrapper">
-        <div>
+        <div style={styles.name}>
           <input id="name"></input>
           <button onClick={connect}>Connect</button>
         </div>
@@ -86,6 +86,7 @@ const Chat = () => {
       </div>
     </div>
   );
+
 };
 
 export default Chat;
