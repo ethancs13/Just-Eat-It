@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
-import { QUERY_ME } from "../../utils/queries"
+import { QUERY_ME } from "../../utils/queries";
 
 const Chat = ({ user }) => {
-
   const [socket, setSocket] = useState(null);
 
   function connect() {
     const name = user.data.username;
-    console.log(name)
+    console.log(name);
 
     const newSocket = new WebSocket("ws://localhost:8080");
 
@@ -66,18 +65,16 @@ const Chat = ({ user }) => {
     document.getElementById("messages").appendChild(container);
   }
 
-
   const styles = {
     name: {
       padding: "10px",
     },
-    message: {
-          
-    },
+    message: {},
     wrapper: {
-      marginLeft: "50px"
-    }
-  }
+      marginLeft: "50px",
+      marginTop: "15px",
+    },
+  };
 
   return (
     <div style={styles.wrapper}>
@@ -91,7 +88,7 @@ const Chat = ({ user }) => {
             <button onClick={disconnect}>Disconnect</button>
           )}
         </div>
-        <div>style
+        <div>
           <input id="message"></input>
           <button onClick={sendMessage}>Send Message</button>
         </div>
@@ -104,7 +101,6 @@ const Chat = ({ user }) => {
       </div>
     </div>
   );
-
 };
 
 export default Chat;

@@ -47,7 +47,7 @@ const SearchComponent = () => {
       <Box
         className="searchContainer"
         p={4}
-        mt={results.length > 0 ? "0" : "10%"}
+        mt={results.length > 0 ? "0" : "15%"}
       >
         <Flex align="center" justify="center">
           <Select
