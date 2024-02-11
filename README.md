@@ -6,7 +6,7 @@
 
 ## Description
 
-Just Eat It is a MERN (MongoDB, Express.js, React, Node.js) stack application designed to simplify the process of finding a restaurant based on user and friend's food preferences. The app allows signed-up users to select their pickiest friend's food preferences, compares them with the user's preferences, and finds a restaurant by selecting a random preference match and by user input location. It's designed to save time looking for a place to eat.
+Just Eat It is a dynamic application built on the MERN (MongoDB, Express.js, React, Node.js) stack, tailored to streamline the restaurant selection process based on user and friend preferences. Designed for efficiency, the app enables registered users to specify their pickiest friend's food preferences, compares them with the user's own tastes, and locates a restaurant that aligns with both. This intuitive solution not only saves valuable time but also enhances the dining experience by combining random preference matches with user-input locations.
 
 ## Table of Contents
 
