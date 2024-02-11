@@ -8,7 +8,7 @@ const IntroText = () => (
       textAlign="center"
     >
       End the debate over where to eat! Just Eat It syncs your preferences with
-      your most pickiest friend!
+      your pickiest friend!
     </Text>
   </Box>
 );
