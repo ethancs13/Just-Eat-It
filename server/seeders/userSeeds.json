@@ -2,34 +2,15 @@
   {
     "username": "Ethan",
     "password": "123",
-    "friends": [
-      {
-        "_id": "65c1ce8249cadca25f1e1084"
-      }
-    ],
-    "favorites": [
-      {
-        "_id": "65bef12d38d23982c0672bb2"
-      }
-    ],
-    "cuisine": [
-      {
-        "_id": "65beec0a2ceaae105e10143d"
-      },
-      {
-        "_id": "65beec0a2ceaae105e10143e"
-      }
-    ]
+    "friends": [],
+    "favorites": [],
+    "cuisine": []
   },
   {
     "username": "Brian",
     "password": "123",
     "friends": [],
-    "favorites": [
-      {
-        "_id": "65bef12d38d23982c0672bb1"
-      }
-    ],
+    "favorites": [],
     "cuisine": []
   }
 ]

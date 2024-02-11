@@ -20,6 +20,7 @@ export default function User() {
     }
   }, [loggedIn, token]);
 
+
   if (!loggedIn) {
     return <NoAccess />;
   }
