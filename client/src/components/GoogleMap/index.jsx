@@ -24,11 +24,18 @@ const GoogleMap = ({ locations }) => {
         zoom: 12,
       });
 
+      const customMarkerIcon = {
+        url: "https://icons8.com/icon/12869/hamburger",
+        scaledSize: new google.maps.Size(40, 40),
+      };
+
       const newMarkers = locations.map((location) => {
         const marker = new google.maps.Marker({
           position: { lat: location.coordinates.latitude, lng: location.coordinates.longitude },
           map,
           title: location.name,
+          // TODO : custom icon based on cuisine type of restaurant.
+          // icon: customMarkerIcon, 
         });
 
         const infoWindow = new google.maps.InfoWindow({
