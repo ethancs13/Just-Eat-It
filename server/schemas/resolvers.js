@@ -4,8 +4,6 @@ const { signToken, AuthenticationError } = require("../utils/auth");
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
-      console.dir(context.user);
-
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id }).select(
           "-__v -password"
@@ -16,11 +14,20 @@ const resolvers = {
     },
 
     allUsers: async () => {
-      return await User.find({});
+      try {
+        return await User.find({});
+      } catch (error) {
+        console.error("Error fetching all users:", error);
+        throw error;
+      }
     },
 
     user: async (parent, { username }) => {
-      return await User.findOne(username);
+      const user = await User.findOne({ username });
+      if (!user) {
+        throw new Error("User not found");
+      }
+      return user;
     },
 
     allRestaurants: async () => {
@@ -72,26 +79,57 @@ const resolvers = {
 
     addFriend: async (_, { friendData }, context) => {
       if (context.user) {
-        const user = await User.findById(context.user._id);
-        const existingFriends = user.friends.map((friend) => friend._id);
-
-        console.log("friends: ", friendData);
-        const updatedFriends = friendData.filter(
-          (friend) => !existingFriends.includes(friend._id)
-        );
-
-        if (updatedFriends.length > 0) {
-          const updatedUser = await User.findByIdAndUpdate(
-            { _id: context.user._id },
-            { $push: { friends: updatedFriends } },
-            { new: true }
+        try {
+          const user = await User.findById(context.user._id);
+          const existingFriend = user.friends.find(
+            (friend) => friend._id === friendData._id
           );
-          return updatedUser;
-        } else {
-          throw new Error("Friend already exists");
+
+          if (!existingFriend) {
+            const friendExists = user.friends.some(
+              (friend) => friend.toString() === friendData._id
+            );
+
+            if (!friendExists) {
+              user.friends.push(friendData._id);
+              await user.save();
+
+              const updatedUser = await User.findById(
+                context.user._id
+              ).populate("friends", "_id username");
+              return updatedUser;
+            } else {
+              throw new Error("User is already a friend.");
+            }
+          } else {
+            return user;
+          }
+        } catch (error) {
+          throw new Error(`Failed to add friend: ${error.message}`);
         }
+      } else {
+        throw new AuthenticationError("You must be logged in to add a friend.");
       }
-      throw AuthenticationError;
+    },
+
+    removeFriend: async (parent, { friendId }, context) => {
+      if (context.user) {
+        try {
+          const updatedUser = await User.findByIdAndUpdate(
+            context.user._id,
+            { $pull: { friends: friendId } },
+            { new: true }
+          ).populate("friends");
+
+          return updatedUser;
+        } catch (error) {
+          throw new Error(`Failed to remove friend: ${error.message}`);
+        }
+      } else {
+        throw new AuthenticationError(
+          "You must be logged in to remove a friend"
+        );
+      }
     },
 
     createRestaurant: async (parent, { name, cuisineId }) => {

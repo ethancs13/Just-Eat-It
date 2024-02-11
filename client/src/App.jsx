@@ -36,13 +36,38 @@ const client = new ApolloClient({
           favorites: {
             merge(existing = [], incoming) {
               // Custom merge function for the favorite places
-              return [...existing, ...incoming];
+              const merged = [...existing];
+
+              incoming.forEach((item) => {
+                if (
+                  !existing.some(
+                    (existingItem) =>
+                      existingItem.businessId === item.businessId
+                  )
+                ) {
+                  merged.push(item);
+                }
+              });
+
+              return merged;
             },
-            friends: {
-              merge(existing = [], incoming) {
-                // Custom merge function for the friends
-                return [...existing, ...incoming];
-              },
+          },
+          friends: {
+            merge(existing = [], incoming) {
+              // Custom merge function for the friends
+              const merged = [...existing];
+
+              incoming.forEach((item) => {
+                if (
+                  !existing.some(
+                    (existingItem) => existingItem._id === item._id
+                  )
+                ) {
+                  merged.push(item);
+                }
+              });
+
+              return merged;
             },
           },
         },

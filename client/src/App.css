@@ -33,7 +33,7 @@ main {
 
 header {
   padding-left: 5vh;
-  height: 20vh;
+  height: 17.2vh;
   background: linear-gradient(
     to right,
     var(--secondaryDark-color),
@@ -78,13 +78,24 @@ p {
   color: white;
 }
 
+a,
+.yelpLink {
+  color: var(--accentLight-color);
+  text-align: center;
+  text-decoration: none;
+}
+
+a:hover {
+  color: white;
+}
+
 .glow-text {
   color: var(--accentLight-color);
   text-shadow: 0 0 5px var(--primaryLight-color);
 }
 
 .container {
-  padding-top: 2%;
+  padding: 2% 0;
   min-height: 70vh;
 }
 
@@ -160,6 +171,15 @@ p {
   background-size: cover;
 }
 
+.bgFriendsPage {
+  background-image: url("./assets/images/pexels-roman-ska-6989900.jpg");
+  height: auto;
+  width: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .bgNoAccess {
   background-image: url("./assets/images/pexels-pixabay-315191.jpg");
   height: auto;
@@ -169,8 +189,16 @@ p {
   background-size: cover;
 }
 
+.bgFavoritesPage {
+  background-image: url("./assets/images/pexels-joaquin-carfagna-18111560.jpg");
+  height: auto;
+  width: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .searchContainer {
-  margin-top: 15%;
   background-color: #060c2499;
   border-radius: 8px;
 }
@@ -221,6 +249,12 @@ p {
   border-radius: 8px;
 }
 
+.favorites-container {
+  padding: 2% 0;
+  background-color: #060c24b4;
+  border-radius: 8px;
+}
+
 .form-check-label {
   user-select: none;
   color: var(--accent-color);
@@ -249,6 +283,10 @@ p {
 
 .btn:hover {
   background-color: var(--secondaryLight-color);
+}
+
+.favoriteBtn:hover {
+  background-color: var(--secondaryDark-color);
 }
 
 .error-message {
@@ -285,6 +323,16 @@ p {
   text-align: center;
 }
 
+.restCardTitle {
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.restCardDescription {
+  font-size: 20px;
+  margin-bottom: 0.5rem;
+}
+
 @media (max-width: 1024px) {
   .pref-container {
     width: 50vw;
@@ -306,6 +354,9 @@ p {
   }
   .pref-container {
     width: 80vw;
+  }
+  .card {
+    width: fit-content;
   }
 }
 

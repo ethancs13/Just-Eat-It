@@ -1,0 +1,30 @@
+p {
+    font-weight: bold;
+}
+
+.select-friend-dashboard {
+    margin-top: 20px;
+
+    & .pref-container {
+        min-height: 75px;
+        padding: 10px;
+        box-shadow: 10px 10px 10px;
+    }
+}
+
+.modal-body {
+    background-color: white;
+}
+
+.searchContainer {
+    margin-top: 10px;
+}
+
+.friend-dashboard form {
+    width: 95%;
+}
+
+.modal-title {
+    margin: 0 auto;
+    font-weight: bold;
+}

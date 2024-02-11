@@ -12,6 +12,8 @@ const Cuisine = () => {
     userData.savedCuisines || []
   );
 
+  console.log("Data", userData);
+
   if (loading) return <p>Loading...</p>;
 
   const handleUpdateCuisines = async () => {
@@ -33,11 +35,13 @@ const Cuisine = () => {
             <></>
           }
           </ul>
+          <div className="center">
+            <CuisineUpdateModal onUpdate={handleUpdateCuisines} />
+          </div>
         </div>
+
       </div>
-      <div className="center">
-        <CuisineUpdateModal onUpdate={handleUpdateCuisines} />
-      </div>
+
     </div>
   );
 };

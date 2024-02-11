@@ -2,6 +2,7 @@ import Auth from "../utils/auth";
 import { useState, useEffect } from "react";
 import NoAccess from "../components/NoAccess";
 import Cuisine from "../components/Cuisine";
+import FriendDashboard from "../components/FriendDashboard";
 
 export default function User() {
   const token = Auth.getToken();
@@ -28,6 +29,7 @@ export default function User() {
       <div className="container">
         <h2>User Page</h2>
         <Cuisine />
+        <FriendDashboard />
       </div>
     </div>
   );

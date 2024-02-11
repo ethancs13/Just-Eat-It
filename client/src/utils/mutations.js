@@ -46,6 +46,43 @@ export const ADD_FRIEND = gql`
         _id
         username
       }
+      favorites {
+        businessId
+        name
+        rating
+        image
+        url
+        location
+      }
+      savedCuisines {
+        name
+        cuisineId
+      }
+    }
+  }
+`;
+
+export const REMOVE_FRIEND = gql`
+  mutation removeFriend($friendId: ID!) {
+    removeFriend(friendId: $friendId) {
+      _id
+      username
+      friends {
+        _id
+        username
+      }
+      favorites {
+        businessId
+        name
+        rating
+        image
+        url
+        location
+      }
+      savedCuisines {
+        name
+        cuisineId
+      }
     }
   }
 `;

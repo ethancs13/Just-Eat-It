@@ -20,9 +20,9 @@ const typeDefs = gql`
     _id: ID!
     username: String!
     password: String!
-    friends: [User]
-    favorites: [Restaurant]!
+    favorites: [Restaurant]
     savedCuisines: [Cuisine]
+    friends: [User]
     friendCount: Int
     favoriteCount: Int
   }
@@ -50,11 +50,6 @@ const typeDefs = gql`
     cuisineId: String
   }
 
-  input FriendInput {
-    _id: ID!
-    username: String!
-  }
-
   input RestaurantInput {
     businessId: String!
     name: String!
@@ -64,17 +59,16 @@ const typeDefs = gql`
     location: String
   }
 
+  input FriendInput {
+    _id: ID!
+    username: String
+  }
+
   type Mutation {
     createUser(username: String!, password: String!): Auth
-
     login(username: String!, password: String!): Auth
-
     addCuisine(cuisineData: [CuisineInput!]): User
-
     addFavorite(restaurantData: RestaurantInput!): User
-
-    addFriend(friendData: FriendInput!): User
-
     createRestaurant(
       businessId: String!
       name: String!
@@ -83,8 +77,9 @@ const typeDefs = gql`
       url: String
       location: String
     ): Restaurant
-
     removeFavorite(businessId: String!): User
+    addFriend(friendData: FriendInput!): User!
+    removeFriend(friendId: ID!): User!
   }
 `;
 
