@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER_BY_USERNAME, QUERY_ME } from "../../utils/queries";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Card } from "react-bootstrap";
+import { handleSearch } from "../../utils/API";
 
 export default function FriendModal({ friendFoods }) {
 
@@ -11,6 +12,8 @@ export default function FriendModal({ friendFoods }) {
 
   const { loading, error, data } = useQuery(QUERY_ME);
   const [showModal, setShowModal] = useState(false);
+  const [results, setResults] = useState([]);
+
 
   const myFavorites = data.me.savedCuisines.map(food => food.name);
   console.log('My Favorites:', myFavorites);
@@ -33,6 +36,11 @@ export default function FriendModal({ friendFoods }) {
         ? [...prevSelectedFriends, friendArray]
         : prevSelectedFriends.filter((f) => f.username !== username)
     );
+  };
+
+  const search = async () => {
+    const data = await handleSearch("denver", ourFavorites);
+    setResults(data.businesses);
   };
 
   const handleSubmit = async (event) => {
@@ -81,9 +89,31 @@ export default function FriendModal({ friendFoods }) {
               display: "block",
               margin: "0 auto",
             }}
+            onClick={search}
           >
             Find me something to Eat
           </Button>
+
+          <div className="row card-container">
+            {results.map((restaurant) => (
+              <Card key={restaurant.id} className="dashboard-modal-card">
+                <Card.Img variant="top" src={restaurant.image_url} alt={restaurant.name} />
+                <Card.Body>
+                  <Card.Title className="restCardTitle">{restaurant.name}</Card.Title>
+                  <Card.Text className="restCardDescription">
+                    {restaurant.rating} ⭐️
+                  </Card.Text>
+                  <Card.Text className="restCardDescription">{restaurant.address}</Card.Text>
+                  <Card.Body className="yelpLink">
+                    <a href={restaurant.url} target="_blank" rel="noopener noreferrer">
+                      View on Yelp for more details.
+                    </a>
+                  </Card.Body>
+                </Card.Body>
+              </Card>
+            ))}
+
+          </div>
 
         </Modal.Body>
       </Modal>
