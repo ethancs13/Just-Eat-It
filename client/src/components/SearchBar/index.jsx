@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_ALL_CUISINES } from "../../utils/queries";
-import { handleSearch } from "../../utils/API";
+import { handleSearch, getRandomRestaurant } from "../../utils/API";
 import SearchResults from "../SearchResults";
 import IntroText from "./IntroText";
 import {
@@ -24,6 +24,11 @@ const SearchComponent = () => {
   const search = async () => {
     const data = await handleSearch(location, cuisine);
     setResults(data.businesses);
+  };
+
+  const random = async () => {
+    const data = await getRandomRestaurant(location, cuisine);
+    setResults([data]);
   };
 
   const handleKeyDown = (event) => {
@@ -73,6 +78,9 @@ const SearchComponent = () => {
           />
           <Button colorScheme="orange" size="lg" ml={2} onClick={search}>
             Search
+          </Button>
+          <Button colorScheme="orange" size="lg" ml={2} onClick={random}>
+            Just Eat It!
           </Button>
         </Flex>
         <SearchResults results={results} />
