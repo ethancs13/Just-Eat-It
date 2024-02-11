@@ -4,16 +4,22 @@ import { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER_BY_USERNAME, QUERY_ME } from "../../utils/queries";
 import { Modal, Button } from "react-bootstrap";
-import FriendPreferences from "./FriendPreferences";
 
-export default function FriendModal() {
+export default function FriendModal({ friendFoods }) {
 
-  // console.log('Friend Prop:', friends);
-  // const [selectedFriends, setSelectedFriends] = useState(friends);
-  // console.log('Selected Friends:', selectedFriends);
-  // const mappedFriends = friends.map(friend => friend.username);
-  // console.log('Mapped Friends:', mappedFriends);
+  console.log('Imported Favorites', friendFoods);
+
+  const { loading, error, data } = useQuery(QUERY_ME);
   const [showModal, setShowModal] = useState(false);
+
+  const myFavorites = data.me.savedCuisines.map(food => food.name);
+  console.log('My Favorites:', myFavorites);
+
+  const friendFavorites = friendFoods.map(food => food.name);
+  console.log('Friend Favorites:', friendFavorites);
+
+  const ourFavorites = myFavorites.filter(food => friendFavorites.includes(food));
+  console.log('Our Favorites:', ourFavorites);
 
   const handleCheckboxChange = (event) => {
     const { username, checked } = event.target;
@@ -24,7 +30,7 @@ export default function FriendModal() {
 
     setSelectedFriends((prevSelectedFriends) =>
       checked
-        ? [...prevSelectedFriends, friendArray ]
+        ? [...prevSelectedFriends, friendArray]
         : prevSelectedFriends.filter((f) => f.username !== username)
     );
   };
@@ -50,51 +56,38 @@ export default function FriendModal() {
     <div>
       {/* Button to open modal */}
       <Button variant="primary" onClick={() => setShowModal(true)}>
-       Let's Find a Restaurant!
+        Let's Find a Restaurant!
       </Button>
-  {/* Modal for preferences form
-  <Modal show={showModal} onHide={() => setShowModal(false)}>
+
+      {/* Modal for preferences form */}
+
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Select your Friends:</Modal.Title>
+          <Modal.Title className="modal-title">Let's Find a Place to Eat</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ background: "#060c24" }}>
-          <form onSubmit={handleSubmit}>
-            {selectedFriends.map((friend) => (
-              <div key={friend.username}>
-                <input
-                  type="checkbox"
-                  id={friend.username}
-                  value={friend.username}
-                  onChange={handleCheckboxChange}
-                  checked={selectedFriends.some(
-                    (f) => f.username === friend.username
-                  )}
-                  style={{ marginRight: "15px", marginBottom: "10px", height: "18px", width: "18px" }}
-                />
-                <label
-                  style={{ fontSize: "24px", color: "#f02b61" }}
-                  htmlFor={friend.username}
-                >
-                  {friend[0].username}
-                </label>
-              </div>
+          <p>You both enjoy:</p>
+          <ul>
+            {ourFavorites.map(cuisine => (
+              <li key={cuisine}>{cuisine}</li>
             ))}
-            <Button
-              variant="primary"
-              type="submit"
-              style={{
-                backgroundColor: "#fe9553",
-                color: "white",
-                display: "block",
-                margin: "0 auto",
-              }}
-            >
-              Save
-            </Button>
-          </form>
+          </ul>
+          <Button
+            variant="primary"
+            type="submit"
+            style={{
+              backgroundColor: "#fe9553",
+              color: "white",
+              display: "block",
+              margin: "0 auto",
+            }}
+          >
+            Find me something to Eat
+          </Button>
+
         </Modal.Body>
-      </Modal> */}
-    
+      </Modal>
+
 
     </div>
   );

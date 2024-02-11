@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLazyQuery } from "@apollo/client";
 import { QUERY_USER_BY_USERNAME } from "../../utils/queries";
+import FriendModal from "./FriendModal";
 
 import {
     Box,
@@ -14,6 +15,7 @@ import {
 const FriendSearch = () => {
 
     const [searchFriend, setSearchFriend] = useState({ friendName: "" });
+    const [friendFavorites, setFriendFavorites] = useState([]);
     const [getUser, { loading, error, data }] = useLazyQuery(QUERY_USER_BY_USERNAME);
 
     const handleChange = (e) => {
@@ -28,16 +30,31 @@ const FriendSearch = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        getUser({ variables: { username: searchFriend.friendName } })
-        setSearchFriend({ friendName: "" })
+        try {
+            setFriendFavorites([]);
+            await getUser({ variables: { username: searchFriend.friendName } });
+            setFriendFavorites(data.user.savedCuisines);
+            const friendFoods = data.user.savedCuisines;
+            setSearchFriend({ friendName: "" });
+            console.log('Friend Foods:', friendFoods);
+            return friendFoods;
+
+        } catch (err) {
+
+            console.error('Error querying user data:', error);
+        }
+
     };
+
+
+
 
     return (
         <ChakraProvider>
             <Box className="searchContainer friend-dashboard" p={4}>
                 <Flex align="center" justify="center">
                     <form onSubmit={(handleSubmit)}>
-                    <Flex align="center" justify="center">
+                        <Flex align="center" justify="center">
                             <Input
                                 placeholder="Search for a friend"
                                 flex={2}
@@ -49,11 +66,11 @@ const FriendSearch = () => {
                                 name="friendName"
                                 value={searchFriend.friendName}
                             />
-                      
 
-                        <Button type="submit" colorScheme="orange" size="lg" ml={2} >
-                            Find Friend
-                        </Button>
+
+                            <Button type="submit" colorScheme="orange" size="lg" ml={2} >
+                                Find Friend
+                            </Button>
                         </Flex>
                     </form>
                 </Flex>
@@ -68,7 +85,16 @@ const FriendSearch = () => {
                 </ul>
 
             </div>
+
+            <div className="center">
+                {friendFavorites && friendFavorites.length > 0 && (
+                    <FriendModal friendFoods={friendFavorites} />
+                )}
+             
+            </div>
+
         </ChakraProvider>
+
 
     )
 }

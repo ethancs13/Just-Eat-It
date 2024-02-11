@@ -32,11 +32,13 @@ const Cuisine = () => {
               <li key={cuisine.cuisineId}>{cuisine.name}</li>
             ))}
           </ul>
+          <div className="center">
+            <CuisineUpdateModal onUpdate={handleUpdateCuisines} />
+          </div>
         </div>
+
       </div>
-      <div className="center">
-        <CuisineUpdateModal onUpdate={handleUpdateCuisines} />
-      </div>
+
     </div>
   );
 };
