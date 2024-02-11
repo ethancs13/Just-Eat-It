@@ -36,9 +36,7 @@ const Cuisine = () => {
             <CuisineUpdateModal onUpdate={handleUpdateCuisines} />
           </div>
         </div>
-
       </div>
-
     </div>
   );
 };

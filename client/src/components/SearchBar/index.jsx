@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client";
 import { QUERY_ALL_CUISINES } from "../../utils/queries";
 import { handleSearch, getRandomRestaurant } from "../../utils/API";
 import SearchResults from "../SearchResults";
+import GoogleMap from "../GoogleMap";
 import IntroText from "./IntroText";
 import {
   Box,
@@ -83,6 +84,7 @@ const SearchComponent = () => {
             Just Eat It!
           </Button>
         </Flex>
+        <GoogleMap locations={results}/>
         <SearchResults results={results} />
       </Box>
     </ChakraProvider>
