@@ -8,8 +8,11 @@ import { Box, Input, Button, ChakraProvider, Flex } from "@chakra-ui/react";
 const FriendSearch = () => {
   const [searchFriend, setSearchFriend] = useState({ friendName: "" });
   const [friendFavorites, setFriendFavorites] = useState([]);
+  const [noUserFound, setNoUserFound] = useState("");
   const [getUser, { loading, error, data }] = useLazyQuery(
-    QUERY_USER_BY_USERNAME
+    QUERY_USER_BY_USERNAME, {
+        onError: (error) => setNoUserSearch("Username not found."),
+    }
   );
 
   const handleChange = (e) => {
@@ -27,6 +30,14 @@ const FriendSearch = () => {
     try {
       setFriendFavorites([]);
       await getUser({ variables: { username: searchFriend.friendName } });
+
+      if (!data || !data.user) {
+        setNoUserFound('User not found.  Please try searching for another user.');
+
+        setTimeout(() => {
+            setNoUserFound("");
+        }, 3000);
+      }
 
       setSearchFriend({ friendName: "" });
       console.log("Friend Foods:", data?.user.savedCuisines);
@@ -68,6 +79,7 @@ const FriendSearch = () => {
       </Box>
 
       <div>
+        {noUserFound && <h3>{noUserFound}</h3>}
         <p>{data?.user.username} likes:</p>
         <ul>
           {data?.user.savedCuisines.map((cuisine) => (
