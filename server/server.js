@@ -109,6 +109,12 @@ const startApolloServer = async () => {
     }
   });
 
+  app.get("/api/key", async (req, res) => {
+    const key = await process.env.GOOGLE_PLACES_API;
+    console.log("retrieving key", key)
+    res.json({key})
+  })
+
 
   if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "../client/dist")));
