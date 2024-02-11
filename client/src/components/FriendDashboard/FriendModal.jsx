@@ -7,22 +7,23 @@ import { Modal, Button, Card } from "react-bootstrap";
 import { handleSearch } from "../../utils/API";
 
 export default function FriendModal({ friendFoods }) {
-
-  console.log('Imported Favorites', friendFoods);
+  console.log("Imported Favorites", friendFoods);
 
   const { loading, error, data } = useQuery(QUERY_ME);
   const [showModal, setShowModal] = useState(false);
   const [results, setResults] = useState([]);
 
 
-  const myFavorites = data.me.savedCuisines.map(food => food.name);
-  console.log('My Favorites:', myFavorites);
+  const myFavorites = data.me.savedCuisines.map((food) => food.name);
+  console.log("My Favorites:", myFavorites);
 
-  const friendFavorites = friendFoods.map(food => food.name);
-  console.log('Friend Favorites:', friendFavorites);
+  const friendFavorites = friendFoods.map((food) => food.name);
+  console.log("Friend Favorites:", friendFavorites);
 
-  const ourFavorites = myFavorites.filter(food => friendFavorites.includes(food));
-  console.log('Our Favorites:', ourFavorites);
+  const ourFavorites = myFavorites.filter((food) =>
+    friendFavorites.includes(food)
+  );
+  console.log("Our Favorites:", ourFavorites);
 
   const handleCheckboxChange = (event) => {
     const { username, checked } = event.target;
@@ -59,7 +60,6 @@ export default function FriendModal({ friendFoods }) {
     setSelectedFriends([]);
   };
 
-
   return (
     <div>
       {/* Button to open modal */}
@@ -71,12 +71,14 @@ export default function FriendModal({ friendFoods }) {
 
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title className="modal-title">Let's Find a Place to Eat</Modal.Title>
+          <Modal.Title className="modal-title">
+            Let's Find a Place to Eat
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ background: "#060c24" }}>
           <p>You both enjoy:</p>
           <ul>
-            {ourFavorites.map(cuisine => (
+            {ourFavorites.map((cuisine) => (
               <li key={cuisine}>{cuisine}</li>
             ))}
           </ul>
@@ -117,8 +119,6 @@ export default function FriendModal({ friendFoods }) {
 
         </Modal.Body>
       </Modal>
-
-
     </div>
   );
 }

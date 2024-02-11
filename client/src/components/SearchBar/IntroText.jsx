@@ -2,10 +2,17 @@ import { Box, Text } from "@chakra-ui/react";
 
 const IntroText = () => (
   <Box bg="#060c2499" p={4} mb={4} borderRadius="md">
-    <Text fontSize="2xl" color="orange" textAlign="center">
-      Can't decide what to eat? Here you can search for restaurants by cuisine
-      and city/location! Sign up to add favorites and see what your friends are
-      eating.
+    <Text
+      fontSize={["sm", "md", "lg", "2xl"]}
+      color="orange"
+      textAlign="center"
+    >
+      Welcome to Just Eat It, your solution to the eternal dilemma of 'Where
+      should we eat?' Here you can explore restaurants based on cuisine and
+      location. Still feeling indecisive? Utilize the 'Just Eat It!' button for
+      a spontaneous choice. Make sure to choose a city or location, food
+      preferences are optional. Sign up to curate your favorites and discover
+      what's trending among your friends!
     </Text>
   </Box>
 );

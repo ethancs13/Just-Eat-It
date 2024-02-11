@@ -1,46 +1,19 @@
-import { useState } from "react";
-import { useMutation } from "@apollo/client";
-import { ADD_FAVORITE, REMOVE_FAVORITE } from "../../utils/mutations";
-
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 import auth from "../../utils/auth.js";
 
+import FavoriteButton from "./FavoriteButton.jsx";
+import RemoveFavoriteButton from "./RemoveFavoriteButton.jsx";
+
 const RestaurantCard = ({ restaurant, favoritePage, onUpdate }) => {
-  const [addFavorite] = useMutation(ADD_FAVORITE);
-  const [removeFavorite] = useMutation(REMOVE_FAVORITE);
+  if (!restaurant) {
+    return null;
+  }
 
-  const [isFavorited, setIsFavorited] = useState(false);
-
-  const bothId = restaurant.id || restaurant.businessId;
   const imageUrl = restaurant.image || restaurant.image_url;
   const address =
     typeof restaurant.location === "object"
       ? restaurant.location.address1
       : restaurant.location;
-
-  const handleAddFavorite = async () => {
-    const restaurantData = {
-      businessId: bothId,
-      name: restaurant.name,
-      rating: restaurant.rating,
-      image: imageUrl,
-      url: restaurant.url,
-      location: address,
-    };
-
-    console.log(restaurantData);
-    console.log(restaurant);
-
-    await addFavorite({ variables: { restaurantData: restaurantData } });
-    setIsFavorited(true);
-  };
-
-  const handleRemoveFavorite = async () => {
-    await removeFavorite({ variables: { businessId: bothId } });
-    setIsFavorited(false);
-    onUpdate();
-  };
 
   return (
     <Card>
@@ -52,19 +25,11 @@ const RestaurantCard = ({ restaurant, favoritePage, onUpdate }) => {
         </Card.Text>
         <Card.Text className="restCardDescription">{address}</Card.Text>
       </Card.Body>
-      {auth.loggedIn() && (
-        <>
-          {!favoritePage && (
-            <Button className="favoriteBtn" onClick={handleAddFavorite}>
-              {isFavorited ? "Added to Favorites!" : "Favorite"}
-            </Button>
-          )}
-          {favoritePage && (
-            <Button className="favoriteBtn" onClick={handleRemoveFavorite}>
-              Remove Favorite
-            </Button>
-          )}
-        </>
+      {auth.loggedIn() && !favoritePage && (
+        <FavoriteButton restaurant={restaurant} />
+      )}
+      {auth.loggedIn() && favoritePage && (
+        <RemoveFavoriteButton restaurant={restaurant} onUpdate={onUpdate} />
       )}
       <Card.Body className="yelpLink">
         <a href={restaurant.url} target="_blank" rel="noopener noreferrer">
