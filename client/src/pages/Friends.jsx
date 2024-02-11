@@ -27,8 +27,10 @@ export default function Friends() {
   const styles = {
     card: {
       display: "flex",
-      justifyContent: "center",
+      justifyContent: "space-around",
       textAlign: "center",
+      flexDirection: "row",
+      padding: "20px",
     },
   };
   return (

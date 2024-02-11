@@ -8,6 +8,7 @@ import { BsX } from "react-icons/bs";
 
 const FriendsSection = () => {
   const { loading, error, data, refetch } = useQuery(QUERY_ME);
+  console.log(loading, error, data)
   const [removeFriend] = useMutation(REMOVE_FRIEND);
 
   const [friends, setFriends] = useState([]);
