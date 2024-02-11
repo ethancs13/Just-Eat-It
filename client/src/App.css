@@ -333,6 +333,10 @@ a:hover {
   margin-bottom: 0.5rem;
 }
 
+.intro-text {
+  margin-bottom: 0px;
+}
+
 /* map stuff */
 .map-container {
   padding: 15px 0px;
@@ -353,6 +357,11 @@ a:hover {
 @media (max-width: 1024px) {
   .pref-container {
     width: 50vw;
+  }
+
+  .friends-container {
+    flex-direction: column;
+    align-items: center;
   }
 }
 

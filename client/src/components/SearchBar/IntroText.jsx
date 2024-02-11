@@ -6,6 +6,7 @@ const IntroText = () => (
       fontSize={["sm", "md", "lg", "2xl"]}
       color="orange"
       textAlign="center"
+      className="intro-text"
     >
       End the debate over where to eat! Just Eat It syncs your preferences with
       your pickiest friend!
