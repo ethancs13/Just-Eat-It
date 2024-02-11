@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import FriendsSection from "../components/Friends";
-import Chat from "../components/Chat"
+import Chat from "../components/Chat";
 import Auth from "../utils/auth";
 import NoAccess from "../components/NoAccess";
 
@@ -35,7 +35,7 @@ export default function Friends() {
   };
   return (
     <div className="bgFriendsPage">
-      <div className="container" style={styles.card}>
+      <div className="container friends-container" style={styles.card}>
         <FriendsSection />
         <Chat user={user} />
       </div>
