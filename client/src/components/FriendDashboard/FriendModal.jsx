@@ -20,10 +20,9 @@ export default function FriendModal({ friendFoods }) {
   );
 
   const search = async () => {
-    // setSharedFavorites(ourFavorites);
-    console.log('Searching...')
     console.log('Shared Favorites:', sharedFavorites);
-    let foodData = await handleSearch("denver", ourFavorites[0]);
+    const randomFood = Math.floor(Math.random() * ourFavorites.length);
+    let foodData = await handleSearch("denver", ourFavorites[randomFood]);
     setResults(foodData.businesses);
   };
 
