@@ -5,16 +5,29 @@ import FriendModal from "./FriendModal";
 
 import { Box, Input, Button, ChakraProvider, Flex } from "@chakra-ui/react";
 
+const useMessageTimeout = (message, setMessage) => {
+    useEffect(() => {
+      if (message) {
+        const timeout = setTimeout(() => {
+          setMessage("");
+        }, 3000);
+        return () => clearTimeout(timeout);
+      }
+    }, [message, setMessage]);
+  };
+
 const FriendSearch = () => {
   const [searchFriend, setSearchFriend] = useState({ friendName: "" });
   const [friendFavorites, setFriendFavorites] = useState([]);
-  const [getUser, { loading, error, data }] = useLazyQuery(
-    QUERY_USER_BY_USERNAME
-  );
+  const [noUserFound, setNoUserFound] = useState(null);
+  const [getUser, { loading, error, data }] = useLazyQuery(QUERY_USER_BY_USERNAME, {
+    onError: (error) => setNoUserFound('User not found.  Please try searching for another user.'),
+  });
+
+  useMessageTimeout(noUserFound, setNoUserFound);
 
   const handleChange = (e) => {
     const newValue = e.target.value;
-    console.log("New Value:", newValue);
 
     setSearchFriend((currData) => {
       currData.friendName = newValue;
@@ -25,11 +38,11 @@ const FriendSearch = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setFriendFavorites([]);
+
       await getUser({ variables: { username: searchFriend.friendName } });
 
       setSearchFriend({ friendName: "" });
-      console.log("Friend Foods:", data?.user.savedCuisines);
+      
     } catch (err) {
       console.error("Error querying user data:", err);
     }
@@ -38,6 +51,7 @@ const FriendSearch = () => {
   useEffect(() => {
     if (data) {
       setFriendFavorites(data.user.savedCuisines || []);
+      console.log('Friend Favorites:', friendFavorites);
     }
   }, [data]);
 
@@ -68,6 +82,7 @@ const FriendSearch = () => {
       </Box>
 
       <div>
+        {noUserFound && <p className="no-user">{noUserFound}</p>}
         <p>{data?.user.username} likes:</p>
         <ul>
           {data?.user.savedCuisines.map((cuisine) => (
