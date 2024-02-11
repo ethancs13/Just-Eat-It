@@ -1,3 +1,4 @@
+import GoogleMap from "../components/GoogleMap"; // Import GoogleMap component
 import HomeSearchBar from "../components/SearchBar";
 
 export default function Home() {
@@ -5,6 +6,7 @@ export default function Home() {
     <div className="bg">
       <div className="container">
         <HomeSearchBar />
+        <GoogleMap />
       </div>
     </div>
   );

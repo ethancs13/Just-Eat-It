@@ -8,6 +8,8 @@ export default function Friends() {
   const token = Auth.getToken();
   const [loggedIn, setLoggedIn] = useState(Auth.loggedIn());
 
+  const user = Auth.getUser();
+
   useEffect(() => {
     if (!loggedIn && token) {
       setLoggedIn(true);
@@ -35,7 +37,7 @@ export default function Friends() {
     <div className="bgFriendsPage">
       <div className="container" style={styles.card}>
         <FriendsSection />
-        <Chat />
+        <Chat user={user} />
       </div>
     </div>
   );
