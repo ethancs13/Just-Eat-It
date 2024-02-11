@@ -1,6 +1,4 @@
-// Friends MODAL!!!!!!
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER_BY_USERNAME, QUERY_ME } from "../../utils/queries";
 import { Modal, Button, Card } from "react-bootstrap";
@@ -11,18 +9,30 @@ export default function FriendModal({ friendFoods }) {
   const { loading, error, data } = useQuery(QUERY_ME);
   const [showModal, setShowModal] = useState(false);
   const [results, setResults] = useState([]);
+  const [location, setLocation] = useState('');
+  const [sharedFavorites, setSharedFavorites] = useState([])
 
-  const myFavorites = data.me.savedCuisines.map((food) => food.name);
-  const friendFavorites = friendFoods.map((food) => food.name);
- 
-  const ourFavorites = myFavorites.filter((food) =>
+  let myFavorites = data.me.savedCuisines.map((food) => food.name);
+  let friendFavorites = friendFoods.map((food) => food.name);
+
+  let ourFavorites = myFavorites.filter((food) =>
     friendFavorites.includes(food)
   );
 
   const search = async () => {
-    const data = await handleSearch("denver", ourFavorites);
-    setResults(data.businesses);
+    // setSharedFavorites(ourFavorites);
+    console.log('Searching...')
+    console.log('Shared Favorites:', sharedFavorites);
+    let foodData = await handleSearch("denver", ourFavorites[0]);
+    setResults(foodData.businesses);
   };
+
+  const handleHide = () => {
+    setShowModal(false);
+    setResults([]);
+    setSharedFavorites([]);
+    console.log('Hidden sharedFavorites:', sharedFavorites)
+  }
 
   return (
     <div>
@@ -32,7 +42,7 @@ export default function FriendModal({ friendFoods }) {
       </Button>
 
       {/* Modal for preferences form */}
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
+      <Modal show={showModal} onHide={handleHide}>
         <Modal.Header closeButton>
           <Modal.Title className="modal-title">
             Let's Find a Place to Eat
@@ -45,6 +55,8 @@ export default function FriendModal({ friendFoods }) {
               <li key={cuisine}>{cuisine}</li>
             ))}
           </ul>
+
+
           <Button
             variant="primary"
             type="submit"
@@ -60,7 +72,7 @@ export default function FriendModal({ friendFoods }) {
           </Button>
 
           <div className="row card-container">
-            {results.map((restaurant) => (
+            {results?.map((restaurant) => (
               <Card key={restaurant.id} className="dashboard-modal-card">
                 <Card.Img variant="top" src={restaurant.image_url} alt={restaurant.name} />
                 <Card.Body>

@@ -51,7 +51,6 @@ const FriendSearch = () => {
         }
       }, [data]);
 
-
     return (
         <ChakraProvider>
             <Box className="searchContainer friend-dashboard" p={4}>

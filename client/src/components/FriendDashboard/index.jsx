@@ -1,5 +1,3 @@
-// FRIEND MODAL!!!!!
-
 import { useState } from "react";
 import FriendModal from "./FriendModal";
 import { useQuery } from "@apollo/client";
@@ -11,9 +9,9 @@ import FriendSearch from "./FriendSearch";
 const FriendDashboard = () => {
 
   const { loading, data, error } = useQuery(QUERY_ME);
+  console.log('My Favorite foods:', data?.me.savedCuisines);
 
   const userData = data?.me || {};
-  console.log('User Data:', userData);
 
   return (
     <div className="select-friend-dashboard">
