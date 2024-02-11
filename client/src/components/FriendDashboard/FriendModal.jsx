@@ -1,56 +1,37 @@
-// Friends MODAL!!!!!!
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER_BY_USERNAME, QUERY_ME } from "../../utils/queries";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Card } from "react-bootstrap";
+import { handleSearch } from "../../utils/API";
 
 export default function FriendModal({ friendFoods }) {
-  console.log("Imported Favorites", friendFoods);
 
   const { loading, error, data } = useQuery(QUERY_ME);
   const [showModal, setShowModal] = useState(false);
+  const [results, setResults] = useState([]);
+  const [location, setLocation] = useState('');
+  const [sharedFavorites, setSharedFavorites] = useState([])
 
-  const myFavorites = data.me.savedCuisines.map((food) => food.name);
-  console.log("My Favorites:", myFavorites);
+  let myFavorites = data.me.savedCuisines.map((food) => food.name);
+  let friendFavorites = friendFoods.map((food) => food.name);
 
-  const friendFavorites = friendFoods.map((food) => food.name);
-  console.log("Friend Favorites:", friendFavorites);
-
-  const ourFavorites = myFavorites.filter((food) =>
+  let ourFavorites = myFavorites.filter((food) =>
     friendFavorites.includes(food)
   );
-  console.log("Our Favorites:", ourFavorites);
 
-  const handleCheckboxChange = (event) => {
-    const { username, checked } = event.target;
-    const friendArray = {
-      name: event.target.value,
-      username: username,
-    };
-
-    setSelectedFriends((prevSelectedFriends) =>
-      checked
-        ? [...prevSelectedFriends, friendArray]
-        : prevSelectedFriends.filter((f) => f.username !== username)
-    );
+  const search = async () => {
+    console.log('Shared Favorites:', sharedFavorites);
+    const randomFood = Math.floor(Math.random() * ourFavorites.length);
+    let foodData = await handleSearch("denver", ourFavorites[randomFood]);
+    setResults(foodData.businesses);
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    // try {
-    //   const { data } = await addCuisine({
-    //     variables: { cuisineData: selectedCuisines },
-    //   });
-    //   console.log("Saved cuisines:", data);
-    //   setShowModal(false);
-    // } catch (error) {
-    //   console.log(`Error saving food preferences: ${error.message}`);
-    // }
-
-    setSelectedFriends([]);
-  };
+  const handleHide = () => {
+    setShowModal(false);
+    setResults([]);
+    setSharedFavorites([]);
+    console.log('Hidden sharedFavorites:', sharedFavorites)
+  }
 
   return (
     <div>
@@ -60,8 +41,7 @@ export default function FriendModal({ friendFoods }) {
       </Button>
 
       {/* Modal for preferences form */}
-
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
+      <Modal show={showModal} onHide={handleHide}>
         <Modal.Header closeButton>
           <Modal.Title className="modal-title">
             Let's Find a Place to Eat
@@ -74,6 +54,8 @@ export default function FriendModal({ friendFoods }) {
               <li key={cuisine}>{cuisine}</li>
             ))}
           </ul>
+
+
           <Button
             variant="primary"
             type="submit"
@@ -83,9 +65,32 @@ export default function FriendModal({ friendFoods }) {
               display: "block",
               margin: "0 auto",
             }}
+            onClick={search}
           >
             Find me something to Eat
           </Button>
+
+          <div className="row card-container">
+            {results?.map((restaurant) => (
+              <Card key={restaurant.id} className="dashboard-modal-card">
+                <Card.Img variant="top" src={restaurant.image_url} alt={restaurant.name} />
+                <Card.Body>
+                  <Card.Title className="restCardTitle">{restaurant.name}</Card.Title>
+                  <Card.Text className="restCardDescription">
+                    {restaurant.rating} ⭐️
+                  </Card.Text>
+                  <Card.Text className="restCardDescription">{restaurant.address}</Card.Text>
+                  <Card.Body className="yelpLink">
+                    <a href={restaurant.url} target="_blank" rel="noopener noreferrer">
+                      View on Yelp for more details.
+                    </a>
+                  </Card.Body>
+                </Card.Body>
+              </Card>
+            ))}
+
+          </div>
+
         </Modal.Body>
       </Modal>
     </div>

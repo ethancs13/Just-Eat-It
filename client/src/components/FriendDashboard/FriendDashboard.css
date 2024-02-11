@@ -21,10 +21,14 @@ p {
 }
 
 .friend-dashboard form {
-    width: 95%;
+    width: 100%;
 }
 
 .modal-title {
     margin: 0 auto;
     font-weight: bold;
+}
+
+.dashboard-modal-card {
+    color: white;
 }

@@ -81,6 +81,8 @@ const startApolloServer = async () => {
 
   app.get("/", async (req, res) => {
     const { location, cuisine } = req.query;
+    console.log('Location requested:', location);
+    console.log('Cuisine requested', cuisine);
 
     try {
       const response = await axios.get(
