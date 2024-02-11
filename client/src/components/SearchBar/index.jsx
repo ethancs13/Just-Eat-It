@@ -18,6 +18,7 @@ const SearchComponent = () => {
   const [location, setLocation] = useState("");
   const [cuisine, setCuisine] = useState("");
   const [results, setResults] = useState([]);
+  const [showMap, setShowMap] = useState(false);
 
   // Fetch all cuisines
   const { data } = useQuery(QUERY_ALL_CUISINES);
@@ -25,11 +26,13 @@ const SearchComponent = () => {
   const search = async () => {
     const data = await handleSearch(location, cuisine);
     setResults(data.businesses);
+    setShowMap(true);
   };
 
   const random = async () => {
     const data = await getRandomRestaurant(location, cuisine);
     setResults([data]);
+    setShowMap(true);
   };
 
   const handleKeyDown = (event) => {
@@ -84,7 +87,7 @@ const SearchComponent = () => {
             Just Eat It!
           </Button>
         </Flex>
-        <GoogleMap locations={results}/>
+        <GoogleMap locations={results} showMap={showMap} />
         <SearchResults results={results} />
       </Box>
     </ChakraProvider>
