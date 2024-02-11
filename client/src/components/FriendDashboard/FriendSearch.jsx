@@ -21,7 +21,6 @@ const FriendSearch = () => {
   const [friendFavorites, setFriendFavorites] = useState([]);
   const [noUserFound, setNoUserFound] = useState(null);
   const [getUser, { loading, error, data }] = useLazyQuery(QUERY_USER_BY_USERNAME, {
-    onCompleted: (result) => setFriendFavorites(result),
     onError: (error) => setNoUserFound('User not found.  Please try searching for another user.'),
   });
 
