@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLazyQuery } from "@apollo/client";
 import { QUERY_USER_BY_USERNAME } from "../../utils/queries";
 import FriendModal from "./FriendModal";
@@ -33,11 +33,11 @@ const FriendSearch = () => {
         try {
             setFriendFavorites([]);
             await getUser({ variables: { username: searchFriend.friendName } });
-            setFriendFavorites(data.user.savedCuisines);
-            const friendFoods = data.user.savedCuisines;
+            
+            // const friendFoods = data.user.savedCuisines;
             setSearchFriend({ friendName: "" });
+            // setFriendFavorites(data.user.savedCuisines);
             console.log('Friend Foods:', friendFoods);
-            return friendFoods;
 
         } catch (err) {
 
@@ -46,7 +46,11 @@ const FriendSearch = () => {
 
     };
 
-
+    useEffect(() => {
+        if (data) {
+          setFriendFavorites(data.user.savedCuisines || []);
+        }
+      }, [data]);
 
 
     return (

@@ -13,7 +13,6 @@ export default function FriendModal({ friendFoods }) {
   const [showModal, setShowModal] = useState(false);
   const [results, setResults] = useState([]);
 
-
   const myFavorites = data.me.savedCuisines.map((food) => food.name);
   console.log("My Favorites:", myFavorites);
 
@@ -25,20 +24,6 @@ export default function FriendModal({ friendFoods }) {
   );
   console.log("Our Favorites:", ourFavorites);
 
-  const handleCheckboxChange = (event) => {
-    const { username, checked } = event.target;
-    const friendArray = {
-      name: event.target.value,
-      username: username,
-    };
-
-    setSelectedFriends((prevSelectedFriends) =>
-      checked
-        ? [...prevSelectedFriends, friendArray]
-        : prevSelectedFriends.filter((f) => f.username !== username)
-    );
-  };
-
   const search = async () => {
     const data = await handleSearch("denver", ourFavorites);
     setResults(data.businesses);
@@ -46,18 +31,6 @@ export default function FriendModal({ friendFoods }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // try {
-    //   const { data } = await addCuisine({
-    //     variables: { cuisineData: selectedCuisines },
-    //   });
-    //   console.log("Saved cuisines:", data);
-    //   setShowModal(false);
-    // } catch (error) {
-    //   console.log(`Error saving food preferences: ${error.message}`);
-    // }
-
-    setSelectedFriends([]);
   };
 
   return (
