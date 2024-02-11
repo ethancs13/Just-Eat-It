@@ -38,7 +38,7 @@ const FriendSearch = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-    //   setFriendFavorites([]);
+
       await getUser({ variables: { username: searchFriend.friendName } });
 
       setSearchFriend({ friendName: "" });
