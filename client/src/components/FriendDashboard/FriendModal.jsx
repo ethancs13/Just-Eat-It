@@ -7,30 +7,21 @@ import { Modal, Button, Card } from "react-bootstrap";
 import { handleSearch } from "../../utils/API";
 
 export default function FriendModal({ friendFoods }) {
-  console.log("Imported Favorites", friendFoods);
 
   const { loading, error, data } = useQuery(QUERY_ME);
   const [showModal, setShowModal] = useState(false);
   const [results, setResults] = useState([]);
 
   const myFavorites = data.me.savedCuisines.map((food) => food.name);
-  console.log("My Favorites:", myFavorites);
-
   const friendFavorites = friendFoods.map((food) => food.name);
-  console.log("Friend Favorites:", friendFavorites);
-
+ 
   const ourFavorites = myFavorites.filter((food) =>
     friendFavorites.includes(food)
   );
-  console.log("Our Favorites:", ourFavorites);
 
   const search = async () => {
     const data = await handleSearch("denver", ourFavorites);
     setResults(data.businesses);
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
   };
 
   return (
@@ -41,7 +32,6 @@ export default function FriendModal({ friendFoods }) {
       </Button>
 
       {/* Modal for preferences form */}
-
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title className="modal-title">

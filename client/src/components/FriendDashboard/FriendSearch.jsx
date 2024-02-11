@@ -6,7 +6,6 @@ import FriendModal from "./FriendModal";
 import {
     Box,
     Input,
-    FormControl,
     Button,
     ChakraProvider,
     Flex,
@@ -94,12 +93,9 @@ const FriendSearch = () => {
                 {friendFavorites && friendFavorites.length > 0 && (
                     <FriendModal friendFoods={friendFavorites} />
                 )}
-             
             </div>
 
         </ChakraProvider>
-
-
     )
 }
 
