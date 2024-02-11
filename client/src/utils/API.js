@@ -25,13 +25,14 @@ export const getRandomRestaurant = async (location, cuisine) => {
       },
     });
 
-    if (response.data && response.data.length > 0) {
-      const index = Math.floor(Math.random() * response.data.length);
-      const randomRestaurant = response.data[index];
-      console.log(randomRestaurant);
+    console.log(response.data);
+
+    if (response.data && response.data.businesses.length > 0) {
+      const index = Math.floor(Math.random() * response.data.businesses.length);
+      const randomRestaurant = response.data.businesses[index];
       return randomRestaurant;
     } else {
-      console.error(error);
+      console.error("Error receiving data from server.");
     }
   } catch (error) {
     console.error(error);

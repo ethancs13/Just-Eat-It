@@ -5,6 +5,10 @@ import FavoriteButton from "./FavoriteButton.jsx";
 import RemoveFavoriteButton from "./RemoveFavoriteButton.jsx";
 
 const RestaurantCard = ({ restaurant, favoritePage, onUpdate }) => {
+  if (!restaurant) {
+    return null;
+  }
+
   const imageUrl = restaurant.image || restaurant.image_url;
   const address =
     typeof restaurant.location === "object"
