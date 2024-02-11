@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 import { recenterMap } from "../../utils/centerMap";
 
-const GoogleMap = ({ locations }) => {
+const GoogleMap = ({ locations, showMap }) => {
   const [markers, setMarkers] = useState([]);
   const [infoWindows, setInfoWindows] = useState([]);
 
   useEffect(() => {
-    if (!locations || locations.length === 0) {
+    if (!showMap || !locations || locations.length === 0) {
       return;
     }
 
     const loader = new Loader({
-      apiKey: 'AIzaSyC1jbQOJoSOWU-vTp1-JV-ugTHcK6i99WI',
+      apiKey: "AIzaSyC1jbQOJoSOWU-vTp1-JV-ugTHcK6i99WI",
       version: "weekly",
     });
 
@@ -31,11 +31,14 @@ const GoogleMap = ({ locations }) => {
 
       const newMarkers = locations.map((location) => {
         const marker = new google.maps.Marker({
-          position: { lat: location.coordinates.latitude, lng: location.coordinates.longitude },
+          position: {
+            lat: location.coordinates.latitude,
+            lng: location.coordinates.longitude,
+          },
           map,
           title: location.name,
           // TODO : custom icon based on cuisine type of restaurant.
-          // icon: customMarkerIcon, 
+          // icon: customMarkerIcon,
         });
 
         const infoWindow = new google.maps.InfoWindow({
@@ -51,8 +54,8 @@ const GoogleMap = ({ locations }) => {
         });
 
         marker.addListener("click", () => {
-            window.open(location.url, "_blank") //to open new page
-        })
+          window.open(location.url, "_blank"); //to open new page
+        });
 
         return marker;
       });
@@ -60,11 +63,15 @@ const GoogleMap = ({ locations }) => {
       setMarkers(newMarkers);
       recenterMap(map, newMarkers);
     });
-  }, [locations]);
+  }, [locations, showMap]);
 
   return (
     <div>
-      <div id="map" style={{ height: "400px" }}></div>
+      {showMap && (
+        <div className="map-container">
+          <div id="map" style={{ height: "400px", width: "95%" }}></div>
+        </div>
+      )}
     </div>
   );
 };

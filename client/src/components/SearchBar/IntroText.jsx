@@ -7,12 +7,8 @@ const IntroText = () => (
       color="orange"
       textAlign="center"
     >
-      Welcome to Just Eat It, your solution to the eternal dilemma of 'Where
-      should we eat?' Here you can explore restaurants based on cuisine and
-      location. Still feeling indecisive? Utilize the 'Just Eat It!' button for
-      a spontaneous choice. Make sure to choose a city or location, food
-      preferences are optional. Sign up to curate your favorites and discover
-      what's trending among your friends!
+      End the debate over where to eat! Just Eat It syncs your preferences with
+      your most pickiest friend!
     </Text>
   </Box>
 );
