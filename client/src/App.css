@@ -334,15 +334,21 @@ a:hover {
 }
 
 /* map stuff */
+.map-container {
+  padding: 15px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .map_hover {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
-.map_hover h5{
+.map_hover h5 {
   padding: 0 10px;
 }
-
 
 @media (max-width: 1024px) {
   .pref-container {
@@ -377,4 +383,3 @@ a:hover {
     font-size: smaller;
   }
 }
-
