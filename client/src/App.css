@@ -259,7 +259,7 @@ a:hover {
 }
 
 .favorites-container {
-  padding: 2% 0;
+  /* padding: 2% 0; */
   background-color: #060c24b4;
   border-radius: 8px;
 }

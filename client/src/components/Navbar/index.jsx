@@ -29,11 +29,11 @@ export default function Nav() {
           </>
         ) : (
           <>
-            <NavLink key={7} className="nav-link" to="/login">
-              Login
-            </NavLink>
-            <NavLink key={8} className="nav-link" to="/about">
+            <NavLink key={7} className="nav-link" to="/about">
               About
+            </NavLink>
+            <NavLink key={8} className="nav-link" to="/login">
+              Login
             </NavLink>
             <NavLink key={9} className="nav-link" to="/signup">
               Signup
