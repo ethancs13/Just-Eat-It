@@ -16,6 +16,15 @@ body {
   background-color: var(--primary-color);
 }
 
+.right {
+  display: flex;
+  justify-content: right;
+}
+.left {
+  display: flex;
+  justify-content: left;
+}
+
 main {
   display: block;
 }
@@ -318,7 +327,7 @@ a:hover {
 
 .card {
   width: 25rem;
-  margin: 1%;
+  padding: 1rem;
   background-color: var(--secondaryLight-color);
 }
 
