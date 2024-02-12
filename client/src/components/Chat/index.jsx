@@ -88,7 +88,7 @@ const Chat = ({ user }) => {
       background: "#1b2b4580",
       borderRadius: "8px",
       height: "40vh",
-      padding: "20px", // Add padding to ensure the button stays within the background
+      padding: "20px",
     },
     chatWrapper: {
       overflowY: "scroll",
