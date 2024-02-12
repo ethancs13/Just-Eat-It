@@ -1,0 +1,24 @@
+.accordion-container {
+  --bs-accordion-bg: #060c24b4;
+  --bs-accordion-border-color: #a036ee;
+  --bs-accordion-btn-color: orange;
+  --bs-accordion-active-bg: #060c24b4;
+  --bs-accordion-active-color: #a036ee;
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 0.1rem orange;
+}
+
+.accordion-header {
+  background-color: #060c24b4;
+  border-radius: 8px;
+}
+
+.accordion-body {
+  background-color: #060c24b4;
+  border-radius: 8px;
+  color: white;
+}
+
+.accordion-ordered-list {
+  padding-left: 1rem;
+  margin-bottom: 0rem;
+}

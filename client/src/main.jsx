@@ -12,6 +12,7 @@ import Login from "./pages/Login.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import Friends from "./pages/Friends.jsx";
 import Favorites from "./pages/Favorites.jsx";
+import About from "./pages/About.jsx";
 import Error from "./pages/Error";
 
 const router = createBrowserRouter([
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: "friends",
         element: <Friends />,
+      },
+      {
+        path: "about",
+        element: <About />,
       },
     ],
   },

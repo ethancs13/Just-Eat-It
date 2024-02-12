@@ -198,6 +198,15 @@ a:hover {
   background-size: cover;
 }
 
+.bgAboutPage {
+  background-image: url("./assets/images/pexels-mario-cuadros-2793175.jpg");
+  height: auto;
+  width: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .searchContainer {
   background-color: #060c2499;
   border-radius: 8px;
@@ -250,7 +259,7 @@ a:hover {
 }
 
 .favorites-container {
-  padding: 2% 0;
+  /* padding: 2% 0; */
   background-color: #060c24b4;
   border-radius: 8px;
 }
