@@ -92,6 +92,11 @@ const startApolloServer = async () => {
   app.get("/", async (req, res) => {
     const { location, cuisine } = req.query;
 
+    if (!location) {
+      res.status(400).json({ error: "A location is required." });
+      return;
+    }
+
     try {
       const response = await axios.get(
         "https://api.yelp.com/v3/businesses/search",
@@ -111,9 +116,9 @@ const startApolloServer = async () => {
     } catch (error) {
       console.error(error);
       if (error.response) {
-        console.error(error.response.data);
-        console.error(error.response.status);
-        console.error(error.response.headers);
+        console.error("[ERROR DATA]", error.response.data);
+        console.error("[ERROR STATUS]", error.response.status);
+        console.error("[ERROR HEADERS]", error.response.headers);
       }
       res.status(500).json({
         error,
