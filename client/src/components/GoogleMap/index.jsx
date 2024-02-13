@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 import { recenterMap } from "../../utils/centerMap";
-import axios from "axios";
 
 // import icons
 import asian from "./food-icons/asian.png";
@@ -51,77 +50,88 @@ const GoogleMap = ({ locations, showMap }) => {
         steakhouse: { icon: steakhouse, size: 50 },
       };
 
-      const apiKeyResponse = await axios.get("https://just-eat-it-be3958285291.herokuapp.com/api/key");
-      console.log(apiKeyResponse)
-      const apiKey = apiKeyResponse.data.key;
+      const baseURL = "https://just-eat-it-tpcd.onrender.com";
 
-      const loader = new Loader({
-        apiKey: apiKey,
-        version: "weekly",
-      });
+      // Local Testing
+      // const baseURL = "http://localhost:3001";
 
-      loader.load().then(async () => {
-        const { Map } = await google.maps.importLibrary("maps");
+      try {
+        const apiKeyResponse = await fetch(`${baseURL}/api/key`);
+        if (!apiKeyResponse.ok) {
+          throw new Error("Failed to fetch API key");
+        }
+        const { key: apiKey } = await apiKeyResponse.json();
 
-        const map = new Map(document.getElementById("map"), {
-          center: { lat: 37.7749, lng: -122.4194 }, // Default center coordinates (San Francisco)
-          zoom: 12,
+        const loader = new Loader({
+          apiKey,
+          version: "weekly",
         });
 
-        const newMarkers = locations.map((location) => {
-          let cuisineType = "";
-          if (location.categories && location.categories.length > 0) {
-            cuisineType = location.categories[0].title.toLowerCase();
-          }
+        loader.load().then(async () => {
+          const { Map } = await google.maps.importLibrary("maps");
 
-          const iconInfo = cuisineIcons[cuisineType] || {
-            icon: defaultIcon,
-            size: 30,
-          }; // Use default icon if icon is not available
-
-          const customMarkerIcon = {
-            url: iconInfo.icon,
-            // Set the size of the icon
-            scaledSize: new google.maps.Size(iconInfo.size, iconInfo.size),
-          };
-
-          const marker = new google.maps.Marker({
-            position: {
-              lat: location.coordinates.latitude,
-              lng: location.coordinates.longitude,
-            },
-            map,
-            title: location.name,
-            // custom icon
-            icon: customMarkerIcon,
+          const map = new Map(document.getElementById("map"), {
+            center: { lat: 37.7749, lng: -122.4194 }, // Default center coordinates (San Francisco)
+            zoom: 12,
           });
 
-          // info modal on hover
-          const infoWindow = new google.maps.InfoWindow({
-            content: `<div><h3>${location.name}</h3><div class="map_hover"}><h5>Rating ${location.rating}</h5><h5>Price ${location.price}</h5></div></div>`,
+          const newMarkers = locations.map((location) => {
+            let cuisineType = "";
+            if (location.categories && location.categories.length > 0) {
+              cuisineType = location.categories[0].title.toLowerCase();
+            }
+
+            const iconInfo = cuisineIcons[cuisineType] || {
+              icon: defaultIcon,
+              size: 30,
+            }; // Use default icon if icon is not available
+
+            const customMarkerIcon = {
+              url: iconInfo.icon,
+              // Set the size of the icon
+              scaledSize: new google.maps.Size(iconInfo.size, iconInfo.size),
+            };
+
+            const marker = new google.maps.Marker({
+              position: {
+                lat: location.coordinates.latitude,
+                lng: location.coordinates.longitude,
+              },
+              map,
+              title: location.name,
+              // custom icon
+              icon: customMarkerIcon,
+            });
+
+            // info modal on hover
+            const infoWindow = new google.maps.InfoWindow({
+              content: `<div><h3>${location.name}</h3><div class="map_hover"}><h5>Rating ${location.rating}</h5><h5>Price ${location.price}</h5></div></div>`,
+            });
+
+            // event listeners for info modal
+            marker.addListener("mouseover", () => {
+              infoWindow.open(map, marker);
+            });
+            marker.addListener("mouseout", () => {
+              infoWindow.close();
+            });
+
+            marker.addListener("click", () => {
+              window.open(location.url, "_blank"); //to open new page
+            });
+
+            return marker;
           });
 
-          // event listeners for info modal
-          marker.addListener("mouseover", () => {
-            infoWindow.open(map, marker);
-          });
-          marker.addListener("mouseout", () => {
-            infoWindow.close();
-          });
-
-          marker.addListener("click", () => {
-            window.open(location.url, "_blank"); //to open new page
-          });
-
-          return marker;
+          // set markers
+          setMarkers(newMarkers);
+          // center map around new markers
+          recenterMap(map, newMarkers);
         });
-
-        // set markers
-        setMarkers(newMarkers);
-        // center map around new markers
-        recenterMap(map, newMarkers);
-      });
-    }
+      } catch (error) {
+        console.error("Error loading map:", error);
+      }
+    };
 
     loadMap();
   }, [locations, showMap]);
