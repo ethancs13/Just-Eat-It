@@ -9,7 +9,7 @@ export default defineConfig({
     open: true,
     proxy: {
       "/graphql": {
-        target: "https://just-eat-it.onrender.com",
+        target: "http://localhost:3001",
         changeOrigin: true,
         secure: false,
       },
