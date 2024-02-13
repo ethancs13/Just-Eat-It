@@ -382,6 +382,15 @@ a:hover {
   padding: 0 10px;
 }
 
+.chat-container {
+  margin-left: 50px;
+  margin-top: 15px;
+  padding: 50px;
+  background-color: #1b2b4580;
+  border-radius: 8px;
+  height: 40vh;
+}
+
 @media (max-width: 1024px) {
   .pref-container {
     width: 50vw;
@@ -411,6 +420,10 @@ a:hover {
   }
   .card {
     width: 90vw;
+  }
+  .chat-container {
+    margin-left: 0px;
+    padding: 0px;
   }
 }
 

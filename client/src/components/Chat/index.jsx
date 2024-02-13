@@ -82,23 +82,16 @@ const Chat = ({ user }) => {
       padding: "10px",
     },
     message: {},
-    wrapper: {
-      marginLeft: "50px",
-      marginTop: "15px",
-      background: "#1b2b4580",
-      borderRadius: "8px",
-      height: "40vh",
-      padding: "20px",
-    },
     chatWrapper: {
-      overflowY: "scroll",
+      overflowY: "auto",
       width: "auto",
       borderRadius: "8px",
+      maxHeight: "300px",
     },
   };
 
   return (
-    <div style={styles.wrapper}>
+    <div className="chat-container">
       <h2>Global Chat</h2>
 
       <section>
