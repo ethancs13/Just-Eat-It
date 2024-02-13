@@ -83,7 +83,7 @@ const FriendSearch = () => {
 
       <div>
         {noUserFound && <p className="no-user">{noUserFound}</p>}
-        <p>{data?.user.username} likes:</p>
+        {data &&  (<p>{data.user.username} likes:</p>)}
         <ul>
           {data?.user.savedCuisines.map((cuisine) => (
             <li key={cuisine.name}>{cuisine.name}</li>

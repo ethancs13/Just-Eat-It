@@ -3,13 +3,14 @@ import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER_BY_USERNAME, QUERY_ME } from "../../utils/queries";
 import { Modal, Button, Card } from "react-bootstrap";
 import { handleSearch } from "../../utils/API";
+import { Box, Input, ChakraProvider, Flex } from "@chakra-ui/react";
 
 export default function FriendModal({ friendFoods }) {
 
   const { loading, error, data } = useQuery(QUERY_ME);
   const [showModal, setShowModal] = useState(false);
   const [results, setResults] = useState([]);
-  const [location, setLocation] = useState('');
+  const [location, setLocation] = useState({ locationName: ""});
   const [sharedFavorites, setSharedFavorites] = useState([])
 
   let myFavorites = data.me.savedCuisines.map((food) => food.name);
@@ -19,19 +20,35 @@ export default function FriendModal({ friendFoods }) {
     friendFavorites.includes(food)
   );
 
-  const search = async () => {
-    console.log('Shared Favorites:', sharedFavorites);
-    const randomFood = Math.floor(Math.random() * ourFavorites.length);
-    let foodData = await handleSearch("denver", ourFavorites[randomFood]);
-    setResults(foodData.businesses);
-  };
+const handleChange = (e) => {
+  const newLocation = e.target.value;
 
-  const handleHide = () => {
+  setLocation ((currData) => {
+    currData.locationName = newLocation;
+    return { ...currData};
+  })
+};
+
+const search = async (e) => {
+  e.preventDefault();
+
+  if (!location.locationName) {
+    console.error("Please provide a location.");
+    return;
+  }
+
+  console.log('Shared Favorites:', sharedFavorites);
+  const randomFood = Math.floor(Math.random() * ourFavorites.length);
+  let foodData = await handleSearch(location.locationName, ourFavorites[randomFood]);
+  setResults(foodData.businesses);
+};
+  
+const handleHide = () => {
     setShowModal(false);
     setResults([]);
     setSharedFavorites([]);
-    console.log('Hidden sharedFavorites:', sharedFavorites)
-  }
+    setLocation({locationName: ""});
+};
 
   return (
     <div>
@@ -47,6 +64,7 @@ export default function FriendModal({ friendFoods }) {
             Let's Find a Place to Eat
           </Modal.Title>
         </Modal.Header>
+        
         <Modal.Body style={{ background: "#060c24" }}>
           <p>You both enjoy:</p>
           <ul>
@@ -55,20 +73,33 @@ export default function FriendModal({ friendFoods }) {
             ))}
           </ul>
 
+          
+          {!location.locationName && <p className="no-location">Please enter a location to search.</p>}
+            {/* <label htmlFor="modal-location">Enter a City to Search</label> */}
 
-          <Button
-            variant="primary"
-            type="submit"
-            style={{
-              backgroundColor: "#fe9553",
-              color: "white",
-              display: "block",
-              margin: "0 auto",
-            }}
-            onClick={search}
-          >
-            Find me something to Eat
-          </Button>
+            <form className="modal-search-form">
+            <input 
+            placeholder="Enter your location"
+            name="locationName"
+            id="modal-location"
+            onChange={handleChange}
+            value={location.locationName}
+            >
+            </input>
+            <Button
+              variant="primary"
+              type="submit"
+              style={{
+                backgroundColor: "#fe9553",
+                color: "white",
+                display: "block",
+                margin: "0 auto",
+              }}
+              onClick={search}
+            >
+              Find me something to Eat
+            </Button>
+          </form>
 
           <div className="row card-container">
             {results?.map((restaurant) => (

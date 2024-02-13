@@ -10,7 +10,7 @@ const Chat = ({ user }) => {
     const name = user.data.username;
     console.log(name);
 
-    const newSocket = new WebSocket("ws://just-eat-it.onrender.com");
+    const newSocket = new WebSocket("ws://localhost:3000");
 
     newSocket.addEventListener("open", function (event) {
       newSocket.send(JSON.stringify({ name }));
