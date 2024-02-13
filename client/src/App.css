@@ -278,6 +278,10 @@ a:hover {
   /* padding: 2% 0; */
   background-color: #060c24b4;
   border-radius: 8px;
+  overflow-y: scroll;
+  width: auto;
+  border-radius: 8px;
+  max-height: 70vh;
 }
 
 .form-check-label {
