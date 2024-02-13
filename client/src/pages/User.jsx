@@ -30,7 +30,7 @@ export default function User() {
   return (
     <div className="bgUserPage">
       <div className="container welcome">
-        <h2 className="welcome-header">Welcome,{data?.me.username}</h2>
+        <h2 className="welcome-header">Welcome {data?.me.username}!</h2>
         <Cuisine />
         <FriendDashboard />
       </div>

@@ -4,6 +4,7 @@ const axios = require("axios");
 const cors = require("cors");
 const { ApolloServer } = require("@apollo/server");
 const { expressMiddleware } = require("@apollo/server/express4");
+const seedDatabase = require("./seeders/seed");
 
 var bcrypt = require("bcryptjs");
 var salt = 10;
@@ -78,6 +79,12 @@ const server = new ApolloServer({
 
 const startApolloServer = async () => {
   await server.start();
+
+  // Add seeding logic here
+  if (process.env.SEED_DB === "true") {
+    await seedDatabase();
+    console.log("Database seeded successfully!");
+  }
 
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
