@@ -48,8 +48,10 @@ const AboutPage = () => {
           How does the 'JustEatIt' button next to the search button function?
         </Accordion.Header>
         <Accordion.Body className="accordion-body">
-          Press the 'JustEatIt' button for a random restaurant. Enter a city or
-          location. (Food preferences optional).
+          <ol className="accordion-ordered-list">
+            <li>Enter a city or location. (Food preferences optional).</li>
+            <li>Press the 'JustEatIt' button for a random restaurant.</li>
+          </ol>
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item eventKey="3">
