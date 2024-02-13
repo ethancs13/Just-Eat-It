@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_ALL_CUISINES } from "../../utils/queries";
-import { handleSearch, getRandomRestaurant } from "../../utils/API";
 import SearchResults from "../SearchResults";
 import GoogleMap from "../GoogleMap";
 import IntroText from "./IntroText";
@@ -23,16 +22,45 @@ const SearchComponent = () => {
   // Fetch all cuisines
   const { data } = useQuery(QUERY_ALL_CUISINES);
 
+  const baseURL = "https://just-eat-it-tpcd.onrender.com";
+
+  // Local Testing
+  // const baseURL = "http://localhost:3001";
+
   const search = async () => {
-    const data = await handleSearch(location, cuisine);
-    setResults(data.businesses);
-    setShowMap(true);
+    try {
+      const response = await fetch(
+        `${baseURL}/?location=${location}&cuisine=${cuisine}`
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        setResults(data.businesses);
+        setShowMap(true);
+      } else {
+        console.error("Failed to fetch data:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error.message);
+    }
   };
 
   const random = async () => {
-    const data = await getRandomRestaurant(location, cuisine);
-    setResults([data]);
-    setShowMap(true);
+    try {
+      const response = await fetch(
+        `${baseURL}/random?location=${location}&cuisine=${cuisine}`
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        setResults([data]);
+        setShowMap(true);
+      } else {
+        console.error("Failed to fetch data:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error.message);
+    }
   };
 
   const handleKeyDown = (event) => {

@@ -14,15 +14,15 @@
   "dependencies": {
     "@apollo/server": "^4.7.1",
     "apollo-server-express": "^3.13.0",
-    "axios": "^1.6.7",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.1",
     "express": "^4.17.2",
-    "faker": "^6.6.6",
+    "faker": "^5.5.3",
     "graphql": "^16.6.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.0.2",
+    "node-fetch": "^3.3.2",
     "ws": "^8.16.0"
   },
   "devDependencies": {
