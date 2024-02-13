@@ -3,7 +3,7 @@ import axios from "axios";
 export const handleSearch = async (location, cuisine) => {
   try {
     const response = await axios.get(
-      "https://just-eat-it-bi4x.onrender.com/api/search",
+      "https://just-eat-it-be3958285291.herokuapp.com/api/search",
       {
         params: {
           location: location,
@@ -21,7 +21,7 @@ export const handleSearch = async (location, cuisine) => {
 export const getRandomRestaurant = async (location, cuisine) => {
   try {
     const response = await axios.get(
-      "https://just-eat-it-bi4x.onrender.com/api/search",
+      "https://just-eat-it-be3958285291.herokuapp.com/api/search",
       {
         params: {
           location: location,
