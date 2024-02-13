@@ -47,7 +47,7 @@ export default function CuisineUpdateModal() {
   return (
     <div>
       {/* Button to open modal */}
-      <Button variant="primary" onClick={() => setShowModal(true)}>
+      <Button id="cuisine-update-btn" variant="primary" onClick={() => setShowModal(true)}>
         Update Preferences
       </Button>
 

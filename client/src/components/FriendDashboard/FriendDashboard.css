@@ -51,3 +51,12 @@ p {
     text-align: center;
 }
 
+#cuisine-update-btn {
+    margin-bottom: 15px;
+}
+
+#modal-location {
+    height: 35px;
+    padding: 10px;
+    border-radius: .3em;
+}

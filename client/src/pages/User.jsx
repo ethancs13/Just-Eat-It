@@ -33,9 +33,7 @@ export default function User() {
     <div className="bgUserPage">
       <div className="container welcome">
         <h2 className="welcome-header">
-          <div id="welcome-text">
           Welcome,{data?.me.username}
-          </div>
           </h2>
         <Cuisine />
         <FriendDashboard />
