@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const baseURL = process.env.REACT_APP_API_BASE_URL;
+
 export const handleSearch = async (location, cuisine) => {
   try {
-    const response = await axios.get("http://localhost:3001", {
+    const response = await axios.get(`${baseURL}/`, {
       params: {
         location: location,
         cuisine: cuisine,
@@ -17,7 +19,7 @@ export const handleSearch = async (location, cuisine) => {
 
 export const getRandomRestaurant = async (location, cuisine) => {
   try {
-    const response = await axios.get("http://localhost:3001", {
+    const response = await axios.get(`${baseURL}/`, {
       params: {
         location: location,
         cuisine: cuisine,
