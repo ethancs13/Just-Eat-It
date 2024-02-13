@@ -9,7 +9,6 @@ export const handleSearch = async (location, cuisine) => {
       },
     });
 
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -24,8 +23,6 @@ export const getRandomRestaurant = async (location, cuisine) => {
         cuisine: cuisine,
       },
     });
-
-    console.log(response.data);
 
     if (response.data && response.data.businesses.length > 0) {
       const index = Math.floor(Math.random() * response.data.businesses.length);

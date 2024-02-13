@@ -144,7 +144,6 @@ const resolvers = {
     },
 
     addFavorite: async (parent, { restaurantData }, context) => {
-      console.log(restaurantData);
       if (context.user) {
         const user = await User.findById(context.user._id);
         const existingRestaurant = user.favorites.find(
@@ -166,7 +165,6 @@ const resolvers = {
     },
 
     removeFavorite: async (parent, { businessId }, context) => {
-      console.log(businessId);
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },

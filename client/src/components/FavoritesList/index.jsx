@@ -12,8 +12,6 @@ const FavoritesList = () => {
     await refetch();
   };
 
-  console.log(favoriteRestaurants);
-
   if (loading) return <p>Loading...</p>;
 
   return (
