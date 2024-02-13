@@ -27,7 +27,7 @@ const GoogleMap = ({ locations, showMap }) => {
 
   useEffect(() => {
     const loadMap = async () => {
-      if (!showMap || !locations || locations.length === 0) {
+      if (!showMap || !locations || locations?.length === 0) {
         return;
       }
 
@@ -72,7 +72,7 @@ const GoogleMap = ({ locations, showMap }) => {
 
         const newMarkers = locations.map((location) => {
           let cuisineType = "";
-          if (location.categories && location.categories.length > 0) {
+          if (location.categories && location.categories?.length > 0) {
             cuisineType = location.categories[0].title.toLowerCase();
           }
 
