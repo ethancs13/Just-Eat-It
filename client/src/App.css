@@ -365,7 +365,7 @@ a:hover {
 
 .intro-text {
   margin-top: 5%;
-  text-shadow: 0 0 5px var(--secondaryLight-color);
+  text-shadow: 0 0 5px var(--primaryLight-color);
   font-family: "Noto Sans Display", sans-serif;
 }
 
