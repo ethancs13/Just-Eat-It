@@ -221,6 +221,13 @@ a:hover {
   border-radius: 8px;
 }
 
+.results-wrapper {
+  overflow-y: scroll;
+  width: auto;
+  border-radius: 8px;
+  max-height: 50vh;
+}
+
 .pref-container {
   background-color: #f02b61cc;
   width: 30vw;
@@ -271,6 +278,10 @@ a:hover {
   /* padding: 2% 0; */
   background-color: #060c24b4;
   border-radius: 8px;
+  overflow-y: scroll;
+  width: auto;
+  border-radius: 8px;
+  max-height: 70vh;
 }
 
 .form-check-label {
@@ -326,7 +337,8 @@ a:hover {
 }
 
 .card {
-  width: 25rem;
+  margin: 1%;
+  width: 20rem;
   padding: 1rem;
   background-color: var(--secondaryLight-color);
 }
@@ -352,7 +364,9 @@ a:hover {
 }
 
 .intro-text {
-  margin-bottom: 0px;
+  margin-top: 5%;
+  text-shadow: 0 0 5px var(--secondaryLight-color);
+  font-family: "Noto Sans Display", sans-serif;
 }
 
 /* map stuff */
@@ -370,6 +384,15 @@ a:hover {
 }
 .map_hover h5 {
   padding: 0 10px;
+}
+
+.chat-container {
+  margin-left: 50px;
+  margin-top: 15px;
+  padding: 50px;
+  background-color: #1b2b4580;
+  border-radius: 8px;
+  height: 40vh;
 }
 
 @media (max-width: 1024px) {
@@ -401,6 +424,10 @@ a:hover {
   }
   .card {
     width: 90vw;
+  }
+  .chat-container {
+    margin-left: 0px;
+    padding: 0px;
   }
 }
 

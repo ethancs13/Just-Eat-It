@@ -26,7 +26,7 @@ export default function Favorites() {
   return (
     <div className="bgFavoritesPage">
       <div className="container">
-        <h2>Favorites Page</h2>
+        <h2>Favorite Places</h2>
         <FavoritesList />
       </div>
     </div>
