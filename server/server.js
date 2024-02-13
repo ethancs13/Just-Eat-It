@@ -1,87 +1,93 @@
-const express = require("express");
-require("dotenv").config();
-const axios = require("axios");
-const cors = require("cors");
-const { ApolloServer } = require("@apollo/server");
-const { expressMiddleware } = require("@apollo/server/express4");
+import("node-fetch")
+  .then(async (module) => {
+    const fetch = module.default; // Get the default export of node-fetch
 
-var bcrypt = require("bcryptjs");
-var salt = 10;
-const path = require("path");
+    const express = require("express");
+    require("dotenv").config();
+    const cors = require("cors");
+    const { ApolloServer } = require("@apollo/server");
+    const { expressMiddleware } = require("@apollo/server/express4");
 
-const { authMiddleware } = require("./utils/auth");
+    var bcrypt = require("bcryptjs");
+    var salt = 10;
+    const path = require("path");
 
-const { typeDefs, resolvers } = require("./schemas");
-const db = require("./config/connection");
+    const { authMiddleware } = require("./utils/auth");
 
-const PORT = process.env.PORT || 3001;
-const app = express();
+    const { typeDefs, resolvers } = require("./schemas");
+    const db = require("./config/connection");
 
-app.use(cors());
+    const PORT = process.env.PORT || 3001;
+    const app = express();
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-});
+    app.use(cors());
 
-const startApolloServer = async () => {
-  await server.start();
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers,
+    });
 
-  app.use(express.urlencoded({ extended: false }));
-  app.use(express.json());
+    const startApolloServer = async () => {
+      await server.start();
 
-  app.use(
-    "/graphql",
-    expressMiddleware(server, {
-      context: authMiddleware,
-    })
-  );
+      app.use(express.urlencoded({ extended: false }));
+      app.use(express.json());
 
-  app.get("/", async (req, res) => {
-    const { location, cuisine } = req.query;
-
-    try {
-      const response = await axios.get(
-        "https://api.yelp.com/v3/businesses/search",
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.API_KEY}`,
-          },
-          params: {
-            location: location,
-            term: cuisine,
-            limit: 12,
-          },
-        }
+      app.use(
+        "/graphql",
+        expressMiddleware(server, {
+          context: authMiddleware,
+        })
       );
 
-      res.json(response.data);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({
-        error,
+      app.get("/", async (req, res) => {
+        const { location, cuisine } = req.query;
+
+        try {
+          const response = await fetch(
+            `https://api.yelp.com/v3/businesses/search?location=${location}&term=${cuisine}&limit=12`,
+            {
+              headers: {
+                Authorization: `Bearer ${process.env.API_KEY}`,
+              },
+            }
+          );
+
+          if (response.ok) {
+            const data = await response.json();
+            res.json(data);
+          } else {
+            console.error("Failed to fetch data:", response.statusText);
+            res.status(500).json({ error: "Failed to fetch data" });
+          }
+        } catch (error) {
+          console.error("Error fetching data:", error.message);
+          res.status(500).json({ error: error.message });
+        }
       });
-    }
+
+      app.get("/api/key", async (req, res) => {
+        const key = await process.env.GOOGLE_PLACES_API;
+        res.json({ key });
+      });
+
+      if (process.env.NODE_ENV === "production") {
+        app.use(express.static(path.join(__dirname, "../client/dist")));
+
+        app.get("*", (req, res) => {
+          res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+        });
+      }
+
+      db.once("open", () => {
+        app.listen(PORT, () => {
+          console.log(`API server running on port ${PORT}!`);
+        });
+      });
+    };
+
+    startApolloServer();
+  })
+  .catch((error) => {
+    console.error("Error importing node-fetch:", error);
   });
-
-  app.get("/api/key", async (req, res) => {
-    const key = await process.env.GOOGLE_PLACES_API;
-    res.json({ key });
-  });
-
-  if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "../client/dist")));
-
-    app.get("*", (req, res) => {
-      res.sendFile(path.join(__dirname, "../client/dist/index.html"));
-    });
-  }
-
-  db.once("open", () => {
-    app.listen(PORT, () => {
-      console.log(`API server running on port ${PORT}!`);
-    });
-  });
-};
-
-startApolloServer();
