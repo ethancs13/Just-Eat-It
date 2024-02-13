@@ -55,7 +55,7 @@ const SearchComponent = () => {
             flex={1}
             size="lg"
             fontSize="md"
-            color="white"
+            color="orange"
             borderColor="orange"
             ml={2}
             mr={2}
