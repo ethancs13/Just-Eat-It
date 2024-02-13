@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[Link to live deploy](add link)
+[Link to live deploy](https://just-eat-it-bi4x.onrender.com)
 
 ## Description
 
