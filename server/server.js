@@ -5,7 +5,9 @@ const cors = require("cors");
 const { ApolloServer } = require("@apollo/server");
 const { expressMiddleware } = require("@apollo/server/express4");
 
-var bcrypt = require("bcryptjs"); // require bcrypt
+const instance = require("./axios-instance");
+
+var bcrypt = require("bcryptjs");
 var salt = 10;
 const path = require("path");
 
@@ -59,7 +61,6 @@ const db = require("./config/connection");
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-// expressWs(app)
 app.use(cors());
 
 const server = new ApolloServer({
@@ -84,19 +85,13 @@ const startApolloServer = async () => {
     const { location, cuisine } = req.query;
 
     try {
-      const response = await axios.get(
-        "https://api.yelp.com/v3/businesses/search",
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.API_KEY}`,
-          },
-          params: {
-            location: location,
-            term: cuisine,
-            limit: 12,
-          },
-        }
-      );
+      // Use your Axios instance here
+      const response = await instance.get("/api/some-endpoint", {
+        params: {
+          location: location,
+          cuisine: cuisine,
+        },
+      });
 
       res.json(response.data);
     } catch (error) {
