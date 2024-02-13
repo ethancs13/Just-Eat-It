@@ -221,6 +221,13 @@ a:hover {
   border-radius: 8px;
 }
 
+.results-wrapper {
+  overflow-y: scroll;
+  width: auto;
+  border-radius: 8px;
+  max-height: 50vh;
+}
+
 .pref-container {
   background-color: #f02b61cc;
   width: 30vw;
@@ -326,7 +333,8 @@ a:hover {
 }
 
 .card {
-  width: 25rem;
+  margin: 1%;
+  width: 20rem;
   padding: 1rem;
   background-color: var(--secondaryLight-color);
 }
@@ -352,7 +360,9 @@ a:hover {
 }
 
 .intro-text {
-  margin-bottom: 0px;
+  margin-top: 5%;
+  text-shadow: 0 0 5px var(--secondaryLight-color);
+  font-family: "Noto Sans Display", sans-serif;
 }
 
 /* map stuff */
