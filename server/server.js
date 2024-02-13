@@ -4,8 +4,9 @@ const axios = require("axios");
 const cors = require("cors");
 const { ApolloServer } = require("@apollo/server");
 const { expressMiddleware } = require("@apollo/server/express4");
-const seedDatabase = require("./seeders/seed");
-const fs = require("fs");
+
+var bcrypt = require("bcryptjs");
+var salt = 10;
 const path = require("path");
 
 // web socket!
@@ -75,18 +76,8 @@ const server = new ApolloServer({
   resolvers,
 });
 
-const shouldSeed = () => {
-  return !fs.existsSync(path.join(__dirname, "seed.flag"));
-};
-
 const startApolloServer = async () => {
   await server.start();
-
-  if (process.env.SEED_DB === "true" && shouldSeed()) {
-    await seedDatabase();
-    console.log("Database seeded successfully!");
-    fs.writeFileSync(path.join(__dirname, "seed.flag"), "");
-  }
 
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
