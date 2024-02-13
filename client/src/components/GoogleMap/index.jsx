@@ -51,7 +51,7 @@ const GoogleMap = ({ locations, showMap }) => {
         steakhouse: { icon: steakhouse, size: 50 },
       };
 
-      const apiKeyResponse = await axios.get("http://localhost:3001/api/key");
+      const apiKeyResponse = await axios.get("https://just-eat-it.onrender.com/api/key");
       console.log(apiKeyResponse)
       const apiKey = apiKeyResponse.data.key;
 
