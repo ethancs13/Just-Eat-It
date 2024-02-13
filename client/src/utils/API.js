@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const handleSearch = async (location, cuisine) => {
   try {
-    const response = await axios.get("http://just-eat-it-be3958285291.herokuapp.com", {
+    const response = await axios.get("https://just-eat-it-be3958285291.herokuapp.com/", {
       params: {
         location: location,
         cuisine: cuisine,
@@ -18,7 +18,7 @@ export const handleSearch = async (location, cuisine) => {
 
 export const getRandomRestaurant = async (location, cuisine) => {
   try {
-    const response = await axios.get("http://just-eat-it-be3958285291.herokuapp.com", {
+    const response = await axios.get("https://just-eat-it-be3958285291.herokuapp.com/", {
       params: {
         location: location,
         cuisine: cuisine,
