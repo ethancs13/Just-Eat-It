@@ -4,53 +4,52 @@ const axios = require("axios");
 const cors = require("cors");
 const { ApolloServer } = require("@apollo/server");
 const { expressMiddleware } = require("@apollo/server/express4");
-const expressWs = require('express-ws')
 
 var bcrypt = require('bcryptjs'); // require bcrypt
 var salt = 10;
 const path = require("path");
 
 // web socket!
-const { WebSocket, WebSocketServer } = require('ws');
-const WS_PORT = 8080
-const wss = new WebSocketServer({ port: WS_PORT })
-wss.on('listening', () => {
-  console.log(`WebSocketServer listening on port ${WS_PORT}`)
-})
+// const { WebSocket, WebSocketServer } = require('ws');
+// const WS_PORT = 8080
+// const wss = new WebSocketServer({ port: WS_PORT })
+// wss.on('listening', () => {
+//   console.log(`WebSocketServer listening on port ${WS_PORT}`)
+// })
 
-wss.on('connection', function (ws) {
-  ws.on('error', () => console.error(error))
+// wss.on('connection', function (ws) {
+//   ws.on('error', () => console.error(error))
 
-  ws.on('message', function (data) {
-    let jsonData = JSON.parse(data);
-    console.log(jsonData)
-    if (jsonData.name) {
-      console.log(`${jsonData.name} has connected.`);
-      ws.name = jsonData.name
-      wss.clients.forEach(function (client) {
-        if (client.readyState === WebSocket.OPEN && ws.name !== client.name) {
-          console.log(ws.name)
-          client.send(JSON.stringify({ announcement: `${ws.name} has joined.` }))
-        }
-      })
-    } else {
-      wss.clients.forEach(function (client) {
-        if (client.readyState === WebSocket.OPEN && ws.name !== client.name) {
-          client.send(JSON.stringify({ name: ws.name, message: jsonData.message }))
-        }
-      })
-    }
-  })
+//   ws.on('message', function (data) {
+//     let jsonData = JSON.parse(data);
+//     console.log(jsonData)
+//     if (jsonData.name) {
+//       console.log(`${jsonData.name} has connected.`);
+//       ws.name = jsonData.name
+//       wss.clients.forEach(function (client) {
+//         if (client.readyState === WebSocket.OPEN && ws.name !== client.name) {
+//           console.log(ws.name)
+//           client.send(JSON.stringify({ announcement: `${ws.name} has joined.` }))
+//         }
+//       })
+//     } else {
+//       wss.clients.forEach(function (client) {
+//         if (client.readyState === WebSocket.OPEN && ws.name !== client.name) {
+//           client.send(JSON.stringify({ name: ws.name, message: jsonData.message }))
+//         }
+//       })
+//     }
+//   })
 
-  ws.on('close', function () {
-    console.log(`${ws.name} has left.`)
-    wss.clients.forEach(function (client) {
-      if (client.readyState === WebSocket.OPEN) {
-        client.send(JSON.stringify({ announcement: `${ws.name} has left.` }))
-      }
-    })
-  })
-})
+//   ws.on('close', function () {
+//     console.log(`${ws.name} has left.`)
+//     wss.clients.forEach(function (client) {
+//       if (client.readyState === WebSocket.OPEN) {
+//         client.send(JSON.stringify({ announcement: `${ws.name} has left.` }))
+//       }
+//     })
+//   })
+// })
 
 
 const { authMiddleware } = require("./utils/auth");
@@ -61,7 +60,7 @@ const db = require("./config/connection");
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-expressWs(app)
+// expressWs(app)
 app.use(cors());
 
 const server = new ApolloServer({
