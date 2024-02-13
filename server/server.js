@@ -1,108 +1,91 @@
-import("node-fetch")
-  .then(async (module) => {
-    const fetch = module.default; // Get the default export of node-fetch
+const express = require("express");
+require("dotenv").config();
+const axios = require("axios");
+const cors = require("cors");
+const { ApolloServer } = require("@apollo/server");
+const { expressMiddleware } = require("@apollo/server/express4");
 
-    const express = require("express");
-    require("dotenv").config();
-    const cors = require("cors");
-    const { ApolloServer } = require("@apollo/server");
-    const { expressMiddleware } = require("@apollo/server/express4");
+var bcrypt = require("bcryptjs");
+var salt = 10;
+const path = require("path");
 
-    var bcrypt = require("bcryptjs");
-    var salt = 10;
-    const path = require("path");
+const { authMiddleware } = require("./utils/auth");
 
-    const { authMiddleware } = require("./utils/auth");
+const { typeDefs, resolvers } = require("./schemas");
+const db = require("./config/connection");
 
-    const { typeDefs, resolvers } = require("./schemas");
-    const db = require("./config/connection");
+const PORT = process.env.PORT || 3001;
+const app = express();
 
-    const PORT = process.env.PORT || 3001;
-    const app = express();
+// expressWs(app)
+app.use(cors());
 
-    app.use(
-      cors({
-        origin: function (origin, callback) {
-          // Check if the origin is allowed
-          const allowedOrigins = [
-            "https://just-eat-it-hjx1.onrender.com",
-            "http://localhost:3000",
-          ];
-          if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-          } else {
-            callback(new Error("Not allowed by CORS"));
-          }
-        },
-      })
-    );
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+});
 
-    const server = new ApolloServer({
-      typeDefs,
-      resolvers,
-    });
+const startApolloServer = async () => {
+  await server.start();
 
-    const startApolloServer = async () => {
-      await server.start();
+  app.use(express.urlencoded({ extended: false }));
+  app.use(express.json());
 
-      app.use(express.urlencoded({ extended: false }));
-      app.use(express.json());
+  app.use(
+    "/graphql",
+    expressMiddleware(server, {
+      context: authMiddleware,
+    })
+  );
 
-      app.use(
-        "/graphql",
-        expressMiddleware(server, {
-          context: authMiddleware,
-        })
+  app.get("/", async (req, res) => {
+    const { location, cuisine } = req.query;
+
+    try {
+      const response = await axios.get(
+        "https://api.yelp.com/v3/businesses/search",
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.API_KEY}`,
+          },
+          params: {
+            location: location,
+            term: cuisine,
+            limit: 12,
+          },
+        }
       );
 
-      app.get("/", async (req, res) => {
-        const { location, cuisine } = req.query;
-
-        try {
-          const response = await fetch(
-            `https://api.yelp.com/v3/businesses/search?location=${location}&term=${cuisine}&limit=12`,
-            {
-              headers: {
-                Authorization: `Bearer ${process.env.API_KEY}`,
-              },
-            }
-          );
-
-          if (response.ok) {
-            const data = await response.json();
-            res.json(data);
-          } else {
-            console.error("Failed to fetch data:", response.statusText);
-            res.status(500).json({ error: "Failed to fetch data" });
-          }
-        } catch (error) {
-          console.error("Error fetching data:", error.message);
-          res.status(500).json({ error: error.message });
-        }
+      res.json(response.data);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        error,
       });
-
-      app.get("/api/key", async (req, res) => {
-        const key = await process.env.GOOGLE_PLACES_API;
-        res.json({ key });
-      });
-
-      if (process.env.NODE_ENV === "production") {
-        app.use(express.static(path.join(__dirname, "../client/dist")));
-
-        app.get("*", (req, res) => {
-          res.sendFile(path.join(__dirname, "../client/dist/index.html"));
-        });
-      }
-
-      db.once("open", () => {
-        app.listen(PORT, () => {
-          console.log(`API server running on port ${PORT}!`);
-        });
-      });
-    };
-
-    startApolloServer();
-  })
-  .catch((error) => {
-    console.error("Error importing node-fetch:", error);
+    }
   });
+
+  app.get("/api/key", async (req, res) => {
+    const key = await process.env.GOOGLE_PLACES_API;
+    res.json({ key });
+  });
+
+  if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "../client/dist")));
+
+    app.get("*", (req, res) => {
+      res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+    });
+  }
+
+  db.once("open", () => {
+    app.listen(PORT, () => {
+      console.log(`API server running on port ${PORT}!`);
+      console.log(
+        `Use GraphQL at https://just-eat-it-hjx1.onrender.com/graphql`
+      );
+    });
+  });
+};
+
+startApolloServer();
