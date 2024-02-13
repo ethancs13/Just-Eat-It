@@ -5,8 +5,6 @@ const cors = require("cors");
 const { ApolloServer } = require("@apollo/server");
 const { expressMiddleware } = require("@apollo/server/express4");
 
-const instance = require("./axios-instance");
-
 var bcrypt = require("bcryptjs");
 var salt = 10;
 const path = require("path");
@@ -61,6 +59,7 @@ const db = require("./config/connection");
 const PORT = process.env.PORT || 3001;
 const app = express();
 
+// expressWs(app)
 app.use(cors());
 
 const server = new ApolloServer({
@@ -85,13 +84,19 @@ const startApolloServer = async () => {
     const { location, cuisine } = req.query;
 
     try {
-      // Use your Axios instance here
-      const response = await instance.get("/api/some-endpoint", {
-        params: {
-          location: location,
-          cuisine: cuisine,
-        },
-      });
+      const response = await axios.get(
+        "https://api.yelp.com/v3/businesses/search",
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.API_KEY}`,
+          },
+          params: {
+            location: location,
+            term: cuisine,
+            limit: 12,
+          },
+        }
+      );
 
       res.json(response.data);
     } catch (error) {
@@ -118,7 +123,7 @@ const startApolloServer = async () => {
   db.once("open", () => {
     app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
-      console.log(`Use GraphQL at https://just-eat-it-be3958285291.herokuapp.com/graphql`);
+      console.log(`Use GraphQL at https://just-eat-it.onrender.com/graphql`);
     });
   });
 };
