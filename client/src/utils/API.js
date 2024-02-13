@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const handleSearch = async (location, cuisine) => {
   try {
-    const response = await axios.get("http://localhost:3001", {
+    const response = await axios.get("https://just-eat-it.onrender.com", {
       params: {
         location: location,
         cuisine: cuisine,
@@ -18,7 +18,7 @@ export const handleSearch = async (location, cuisine) => {
 
 export const getRandomRestaurant = async (location, cuisine) => {
   try {
-    const response = await axios.get("http://localhost:3001", {
+    const response = await axios.get("https://just-eat-it.onrender.com", {
       params: {
         location: location,
         cuisine: cuisine,
