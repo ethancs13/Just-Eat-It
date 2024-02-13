@@ -22,10 +22,15 @@ const SearchComponent = () => {
   // Fetch all cuisines
   const { data } = useQuery(QUERY_ALL_CUISINES);
 
+  const baseURL = "https://just-eat-it-tpcd.onrender.com";
+
+  // Local Testing
+  // const baseURL = "http://localhost:3001";
+
   const search = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/?location=${location}&cuisine=${cuisine}`
+        `${baseURL}/?location=${location}&cuisine=${cuisine}`
       );
 
       if (response.ok) {
@@ -43,7 +48,7 @@ const SearchComponent = () => {
   const random = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/random?location=${location}&cuisine=${cuisine}`
+        `${baseURL}/random?location=${location}&cuisine=${cuisine}`
       );
 
       if (response.ok) {

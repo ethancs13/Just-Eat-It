@@ -1,5 +1,7 @@
-const baseURL = "http://localhost:3001";
-// const baseURL = "https://just-eat-it-tpcd.onrender.com";
+const baseURL = "https://just-eat-it-tpcd.onrender.com";
+
+// Local Testing
+// const baseURL = "http://localhost:3001";
 
 export const handleSearch = async (location, cuisine) => {
   try {
