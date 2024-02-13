@@ -60,7 +60,14 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 // expressWs(app)
-app.use(cors());
+app.use(cors({
+  credentials: true,
+  origin: [
+    'http://localhost:3000', 
+    'https://just-eat-it-be3958285291.herokuapp.com/',     
+    'http://just-eat-it-be3958285291.herokuapp.com/'        
+  ],
+}));
 
 const server = new ApolloServer({
   typeDefs,
