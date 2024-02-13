@@ -31,6 +31,12 @@ const handleChange = (e) => {
 
 const search = async (e) => {
   e.preventDefault();
+
+  if (!location.locationName) {
+    console.error("Please provide a location.");
+    return;
+  }
+
   console.log('Shared Favorites:', sharedFavorites);
   const randomFood = Math.floor(Math.random() * ourFavorites.length);
   let foodData = await handleSearch(location.locationName, ourFavorites[randomFood]);
@@ -58,6 +64,7 @@ const handleHide = () => {
             Let's Find a Place to Eat
           </Modal.Title>
         </Modal.Header>
+        
         <Modal.Body style={{ background: "#060c24" }}>
           <p>You both enjoy:</p>
           <ul>
@@ -66,8 +73,11 @@ const handleHide = () => {
             ))}
           </ul>
 
-          <form>
-            <label htmlFor="modal-location">Enter a City to Search</label>
+          
+          {!location.locationName && <p className="no-location">Please enter a location to search.</p>}
+            {/* <label htmlFor="modal-location">Enter a City to Search</label> */}
+
+            <form className="modal-search-form">
             <input 
             placeholder="Enter your location"
             name="locationName"

@@ -36,3 +36,18 @@ p {
 .no-user {
     color: black;
 }
+
+.modal-search-form {
+    display: flex;
+}
+
+.welcome-header {
+    background-color: black;
+    opacity: .75;
+    width: 30%;
+    padding: 5px;
+    border-radius: .2em;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
