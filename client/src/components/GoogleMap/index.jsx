@@ -51,8 +51,10 @@ const GoogleMap = ({ locations, showMap }) => {
         steakhouse: { icon: steakhouse, size: 50 },
       };
 
-      const apiKeyResponse = await axios.get("https://just-eat-it-be3958285291.herokuapp.com/api/key");
-      console.log(apiKeyResponse)
+      const apiKeyResponse = await axios.get(
+        "https://just-eat-it-test-a5e86dcbbf47.herokuapp.com/api/key"
+      );
+      console.log(apiKeyResponse);
       const apiKey = apiKeyResponse.data.key;
 
       const loader = new Loader({
@@ -121,7 +123,7 @@ const GoogleMap = ({ locations, showMap }) => {
         // center map around new markers
         recenterMap(map, newMarkers);
       });
-    }
+    };
 
     loadMap();
   }, [locations, showMap]);
