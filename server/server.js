@@ -65,8 +65,8 @@ app.use(
     credentials: true,
     origin: [
       "http://localhost:3000",
-      "https://just-eat-it-be3958285291.herokuapp.com/",
-      "http://just-eat-it-be3958285291.herokuapp.com/",
+      "https://just-eat-it-bi4x.onrender.com/",
+      "http://just-eat-it-bi4x.onrender.com/",
     ],
   })
 );
