@@ -65,8 +65,8 @@ app.use(
     credentials: true,
     origin: [
       "http://localhost:3000",
-      "https://just-eat-it-bi4x.onrender.com/",
-      "http://just-eat-it-bi4x.onrender.com/",
+      "https://just-eat-it-be3958285291.herokuapp.com/",
+      "http://just-eat-it-be3958285291.herokuapp.com/",
     ],
   })
 );
@@ -149,7 +149,7 @@ const startApolloServer = async () => {
     app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
       console.log(
-        `Use GraphQL at https://just-eat-it-bi4x.onrender.com/graphql`
+        `Use GraphQL at https://just-eat-it-be3958285291.herokuapp.com/graphql`
       );
     });
   });
