@@ -89,15 +89,18 @@ const startApolloServer = async () => {
     })
   );
 
-  app.get("/", async (req, res) => {
+  app.get("/", (req, res) => {
+    if (process.env.NODE_ENV === "production") {
+      res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+    }
+  });
+
+  app.get("/api/search", async (req, res) => {
     const { location, cuisine } = req.query;
 
     if (!location) {
-      if (process.env.NODE_ENV === "production") {
-        return res.sendFile(path.join(__dirname, "../client/dist/index.html"));
-      } else {
-        return res.send("API server is running");
-      }
+      res.status(400).json({ error: "A location is required." });
+      return;
     }
 
     try {
@@ -119,9 +122,9 @@ const startApolloServer = async () => {
     } catch (error) {
       console.error(error);
       if (error.response) {
-        console.error("[ERROR DATA]", error.response.data);
-        console.error("[ERROR STATUS]", error.response.status);
-        console.error("[ERROR HEADERS]", error.response.headers);
+        console.error(error.response.data);
+        console.error(error.response.status);
+        console.error(error.response.headers);
       }
       res.status(500).json({
         error,
