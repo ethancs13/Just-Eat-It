@@ -60,14 +60,16 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 // expressWs(app)
-app.use(cors({
-  credentials: true,
-  origin: [
-    'http://localhost:3000', 
-    'https://just-eat-it-be3958285291.herokuapp.com/',     
-    'http://just-eat-it-be3958285291.herokuapp.com/'        
-  ],
-}));
+app.use(
+  cors({
+    credentials: true,
+    origin: [
+      "http://localhost:3000",
+      "https://just-eat-it-test-a5e86dcbbf47.herokuapp.com/",
+      "http://just-eat-it-test-a5e86dcbbf47.herokuapp.com/",
+    ],
+  })
+);
 
 const server = new ApolloServer({
   typeDefs,
@@ -130,7 +132,9 @@ const startApolloServer = async () => {
   db.once("open", () => {
     app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
-      console.log(`Use GraphQL at https://just-eat-it.onrender.com/graphql`);
+      console.log(
+        `Use GraphQL at https://just-eat-it-test-a5e86dcbbf47.herokuapp.com/graphql`
+      );
     });
   });
 };

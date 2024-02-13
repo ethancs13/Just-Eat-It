@@ -2,12 +2,15 @@ import axios from "axios";
 
 export const handleSearch = async (location, cuisine) => {
   try {
-    const response = await axios.get("https://just-eat-it-be3958285291.herokuapp.com/", {
-      params: {
-        location: location,
-        cuisine: cuisine,
-      },
-    });
+    const response = await axios.get(
+      "https://just-eat-it-test-a5e86dcbbf47.herokuapp.com/",
+      {
+        params: {
+          location: location,
+          cuisine: cuisine,
+        },
+      }
+    );
 
     return response.data;
   } catch (error) {
@@ -17,12 +20,15 @@ export const handleSearch = async (location, cuisine) => {
 
 export const getRandomRestaurant = async (location, cuisine) => {
   try {
-    const response = await axios.get("https://just-eat-it-be3958285291.herokuapp.com/", {
-      params: {
-        location: location,
-        cuisine: cuisine,
-      },
-    });
+    const response = await axios.get(
+      "https://just-eat-it-test-a5e86dcbbf47.herokuapp.com/",
+      {
+        params: {
+          location: location,
+          cuisine: cuisine,
+        },
+      }
+    );
 
     if (response.data && response.data.businesses.length > 0) {
       const index = Math.floor(Math.random() * response.data.businesses.length);
