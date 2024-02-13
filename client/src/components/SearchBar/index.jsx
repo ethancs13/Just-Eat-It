@@ -22,7 +22,7 @@ const SearchComponent = () => {
   // Fetch all cuisines
   const { data } = useQuery(QUERY_ALL_CUISINES);
 
-  const baseURL = "https://just-eat-it-tpcd.onrender.com";
+  const baseURL = "https://just-eat-it-hjx1.onrender.com";
 
   // Local Testing
   // const baseURL = "http://localhost:3001";
