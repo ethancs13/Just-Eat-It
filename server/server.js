@@ -20,7 +20,22 @@ import("node-fetch")
     const PORT = process.env.PORT || 3001;
     const app = express();
 
-    app.use(cors());
+    app.use(
+      cors({
+        origin: function (origin, callback) {
+          // Check if the origin is allowed
+          const allowedOrigins = [
+            "https://just-eat-it-hjx1.onrender.com",
+            "http://localhost:3000",
+          ];
+          if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+          } else {
+            callback(new Error("Not allowed by CORS"));
+          }
+        },
+      })
+    );
 
     const server = new ApolloServer({
       typeDefs,
