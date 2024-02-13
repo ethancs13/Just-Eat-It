@@ -93,8 +93,11 @@ const startApolloServer = async () => {
     const { location, cuisine } = req.query;
 
     if (!location) {
-      res.status(400).json({ error: "A location is required." });
-      return;
+      if (process.env.NODE_ENV === "production") {
+        return res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+      } else {
+        return res.send("API server is running");
+      }
     }
 
     try {
