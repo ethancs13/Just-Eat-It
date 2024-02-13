@@ -61,11 +61,11 @@ userSchema.methods.isCorrectPassword = async function (password) {
 };
 
 userSchema.virtual("friendCount").get(function () {
-  return this.friends.length;
+  return this.friends?.length;
 });
 
 userSchema.virtual("favoriteCount").get(function () {
-  return this.favorites.length;
+  return this.favorites?.length;
 });
 
 const User = model("User", userSchema);

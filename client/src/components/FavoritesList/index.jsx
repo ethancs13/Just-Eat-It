@@ -17,7 +17,7 @@ const FavoritesList = () => {
   return (
     <div
       className={`row card-container ${
-        favoriteRestaurants.length > 0 ? "favorites-container" : ""
+        favoriteRestaurants?.length > 0 ? "favorites-container" : ""
       }`}
     >
       {favoriteRestaurants?.map((restaurant) => (

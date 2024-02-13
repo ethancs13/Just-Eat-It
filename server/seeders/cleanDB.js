@@ -11,7 +11,7 @@ module.exports = async (modelName, collectionName) => {
 
     console.log(modelExists);
 
-    if (modelExists.length) {
+    if (modelExists?.length) {
       await db.dropCollection(collectionName);
     }
   } catch (err) {
