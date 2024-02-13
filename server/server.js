@@ -110,6 +110,11 @@ const startApolloServer = async () => {
       res.json(response.data);
     } catch (error) {
       console.error(error);
+      if (error.response) {
+        console.error(error.response.data);
+        console.error(error.response.status);
+        console.error(error.response.headers);
+      }
       res.status(500).json({
         error,
       });
