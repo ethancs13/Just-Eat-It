@@ -3,19 +3,18 @@ const baseURL = "https://just-eat-it-hjx1.onrender.com";
 // Local Testing
 // const baseURL = "http://localhost:3001";
 
+import axios from "axios";
+
 export const handleSearch = async (location, cuisine) => {
   try {
-    const response = await fetch(
-      `${baseURL}/?location=${location}&cuisine=${cuisine}`
-    );
+    const response = await axios.get(`${baseURL}`, {
+      params: {
+        location: location,
+        cuisine: cuisine,
+      },
+    });
 
-    if (response.ok) {
-      const data = await response.json();
-      return data;
-    } else {
-      const errorMessage = `Error: ${response.status} - ${response.statusText}`;
-      throw new Error(errorMessage);
-    }
+    return response.data;
   } catch (error) {
     console.error(error);
   }
@@ -23,22 +22,19 @@ export const handleSearch = async (location, cuisine) => {
 
 export const getRandomRestaurant = async (location, cuisine) => {
   try {
-    const response = await fetch(
-      `${baseURL}/?location=${location}&cuisine=${cuisine}`
-    );
+    const response = await axios.get(`${baseURL}`, {
+      params: {
+        location: location,
+        cuisine: cuisine,
+      },
+    });
 
-    if (response.ok) {
-      const data = await response.json();
-      if (data && data.businesses.length > 0) {
-        const index = Math.floor(Math.random() * data.businesses.length);
-        const randomRestaurant = data.businesses[index];
-        return randomRestaurant;
-      } else {
-        console.error("Error receiving data from server.");
-      }
+    if (response.data && response.data.businesses.length > 0) {
+      const index = Math.floor(Math.random() * response.data.businesses.length);
+      const randomRestaurant = response.data.businesses[index];
+      return randomRestaurant;
     } else {
-      const errorMessage = `Error: ${response.status} - ${response.statusText}`;
-      throw new Error(errorMessage);
+      console.error("Error receiving data from server.");
     }
   } catch (error) {
     console.error(error);
