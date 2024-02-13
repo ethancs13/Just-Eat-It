@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ME } from "../../utils/queries";
 import { REMOVE_FRIEND } from "../../utils/mutations";
-import FriendsSearchAdd from "./FriendsSearchAdd";
+import FriendsSearchAdd from "./friendsSearchAdd";
 import { Card, CardBody, ListGroup, ListGroupItem } from "react-bootstrap";
 import { BsX } from "react-icons/bs";
 
