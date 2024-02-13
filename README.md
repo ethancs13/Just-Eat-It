@@ -59,44 +59,38 @@ Just Eat It is a dynamic application built on the MERN (MongoDB, Express.js, Rea
     - Utilize the "Just Eat It" button for quick access to a single curated restaurant choice.
     - Features a map displaying the location and restaurant markers for easy navigation.
 
-      <!-- ![Home](add path) -->
+      ![Home](./client/src/assets/screenShots/home_page.png)
 
 3.  Sign Up or Login
 
     - Begin your culinary journey by creating an account or logging in to access personalized features.
     - Utilize the home page to search restaurants and save your favorite places.
 
-      <!-- ![Sign Up](add path)
-
-      ![Login](add path) -->
+      ![Sign Up](./client/src/assets/screenShots/signUp_Page.png)
 
 4.  Dashboard
 
     - Update your food preferences with a list of delectable options.
     - Use the "Select Friends... It's time to Eat!" search bar to input a location, add your friend to match food preferences, and find a place to eat!
 
-      <!-- ![Food Preferences](add path)
+      ![Food Preferences](./client/src/assets/screenShots/dashboardOne.png)
 
-      ![Add Friend](add path)
-
-      ![Results](add path) -->
+      ![Add Friend Results](./client/src/assets/screenShots/dashboardTwo.png)
 
 5.  Friends
 
     - Search Just Eat It's user database to connect with friends and add those users to your friends.
     - Includes the option to remove friends from your network.
-    - Engage in live chat with your friends for real-time communication.
+      <!-- - Engage in live chat with your friends for real-time communication. -->
 
-      <!-- ![Add Friends](add path)
-
-      ![Live Chat](add path) -->
+      ![Add Friends](./client/src/assets/screenShots/friends_page.png)
 
 6.  Favorites
 
     - Discover restaurants you love and save them for future reference using the "Favorite" button.
     - Easily remove any saved restaurants as desired.
 
-      <!-- ![Favorite Places](add path) -->
+      ![Favorite Places](./client/src/assets/screenShots/favorites_page.png)
 
 ## Badges
 
@@ -119,7 +113,7 @@ Just Eat It is a dynamic application built on the MERN (MongoDB, Express.js, Rea
 ## Collaborators
 
 - [Cody Burkholder](https://github.com/chilejay7)
-- [Brandon Wind](https://github.com/Bwing2)
+- [Brandon Wing](https://github.com/Bwing2)
 - [Lacey Trokey](https://github.com/ltrokey)
 
 ## Features

@@ -6,12 +6,11 @@ import { handleSearch } from "../../utils/API";
 import { Box, Input, ChakraProvider, Flex } from "@chakra-ui/react";
 
 export default function FriendModal({ friendFoods }) {
-
   const { loading, error, data } = useQuery(QUERY_ME);
   const [showModal, setShowModal] = useState(false);
   const [results, setResults] = useState([]);
-  const [location, setLocation] = useState({ locationName: ""});
-  const [sharedFavorites, setSharedFavorites] = useState([])
+  const [location, setLocation] = useState({ locationName: "" });
+  const [sharedFavorites, setSharedFavorites] = useState([]);
 
   let myFavorites = data.me.savedCuisines.map((food) => food.name);
   let friendFavorites = friendFoods.map((food) => food.name);
@@ -20,35 +19,37 @@ export default function FriendModal({ friendFoods }) {
     friendFavorites.includes(food)
   );
 
-const handleChange = (e) => {
-  const newLocation = e.target.value;
+  const handleChange = (e) => {
+    const newLocation = e.target.value;
 
-  setLocation ((currData) => {
-    currData.locationName = newLocation;
-    return { ...currData};
-  })
-};
+    setLocation((currData) => {
+      currData.locationName = newLocation;
+      return { ...currData };
+    });
+  };
 
-const search = async (e) => {
-  e.preventDefault();
+  const search = async (e) => {
+    e.preventDefault();
 
-  if (!location.locationName) {
-    console.error("Please provide a location.");
-    return;
-  }
+    if (!location.locationName) {
+      console.error("Please provide a location.");
+      return;
+    }
 
-  console.log('Shared Favorites:', sharedFavorites);
-  const randomFood = Math.floor(Math.random() * ourFavorites.length);
-  let foodData = await handleSearch(location.locationName, ourFavorites[randomFood]);
-  setResults(foodData.businesses);
-};
-  
-const handleHide = () => {
+    const randomFood = Math.floor(Math.random() * ourFavorites.length);
+    let foodData = await handleSearch(
+      location.locationName,
+      ourFavorites[randomFood]
+    );
+    setResults(foodData.businesses);
+  };
+
+  const handleHide = () => {
     setShowModal(false);
     setResults([]);
     setSharedFavorites([]);
-    setLocation({locationName: ""});
-};
+    setLocation({ locationName: "" });
+  };
 
   return (
     <div>
@@ -64,7 +65,7 @@ const handleHide = () => {
             Let's Find a Place to Eat
           </Modal.Title>
         </Modal.Header>
-        
+
         <Modal.Body style={{ background: "#060c24" }}>
           <p>You both enjoy:</p>
           <ul>
@@ -73,19 +74,19 @@ const handleHide = () => {
             ))}
           </ul>
 
-          
-          {!location.locationName && <p className="no-location">Please enter a location to search.</p>}
-            {/* <label htmlFor="modal-location">Enter a City to Search</label> */}
+          {!location.locationName && (
+            <p className="no-location">Please enter a location to search.</p>
+          )}
+          {/* <label htmlFor="modal-location">Enter a City to Search</label> */}
 
-            <form className="modal-search-form">
-            <input 
-            placeholder="Enter your location"
-            name="locationName"
-            id="modal-location"
-            onChange={handleChange}
-            value={location.locationName}
-            >
-            </input>
+          <form className="modal-search-form">
+            <input
+              placeholder="Enter your location"
+              name="locationName"
+              id="modal-location"
+              onChange={handleChange}
+              value={location.locationName}
+            ></input>
             <Button
               variant="primary"
               type="submit"
@@ -104,24 +105,34 @@ const handleHide = () => {
           <div className="row card-container">
             {results?.map((restaurant) => (
               <Card key={restaurant.id} className="dashboard-modal-card">
-                <Card.Img variant="top" src={restaurant.image_url} alt={restaurant.name} />
+                <Card.Img
+                  variant="top"
+                  src={restaurant.image_url}
+                  alt={restaurant.name}
+                />
                 <Card.Body>
-                  <Card.Title className="restCardTitle">{restaurant.name}</Card.Title>
+                  <Card.Title className="restCardTitle">
+                    {restaurant.name}
+                  </Card.Title>
                   <Card.Text className="restCardDescription">
                     {restaurant.rating} ⭐️
                   </Card.Text>
-                  <Card.Text className="restCardDescription">{restaurant.address}</Card.Text>
+                  <Card.Text className="restCardDescription">
+                    {restaurant.address}
+                  </Card.Text>
                   <Card.Body className="yelpLink">
-                    <a href={restaurant.url} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={restaurant.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       View on Yelp for more details.
                     </a>
                   </Card.Body>
                 </Card.Body>
               </Card>
             ))}
-
           </div>
-
         </Modal.Body>
       </Modal>
     </div>
