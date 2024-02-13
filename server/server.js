@@ -60,14 +60,16 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 // expressWs(app)
-app.use(cors({
-  credentials: true,
-  origin: [
-    'http://localhost:3000', 
-    'https://just-eat-it-be3958285291.herokuapp.com/',     
-    'http://just-eat-it-be3958285291.herokuapp.com/'        
-  ],
-}));
+app.use(
+  cors({
+    credentials: true,
+    origin: [
+      "http://localhost:3000",
+      "https://just-eat-it-be3958285291.herokuapp.com/",
+      "http://just-eat-it-be3958285291.herokuapp.com/",
+    ],
+  })
+);
 
 const server = new ApolloServer({
   typeDefs,
@@ -87,8 +89,19 @@ const startApolloServer = async () => {
     })
   );
 
-  app.get("/", async (req, res) => {
+  app.get("/", (req, res) => {
+    if (process.env.NODE_ENV === "production") {
+      res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+    }
+  });
+
+  app.get("/api/search", async (req, res) => {
     const { location, cuisine } = req.query;
+
+    if (!location) {
+      res.status(400).json({ error: "A location is required." });
+      return;
+    }
 
     try {
       const response = await axios.get(
@@ -108,6 +121,11 @@ const startApolloServer = async () => {
       res.json(response.data);
     } catch (error) {
       console.error(error);
+      if (error.response) {
+        console.error(error.response.data);
+        console.error(error.response.status);
+        console.error(error.response.headers);
+      }
       res.status(500).json({
         error,
       });
