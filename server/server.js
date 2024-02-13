@@ -45,13 +45,12 @@ const startApolloServer = async () => {
       const response = await axios.get(
         "https://api.yelp.com/v3/businesses/search",
         {
-          headers: {
-            Authorization: `Bearer ${process.env.API_KEY}`,
-          },
           params: {
             location: location,
             term: cuisine,
             limit: 12,
+            // Include the API key as a query parameter
+            Authorization: `Bearer ${process.env.API_KEY}`,
           },
         }
       );
