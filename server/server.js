@@ -148,7 +148,9 @@ const startApolloServer = async () => {
   db.once("open", () => {
     app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
-      console.log(`Use GraphQL at https://just-eat-it.onrender.com/graphql`);
+      console.log(
+        `Use GraphQL at https://just-eat-it-bi4x.onrender.com/graphql`
+      );
     });
   });
 };
