@@ -10,7 +10,6 @@ export default function User() {
   const token = Auth.getToken();
   const [loggedIn, setLoggedIn] = useState(Auth.loggedIn());
   const { loading, error, data } = useQuery(QUERY_ME);
-  console.log('Me Data:', data);
 
   useEffect(() => {
     if (!loggedIn && token) {
@@ -24,7 +23,6 @@ export default function User() {
     }
   }, [loggedIn, token]);
 
-
   if (!loggedIn) {
     return <NoAccess />;
   }
@@ -32,9 +30,7 @@ export default function User() {
   return (
     <div className="bgUserPage">
       <div className="container welcome">
-        <h2 className="welcome-header">
-          Welcome,{data?.me.username}
-          </h2>
+        <h2 className="welcome-header">Welcome,{data?.me.username}</h2>
         <Cuisine />
         <FriendDashboard />
       </div>

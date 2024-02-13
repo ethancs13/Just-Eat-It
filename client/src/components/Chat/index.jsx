@@ -8,7 +8,6 @@ const Chat = ({ user }) => {
 
   function connect() {
     const name = user.data.username;
-    console.log(name);
 
     const newSocket = new WebSocket("ws://localhost:3000");
 
@@ -17,7 +16,6 @@ const Chat = ({ user }) => {
     });
 
     newSocket.addEventListener("message", function (event) {
-      console.log(event.data);
       let jsonData = JSON.parse(event.data);
 
       if (jsonData.message) {
