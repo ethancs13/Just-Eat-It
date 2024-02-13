@@ -5,9 +5,7 @@ const cors = require("cors");
 const { ApolloServer } = require("@apollo/server");
 const { expressMiddleware } = require("@apollo/server/express4");
 const seedDatabase = require("./seeders/seed");
-
-var bcrypt = require("bcryptjs");
-var salt = 10;
+const fs = require("fs");
 const path = require("path");
 
 // web socket!
@@ -66,8 +64,8 @@ app.use(
     credentials: true,
     origin: [
       "http://localhost:3000",
-      "https://just-eat-it-be3958285291.herokuapp.com/",
-      "http://just-eat-it-be3958285291.herokuapp.com/",
+      "https://just-eat-it-bi4x.onrender.com/",
+      "http://just-eat-it-bi4x.onrender.com/",
     ],
   })
 );
@@ -77,13 +75,17 @@ const server = new ApolloServer({
   resolvers,
 });
 
+const shouldSeed = () => {
+  return !fs.existsSync(path.join(__dirname, "seed.flag"));
+};
+
 const startApolloServer = async () => {
   await server.start();
 
-  // Add seeding logic here
-  if (process.env.SEED_DB === "true") {
+  if (process.env.SEED_DB === "true" && shouldSeed()) {
     await seedDatabase();
     console.log("Database seeded successfully!");
+    fs.writeFileSync(path.join(__dirname, "seed.flag"), "");
   }
 
   app.use(express.urlencoded({ extended: false }));
@@ -155,7 +157,9 @@ const startApolloServer = async () => {
   db.once("open", () => {
     app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
-      console.log(`Use GraphQL at https://just-eat-it.onrender.com/graphql`);
+      console.log(
+        `Use GraphQL at https://just-eat-it-bi4x.onrender.com/graphql`
+      );
     });
   });
 };
