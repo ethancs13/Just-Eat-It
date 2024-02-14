@@ -429,6 +429,16 @@ a:hover {
     margin-left: 0px;
     padding: 0px;
   }
+  .searchInput {
+    margin-top: 5px;
+    padding: 10px;
+  }
+  .searchBtn {
+    margin-top: 10px;
+  }
+  .welcome-header {
+    width: 100%;
+  }
 }
 
 @media (max-width: 320px) {
