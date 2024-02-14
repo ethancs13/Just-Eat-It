@@ -115,6 +115,7 @@ Just Eat It is a dynamic application built on the MERN (MongoDB, Express.js, Rea
 - [Cody Burkholder](https://github.com/chilejay7)
 - [Ethan Sroka](https://github.com/ethancs13)
 - [Lacey Trokey](https://github.com/ltrokey)
+- [Brandon Wing](https://github.com/Bwing2)
 
 ## Features
 
@@ -197,6 +198,9 @@ Just Eat It is a dynamic application built on the MERN (MongoDB, Express.js, Rea
 
 ## Questions
 
-Please feel free to follow me on GitHub.
+Please feel free to follow us on GitHub.
 
+[Cody Burkholder](https://github.com/chilejay7)
+[Ethan Sroka](https://github.com/ethancs13)
+[Lacey Trokey](https://github.com/ltrokey)
 [Brandon Wing](https://github.com/Bwing2)
