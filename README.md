@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[Link to live deploy](https://just-eat-it-test-a5e86dcbbf47.herokuapp.com/)
+[Link to live deploy](https://just-eat-it-be3958285291.herokuapp.com/)
 
 ## Description
 
