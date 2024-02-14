@@ -12,6 +12,7 @@ import {
   Button,
   ChakraProvider,
   Flex,
+  SimpleGrid,
 } from "@chakra-ui/react";
 
 const SearchComponent = () => {
@@ -49,7 +50,11 @@ const SearchComponent = () => {
         p={4}
         mt={results.length > 0 ? "0" : "5%"}
       >
-        <Flex align="center" justify="center">
+        <Flex
+          align="center"
+          justify="center"
+          direction={{ base: "column", md: "row" }}
+        >
           <Select
             placeholder="Select Food Preferences"
             flex={1}
@@ -71,6 +76,7 @@ const SearchComponent = () => {
               ))}
           </Select>
           <Input
+            className="searchInput"
             placeholder="Search by city"
             flex={2}
             size="lg"
@@ -80,10 +86,22 @@ const SearchComponent = () => {
             onChange={(e) => setLocation(e.target.value)}
             onKeyDown={handleKeyDown}
           />
-          <Button colorScheme="orange" size="lg" ml={2} onClick={search}>
+          <Button
+            className="searchBtn"
+            colorScheme="orange"
+            size="lg"
+            ml={2}
+            onClick={search}
+          >
             Search
           </Button>
-          <Button colorScheme="orange" size="lg" ml={2} onClick={random}>
+          <Button
+            className="searchBtn"
+            colorScheme="orange"
+            size="lg"
+            ml={2}
+            onClick={random}
+          >
             Just Eat It!
           </Button>
         </Flex>
