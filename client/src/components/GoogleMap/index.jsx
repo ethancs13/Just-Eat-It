@@ -27,7 +27,7 @@ const GoogleMap = ({ locations, showMap }) => {
 
   useEffect(() => {
     const loadMap = async () => {
-      if (!showMap || !locations || locations.length === 0) {
+      if (!showMap || !locations || locations?.length === 0) {
         return;
       }
 
@@ -54,7 +54,6 @@ const GoogleMap = ({ locations, showMap }) => {
       const apiKeyResponse = await axios.get(
         "https://just-eat-it-test-a5e86dcbbf47.herokuapp.com/api/key"
       );
-
       const apiKey = apiKeyResponse.data.key;
 
       const loader = new Loader({
