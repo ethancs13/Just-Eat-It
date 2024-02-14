@@ -54,7 +54,7 @@ const GoogleMap = ({ locations, showMap }) => {
       const apiKeyResponse = await axios.get(
         "https://just-eat-it-test-a5e86dcbbf47.herokuapp.com/api/key"
       );
-      console.log(apiKeyResponse);
+
       const apiKey = apiKeyResponse.data.key;
 
       const loader = new Loader({

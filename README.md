@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[Link to live deploy](add link)
+[Link to live deploy](https://just-eat-it-test-a5e86dcbbf47.herokuapp.com/)
 
 ## Description
 
@@ -113,7 +113,7 @@ Just Eat It is a dynamic application built on the MERN (MongoDB, Express.js, Rea
 ## Collaborators
 
 - [Cody Burkholder](https://github.com/chilejay7)
-- [Brandon Wing](https://github.com/Bwing2)
+- [Ethan Sroka](https://github.com/ethancs13)
 - [Lacey Trokey](https://github.com/ltrokey)
 
 ## Features
@@ -199,4 +199,4 @@ Just Eat It is a dynamic application built on the MERN (MongoDB, Express.js, Rea
 
 Please feel free to follow me on GitHub.
 
-[GitHub Profile](https://github.com/ethancs13)
+[Brandon Wing](https://github.com/Bwing2)
