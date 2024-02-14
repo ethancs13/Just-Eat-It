@@ -55,7 +55,6 @@ const FriendSearch = () => {
   useEffect(() => {
     if (data) {
       setFriendFavorites(data.user.savedCuisines || []);
-      console.log("Friend Favorites:", friendFavorites);
     }
   }, [data]);
 

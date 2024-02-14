@@ -3,13 +3,11 @@ import FriendModal from "./FriendModal";
 import { useQuery } from "@apollo/client";
 import { QUERY_ME } from "../../utils/queries";
 
-import './FriendDashboard.css'
+import "./FriendDashboard.css";
 import FriendSearch from "./FriendSearch";
 
 const FriendDashboard = () => {
-
   const { loading, data, error } = useQuery(QUERY_ME);
-  console.log('My Favorite foods:', data?.me.savedCuisines);
 
   const userData = data?.me || {};
 
@@ -20,7 +18,6 @@ const FriendDashboard = () => {
           <p>Select Friends...It's time to Eat!</p>
 
           <FriendSearch />
-
         </div>
       </div>
     </div>
