@@ -9,7 +9,7 @@ export default defineConfig({
     open: true,
     proxy: {
       "/graphql": {
-        target: "https://just-eat-it-test-a5e86dcbbf47.herokuapp.com/",
+        target: "https://just-eat-it-be3958285291.herokuapp.com/",
         changeOrigin: true,
         secure: false,
       },

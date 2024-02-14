@@ -10,7 +10,7 @@ const Chat = ({ user }) => {
     const name = user.data.username;
 
     const newSocket = new WebSocket(
-      "wss://just-eat-it-test-a5e86dcbbf47.herokuapp.com/"
+      "wss://just-eat-it-be3958285291.herokuapp.com/"
     );
 
     newSocket.addEventListener("open", function (event) {
