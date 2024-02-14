@@ -1,6 +1,6 @@
 export function recenterMap(map, markers) {
   try {
-    if (markers?.length === 0) {
+    if (markers.length === 0) {
       return; // No markers to recenter
     }
 
@@ -17,8 +17,8 @@ export function recenterMap(map, markers) {
     });
 
     // Calculate the average latitude and longitude
-    const avgLat = latSum / markers?.length;
-    const avgLng = lngSum / markers?.length;
+    const avgLat = latSum / markers.length;
+    const avgLng = lngSum / markers.length;
 
     // Create a new center point
     const newCenter = new google.maps.LatLng(avgLat, avgLng);

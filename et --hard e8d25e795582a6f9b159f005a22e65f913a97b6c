@@ -1,0 +1,245 @@
+[33mcommit 26dcddab57c21d0071a11ac88ee5e4928b31bf55[m[33m ([m[1;36mHEAD -> [m[1;32mfeature/testing-deploy[m[33m, [m[1;31morigin/feature/testing-deploy[m[33m)[m
+Author: Brandon Wing <brandon.wing245@gmail.com>
+Date:   Tue Feb 13 16:57:05 2024 -0700
+
+    Optional chaining added on all lengths
+
+[33mcommit f45591b1e3adb62ef859f4ba5ef022b96c1e5e98[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m, [m[1;32mfeature/site-upload[m[33m)[m
+Merge: 860e5c4 e8d25e7
+Author: Brandon Wing <134564668+Bwing2@users.noreply.github.com>
+Date:   Tue Feb 13 15:58:16 2024 -0700
+
+    Merge pull request #84 from ethancs13/feature/site-upload
+    
+    Changed links for heroku upload.
+
+[33mcommit e8d25e795582a6f9b159f005a22e65f913a97b6c[m[33m ([m[1;31morigin/feature/site-upload[m[33m)[m
+Author: Brandon Wing <brandon.wing245@gmail.com>
+Date:   Tue Feb 13 15:57:44 2024 -0700
+
+    Changed links for heroku upload.
+
+[33mcommit 860e5c4416b76ef1e5ac78426139ba4da8bc3606[m
+Merge: caca739 5d4cf7a
+Author: Lacey Trokey <139284883+ltrokey@users.noreply.github.com>
+Date:   Tue Feb 13 15:30:15 2024 -0700
+
+    Merge pull request #83 from ltrokey/ltrokey/feature_updateUrl
+    
+    Ltrokey/feature update url
+
+[33mcommit 5d4cf7a3348ff277f697e0ce8b825cc25d944249[m
+Author: Lacey Trokey <trokeyln@gmail.com>
+Date:   Tue Feb 13 15:29:49 2024 -0700
+
+    added url on graphQl
+
+[33mcommit 274ecbd79be10cc87677aaae56add6f764d67c84[m
+Author: Lacey Trokey <trokeyln@gmail.com>
+Date:   Tue Feb 13 15:28:53 2024 -0700
+
+    added url
+
+[33mcommit dec5aa60c75ea71d3ab8e571fdef17b2697878a6[m
+Author: Lacey Trokey <trokeyln@gmail.com>
+Date:   Tue Feb 13 15:26:47 2024 -0700
+
+    removed seed issue
+
+[33mcommit caca73905fdc5d7b0af8f95f2df293edacef6c29[m
+Merge: 34c4c8f 814acc0
+Author: Lacey Trokey <139284883+ltrokey@users.noreply.github.com>
+Date:   Tue Feb 13 15:21:39 2024 -0700
+
+    Merge pull request #82 from ltrokey/ltrokey/feature_updateUrl
+    
+    Ltrokey/feature update url
+
+[33mcommit 814acc02818e6f95c831196ab932b7af1797fb66[m
+Author: Lacey Trokey <trokeyln@gmail.com>
+Date:   Tue Feb 13 15:21:02 2024 -0700
+
+    Updated readme link
+
+[33mcommit 0cf4db81f193bbe4c5978635c2ec563a31507cc3[m
+Author: Lacey Trokey <trokeyln@gmail.com>
+Date:   Tue Feb 13 15:20:10 2024 -0700
+
+    Updated url links and revised seeding
+
+[33mcommit 34c4c8f17139cc9e4a63aa64423bc7bfd641e95b[m
+Merge: 92a2f83 bd75ac4
+Author: Lacey Trokey <139284883+ltrokey@users.noreply.github.com>
+Date:   Tue Feb 13 15:07:22 2024 -0700
+
+    Merge pull request #81 from ethancs13/ltrokey/feature_addSeed
+    
+    adding seeding on start of server and fixed title on dashboard
+
+[33mcommit bd75ac4dac9b4ecf079ff9e5783a546407e98aa4[m[33m ([m[1;31morigin/ltrokey/feature_addSeed[m[33m)[m
+Author: Lacey Trokey <trokeyln@gmail.com>
+Date:   Tue Feb 13 15:06:24 2024 -0700
+
+    adding seeding on start of server and fixed title on dashboard
+
+[33mcommit 92a2f837188cc8ccbf223ca21bb22697fabb6b74[m
+Merge: 06d125f 7f3fd0c
+Author: Lacey Trokey <139284883+ltrokey@users.noreply.github.com>
+Date:   Tue Feb 13 13:47:08 2024 -0700
+
+    Merge pull request #80 from ethancs13/feature/site-upload
+
+[33mcommit 7f3fd0cf73bbe2d31c8c9643d5b0908eafd080fb[m
+Author: Brandon Wing <brandon.wing245@gmail.com>
+Date:   Tue Feb 13 13:42:36 2024 -0700
+
+    Added error handling for search, and seperated home and search routes.
+
+[33mcommit 06d125fed25c80588279a9df23576340509f8ee0[m[33m ([m[1;32mfeature/about-page[m[33m)[m
+Author: BuildTools <unconfigured@null.spigotmc.org>
+Date:   Mon Feb 12 22:37:35 2024 -0700
+
+    cors update
+
+[33mcommit 304a2a7848ac8e1214b39d7e45b7a89e30817917[m
+Merge: 49706b8 750444d
+Author: BuildTools <unconfigured@null.spigotmc.org>
+Date:   Mon Feb 12 22:25:01 2024 -0700
+
+    Merge branch 'main' of github.com:ethancs13/final-project
+
+[33mcommit 750444d5c0541fe87f7efb04db2b74a3626ce719[m
+Merge: fcaa125 0d9feb3
+Author: Lacey Trokey <139284883+ltrokey@users.noreply.github.com>
+Date:   Mon Feb 12 22:24:58 2024 -0700
+
+    Merge pull request #71 from ethancs13/ltrokey/feature_deploy
+    
+    reset, removed axios instance
+
+[33mcommit 0d9feb3ea356714ccf3fe76fea697e4fae7099fd[m
+Author: Lacey Trokey <trokeyln@gmail.com>
+Date:   Mon Feb 12 22:24:13 2024 -0700
+
+    reset, removed axios instance
+
+[33mcommit 49706b8311c4526244c47f56187f42f97adef53b[m
+Merge: 62647f8 fcaa125
+Author: BuildTools <unconfigured@null.spigotmc.org>
+Date:   Mon Feb 12 22:20:57 2024 -0700
+
+    Merge branch 'main' of github.com:ethancs13/final-project
+
+[33mcommit fcaa125d22de12b774085ccced1061381294b52c[m
+Merge: ee3b9cd 021ae96
+Author: ethancs13 <140864204+ethancs13@users.noreply.github.com>
+Date:   Mon Feb 12 22:15:46 2024 -0700
+
+    Merge pull request #70 from ethancs13/ltrokey/feature_cleanCode
+    
+    Ltrokey/feature clean code
+
+[33mcommit 021ae9686c28bdbb20445ae364d18382f9791d78[m[33m ([m[1;31morigin/ltrokey/feature_cleanCode[m[33m)[m
+Author: Lacey Trokey <trokeyln@gmail.com>
+Date:   Mon Feb 12 22:12:09 2024 -0700
+
+    added axios instance
+
+[33mcommit d04ebac9b12729183bcbd2cacf5a8c8e05263828[m
+Author: Lacey Trokey <trokeyln@gmail.com>
+Date:   Mon Feb 12 21:47:14 2024 -0700
+
+    Removed testing console.logs and added readme screen shots
+
+[33mcommit 62647f85207d17643bb929f94fd2f035ba5e6d3a[m[33m ([m[1;31morigin/testing[m[33m)[m
+Author: BuildTools <unconfigured@null.spigotmc.org>
+Date:   Mon Feb 12 21:46:13 2024 -0700
+
+    https / at end
+
+[33mcommit ee3b9cd1e47e1c200d331b1316e122d965cff339[m
+Author: BuildTools <unconfigured@null.spigotmc.org>
+Date:   Mon Feb 12 21:38:07 2024 -0700
+
+    http
+
+[33mcommit c14824f2b5ebb833abceac68775d0ddb9d634bec[m
+Author: BuildTools <unconfigured@null.spigotmc.org>
+Date:   Mon Feb 12 21:25:58 2024 -0700
+
+    changes for heroku deployment
+
+[33mcommit 77584e3da9960fb174a2751606a7c822c556e3f9[m
+Merge: 6298b48 bce2995
+Author: BuildTools <unconfigured@null.spigotmc.org>
+Date:   Mon Feb 12 21:15:25 2024 -0700
+
+    Merge branch 'main' of github.com:ethancs13/final-project
+
+[33mcommit 6298b48c1ba97c5fbb561833384051b05874969e[m
+Author: BuildTools <unconfigured@null.spigotmc.org>
+Date:   Mon Feb 12 21:14:17 2024 -0700
+
+    fix
+
+[33mcommit bce2995c8b84d6f5bebb6504e9cae46dffd8e954[m
+Merge: cc19248 ce0ee35
+Author: BuildTools <unconfigured@null.spigotmc.org>
+Date:   Mon Feb 12 21:12:46 2024 -0700
+
+    Merge branch 'main' of github.com:ethancs13/final-project
+
+[33mcommit cc192480a624497dcb174ca1e5ec310f1430b7cf[m
+Author: BuildTools <unconfigured@null.spigotmc.org>
+Date:   Mon Feb 12 21:12:35 2024 -0700
+
+    reset
+
+[33mcommit ce0ee35d089f357798691e92200cec531df16de7[m
+Merge: 4b18e56 b625a4e
+Author: BuildTools <unconfigured@null.spigotmc.org>
+Date:   Mon Feb 12 21:08:48 2024 -0700
+
+    Merge branch 'main' of github.com:ethancs13/final-project
+
+[33mcommit 4b18e569ccb7dcd2fe45b59b0c11cb321b770192[m
+Author: BuildTools <unconfigured@null.spigotmc.org>
+Date:   Mon Feb 12 21:08:36 2024 -0700
+
+    target back to localhost
+
+[33mcommit b625a4e07fc6a8abf5db935630e7ff439bd0e71b[m
+Merge: 2b58e0a 41704e9
+Author: Lacey Trokey <139284883+ltrokey@users.noreply.github.com>
+Date:   Mon Feb 12 21:02:17 2024 -0700
+
+    Merge pull request #69 from ethancs13/add-modalFriendSearch
+    
+    Updates modal to include location search
+
+[33mcommit 41704e996979476cfd8173e0c4622ddca444aa95[m[33m ([m[1;31morigin/add-modalFriendSearch[m[33m)[m
+Author: chilejay7 <codyburk7@yahoo.com>
+Date:   Mon Feb 12 20:48:09 2024 -0700
+
+    about page list item updated to ol
+
+[33mcommit 7284428aa1ce3a1abd03f02bb3eb207b3328e729[m[33m ([m[1;31morigin/RenderUpdate[m[33m)[m
+Author: BuildTools <unconfigured@null.spigotmc.org>
+Date:   Mon Feb 12 20:45:27 2024 -0700
+
+    remove chat
+
+[33mcommit 0e5d40d522b015b2857af6e2f3a11fbe3ed0de46[m
+Author: chilejay7 <codyburk7@yahoo.com>
+Date:   Mon Feb 12 20:44:47 2024 -0700
+
+    updated styles
+
+[33mcommit 81b575df4064077b4951153347258095b4fae72a[m
+Author: BuildTools <unconfigured@null.spigotmc.org>
+Date:   Mon Feb 12 20:39:00 2024 -0700
+
+    expressws
+
+[33mcommit dbefc38ef67baff7a72156272a36dda8f80b2471[m
+Author: chilejay7 <codyburk7@yahoo.com>

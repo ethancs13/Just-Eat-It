@@ -72,7 +72,7 @@ const GoogleMap = ({ locations, showMap }) => {
 
         const newMarkers = locations.map((location) => {
           let cuisineType = "";
-          if (location.categories && location.categories?.length > 0) {
+          if (location.categories && location.categories.length > 0) {
             cuisineType = location.categories[0].title.toLowerCase();
           }
 

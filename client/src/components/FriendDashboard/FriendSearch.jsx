@@ -96,7 +96,7 @@ const FriendSearch = () => {
       </div>
 
       <div className="center">
-        {friendFavorites && friendFavorites?.length > 0 && (
+        {friendFavorites && friendFavorites.length > 0 && (
           <FriendModal friendFoods={friendFavorites} />
         )}
       </div>

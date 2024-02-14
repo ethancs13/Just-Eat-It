@@ -30,10 +30,8 @@ export const getRandomRestaurant = async (location, cuisine) => {
       }
     );
 
-    if (response.data && response.data.businesses?.length > 0) {
-      const index = Math.floor(
-        Math.random() * response.data.businesses?.length
-      );
+    if (response.data && response.data.businesses.length > 0) {
+      const index = Math.floor(Math.random() * response.data.businesses.length);
       const randomRestaurant = response.data.businesses[index];
       return randomRestaurant;
     } else {

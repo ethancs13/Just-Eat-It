@@ -36,7 +36,7 @@ export default function FriendModal({ friendFoods }) {
       return;
     }
 
-    const randomFood = Math.floor(Math.random() * ourFavorites?.length);
+    const randomFood = Math.floor(Math.random() * ourFavorites.length);
     let foodData = await handleSearch(
       location.locationName,
       ourFavorites[randomFood]
